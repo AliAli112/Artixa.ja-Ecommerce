@@ -24,6 +24,22 @@ CREATE TABLE Customers (
     PRIMARY KEY (id)
 );
 
+DROP TABLE IF EXISTS Orders;
+CREATE TABLE Orders (
+    id INT auto_increment,
+    customerID INT,
+    customerFirstName varchar(255),
+    customerLastName varchar(255),
+    customerAddress varchar(255),
+    itemName varchar(255),
+    itemDescription varchar(255),
+    itemLocation varchar(255),
+    FOREIGN KEY (customerID) REFERENCES Customers(id) ON DELETE CASCADE
+    FOREIGN KEY (customerFirstName) REFERENCES Customers(customerFirstName) ON DELETE CASCADE,
+    FOREIGN KEY (customerLastName) REFERENCES Customers(customerLastName) ON DELETE CASCADE,
+    FOREIGN KEY (customerAddress) REFERENCES Customers(customerAddress) ON DELETE CASCADE
+);
+
 DROP TABLE IF EXISTS Invoices;
 CREATE TABLE Invoices (
     id INT auto_increment,
