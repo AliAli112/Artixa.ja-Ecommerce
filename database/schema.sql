@@ -32,7 +32,6 @@ CREATE TABLE Orders (
     customerAddress varchar(255),
     itemName varchar(255),
     itemDescription varchar(255),
-    itemLocation varchar(255),
     PRIMARY KEY(id),
     FOREIGN KEY(id) REFERENCES Customers(id) ON DELETE CASCADE,
     FOREIGN KEY(customerFirstName) REFERENCES Customers(customerFirstName) ON DELETE CASCADE,
