@@ -16,5 +16,5 @@
     },
     "include": [
         "ServerAPI/src/**/*"
-, "ServerAPI/app.ts"    ]
+, "ServerAPI/index.ts"    ]
 }

@@ -1,17 +1,59 @@
 import express, { Application, Request, Response } from 'express'
-import * as http from 'http';
+import { Connection } from '../misc/Connection'
 import cors from 'cors';
 import { con } from '../config/database';
-import { Inventoryrouter } from './routes/Inventory'
+import { inventoryrouter } from './routes/Inventoryroute'
+import { indexrouter } from './routes/Indexroute'
 
+export class App {
+    app: Application;
+    public connection: Connection;
 
-const app: express.Application = express();
+    constructor(
+        private port: number,
+    )
+    {
+        this.app =  express();
+        this.middlewares();
+        this.routes();
+        this.connectDB();
+    }
+
+    private middlewares(){
+        this.app.use(express.json());
+        this.app.use(cors());
+        this.app.use(express.urlencoded({
+            extended: true
+        }));
+    }
+
+    private routes(){
+        this.app.use(indexrouter)
+        this.app.use('/inventory', inventoryrouter)
+    }
+
+    public async listen(): Promise<void> {
+        await this.app.listen(this.port);
+        console.log('Server on port' + this.port);
+    }
+
+    private connectDB(){
+        con.connect((err) => {
+            if(err){
+                this.connection = 0;
+                throw err;
+            }
+            else{
+                console.log("Successfully connecting to database");
+                this.connection = 1;
+            }
+        })
+    }
+
+}
+/*const app: express.Application = express();
 const server: http.Server = http.createServer(app);
 const port: number = 3000;
-con.connect((err) => {
-    if(err) throw err
-    else console.log("Successful");
-})
 
 app.use(cors());
 app.use(express.json());
@@ -20,7 +62,7 @@ app.use(express.urlencoded({
     extended: true
 }));
 
-app.use('/inventory', Inventoryrouter);
+app.use('/inventory', inventoryrouter);
 app.listen(port);
 
 app.get('/', (req: Request, res: Response) => {
@@ -33,4 +75,4 @@ app.get('/', (req: Request, res: Response) => {
         else res.json({});
     })
 })
-
+*/

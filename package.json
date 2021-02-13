@@ -2,13 +2,13 @@
   "name": "comp2171",
   "version": "1.0.0",
   "description": "A react-express-mysql project",
-  "main": "ServerAPI/dist/ServerAPI/app.js",
+  "main": "ServerAPI/dist/ServerAPI/index.js",
   "scripts": {
     "prebuild": "tslint -c tslint.json -p tsconfig.json --fix",
     "build": "tsc",
     "prestart": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app.js"
+    "start": "nodemon index.js"
   },
   "author": "logiciel",
   "license": "ISC",

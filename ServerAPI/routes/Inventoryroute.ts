@@ -1,9 +1,9 @@
 import express, { Request, Response } from 'express';
 import { con } from '../../config/database';
 
-const Inventoryrouter = express.Router();
+const inventoryrouter = express.Router();
 
-Inventoryrouter
+inventoryrouter
     .route("/")
     // Get all items
     .get(getAllItems);
@@ -36,4 +36,4 @@ async function getAllItems(req: Request, res: Response): Promise<Response | void
     })
 }
 
-export { Inventoryrouter }
+export { inventoryrouter }
