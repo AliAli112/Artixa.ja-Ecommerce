@@ -27,17 +27,10 @@ CREATE TABLE Customers (
 DROP TABLE IF EXISTS Orders;
 CREATE TABLE Orders (
     id INT auto_increment,
-    customerFirstName varchar(255),
-    customerLastName varchar(255),
-    customerAddress varchar(255),
-    itemName varchar(255),
-    itemDescription varchar(255),
-    itemLocation varchar(255),
+    shippingLocation varchar(255),
     PRIMARY KEY(id),
     FOREIGN KEY(id) REFERENCES Customers(id) ON DELETE CASCADE,
-    FOREIGN KEY(customerFirstName) REFERENCES Customers(customerFirstName) ON DELETE CASCADE,
-    FOREIGN KEY(customerLastName) REFERENCES Customers(customerLastName) ON DELETE CASCADE,
-    FOREIGN KEY(customerAddress) REFERENCES Customers(customerAddress) ON DELETE CASCADE
+    FOREIGN KEY(id) REFERENCES Inventory(id) ON DELETE CASCADE
 );
 
 DROP TABLE IF EXISTS Invoices;
@@ -61,5 +54,6 @@ CREATE TABLE Expenses (
     id INT auto_increment,
     expenseName varchar(255),
     expenseAmount decimal(10,2),
+    expensetype INT,
     PRIMARY KEY(id)
 );
