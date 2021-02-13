@@ -30,7 +30,7 @@ CREATE TABLE Orders (
     shippingLocation varchar(255),
     PRIMARY KEY(id),
     FOREIGN KEY(id) REFERENCES Customers(id) ON DELETE CASCADE,
-    FOREIGN KEY(id) RFERENCES Inventory(id) ON DELETE CASCADE
+    FOREIGN KEY(id) REFERENCES Inventory(id) ON DELETE CASCADE
 );
 
 DROP TABLE IF EXISTS Invoices;
