@@ -49,8 +49,11 @@ function getAllItems(req, res) {
 function addItem(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const newItem = req.body;
-            database_1.con.query('INSERT INTO inventory SET ?', [newItem]);
+            const { itemName, itemQuantity, itemCost } = req.body;
+            // const newItem: Item = req.body
+            const sql = `INSERT INTO inventory (itemName, itemQuantity, itemCost) VALUES (
+            '${itemName}', '${itemQuantity}', '${itemCost}')`;
+            database_1.con.query(sql);
             console.log("Item added");
         }
         catch (err) {
@@ -88,8 +91,8 @@ function updateItemAmount(req, res) {
         // Need to implement so that it only updates quantity
         try {
             const id = req.params.itemid;
-            const updateitem = req.body;
-            database_1.con.query('UPDATE inventory SET ? WHERE id = ?', [updateitem, id]);
+            const { itemAmount } = req.body;
+            database_1.con.query('UPDATE inventory SET itemAmount WHERE id = ?', [itemAmount, id]);
         }
         catch (err) {
             res.status(400).send(err);

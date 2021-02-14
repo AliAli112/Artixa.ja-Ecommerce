@@ -3,7 +3,7 @@ import cors  from 'cors';
 
 
 async function main() {
-    const app = new App(3000);
+    const app = new App(3005);
     await app.listen();
 }
 

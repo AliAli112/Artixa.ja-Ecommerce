@@ -34,7 +34,7 @@ async function getAllExpense(req: Request, res: Response) {
 
 async function addExpense(req: Request, res: Response){
     try{
-        let { expenseName, expenseAmount , expensetype} = req.body
+        const { expenseName, expenseAmount , expensetype} = req.body
         const sql = `INSERT INTO expense (expenseName, expenseAmount, expensetype) VALUES (
             '${expenseName}','${expenseAmount}','${expensetype}')`
     con.query(sql);

@@ -47,8 +47,10 @@ function getAllExpense(req, res) {
 function addExpense(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const newExpense = req.body;
-            database_1.con.query('INSERT INTO expenses SET ?', [newExpense]);
+            const { expenseName, expenseAmount, expensetype } = req.body;
+            const sql = `INSERT INTO expense (expenseName, expenseAmount, expensetype) VALUES (
+            '${expenseName}','${expenseAmount}','${expensetype}')`;
+            database_1.con.query(sql);
             console.log("Successfully added");
         }
         catch (err) {

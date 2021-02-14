@@ -36,8 +36,8 @@ async function getAllItems(req: Request, res: Response): Promise<Response | void
 
 async function addItem(req: Request, res: Response){
     try{
-        let { itemName, itemQuantity, itemCost } = req.body
-        //const newItem: Item = req.body
+        const { itemName, itemQuantity, itemCost } = req.body
+        // const newItem: Item = req.body
         const sql = `INSERT INTO inventory (itemName, itemQuantity, itemCost) VALUES (
             '${itemName}', '${itemQuantity}', '${itemCost}')`
         con.query(sql);
@@ -73,7 +73,7 @@ async function updateItemAmount(req: Request, res: Response){
     // Need to implement so that it only updates quantity
     try{
         const id = req.params.itemid
-        let { itemAmount } = req.body;
+        const { itemAmount } = req.body;
         con.query('UPDATE inventory SET itemAmount WHERE id = ?', [itemAmount, id]);
     }catch(err){
         res.status(400).send(err);
