@@ -18,6 +18,7 @@ const cors_1 = __importDefault(require("cors"));
 const database_1 = require("../config/database");
 const Inventoryroute_1 = require("./routes/Inventoryroute");
 const Indexroute_1 = require("./routes/Indexroute");
+const Expensesroute_1 = require("./routes/Expensesroute");
 class App {
     constructor(port) {
         this.port = port;
@@ -36,11 +37,12 @@ class App {
     routes() {
         this.app.use(Indexroute_1.indexrouter);
         this.app.use('/inventory', Inventoryroute_1.inventoryrouter);
+        this.app.use('/accounts', Expensesroute_1.expenserouter);
     }
     listen() {
         return __awaiter(this, void 0, void 0, function* () {
             yield this.app.listen(this.port);
-            console.log('Server on port', this.app.get('port'));
+            console.log('Server on port ' + this.port);
         });
     }
     connectDB() {

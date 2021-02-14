@@ -7,6 +7,7 @@ indexrouter
     .route("/")
     .get((req: Request, res: Response) => {
         res.send("/inventory for INVENTORY")
+        res.send("/accounts for EXPENSES")
     });
 
 export { indexrouter }

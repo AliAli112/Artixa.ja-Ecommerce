@@ -11,5 +11,6 @@ indexrouter
     .route("/")
     .get((req, res) => {
     res.send("/inventory for INVENTORY");
+    res.send("/accounts for EXPENSES");
 });
 //# sourceMappingURL=Indexroute.js.map

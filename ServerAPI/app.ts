@@ -1,9 +1,10 @@
 import express, { Application, Request, Response } from 'express'
-import { Connection } from '../misc/Connection'
+import { Connection } from '../misc/Enum'
 import cors from 'cors';
 import { con } from '../config/database';
 import { inventoryrouter } from './routes/Inventoryroute'
 import { indexrouter } from './routes/Indexroute'
+import { expenserouter } from './routes/Expensesroute'
 
 export class App {
     app: Application;
@@ -30,11 +31,12 @@ export class App {
     private routes(){
         this.app.use(indexrouter)
         this.app.use('/inventory', inventoryrouter)
+        this.app.use('/accounts', expenserouter)
     }
 
     public async listen(): Promise<void> {
         await this.app.listen(this.port);
-        console.log('Server on port' + this.port);
+        console.log('Server on port ' + this.port);
     }
 
     private connectDB(){

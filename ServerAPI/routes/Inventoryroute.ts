@@ -1,26 +1,24 @@
 import express, { Request, Response } from 'express';
 import { con } from '../../config/database';
+import { Item } from '../../misc/Item'
 
 const inventoryrouter = express.Router();
 
 inventoryrouter
     .route("/")
     // Get all items
-    .get(getAllItems);
-//     .post((req: Request, res: Response) => {
+    .get(getAllItems)
+    // add new item
+    .post(addItem);
 
-//     })
-
-// Inventoryrouter
-//     .route("/inventory/:itemid")
-//     // Delete item from database
-//     .delete((req: Request, res: Response) => {
-
-//     })
-//     // Update quantity
-//     .post((req: Request, res: Response) => {
-
-//     })
+inventoryrouter
+     .route("/:itemid")
+     // Get specific item
+     .get(getItem)
+      // Delete item from database
+     .delete(deleteItem)
+      // Update quantity
+     .post(updateItemAmount)
 
 // Controller functions
 
@@ -36,4 +34,47 @@ async function getAllItems(req: Request, res: Response): Promise<Response | void
     })
 }
 
+async function addItem(req: Request, res: Response){
+    try{
+        const newItem: Item = req.body
+        con.query('INSERT INTO inventory SET ?', [newItem]);
+        console.log("Item added");
+    }catch(err){
+        res.status(400).send(err);
+        console.log("An error occured");
+    }
+}
+
+async function getItem(req: Request, res: Response){
+    try{
+        const id = req.params.itemid
+        con.query('SELECT * FROM inventory WHERE id = ?', [id]);
+    }catch(err){
+        res.status(400).send(err);
+        console.log("An error occured");
+    }
+}
+
+async function deleteItem(req: Request, res: Response){
+    try{
+        const id = req.params.itemid
+        con.query('DELETE FROM inventory WHERE id = ?', [id]);
+    }catch(err){
+        res.status(400).send(err);
+        console.log("An error occured");
+    }
+
+}
+
+async function updateItemAmount(req: Request, res: Response){
+    // Need to implement so that it only updates quantity
+    try{
+        const id = req.params.itemid
+        const updateitem: Item = req.body;
+        con.query('UPDATE inventory SET ? WHERE id = ?', [updateitem, id]);
+    }catch(err){
+        res.status(400).send(err);
+        console.log("An error occured");
+    }
+}
 export { inventoryrouter }

@@ -1,10 +1,10 @@
-class Item {
+export class Item {
     private id: number;
     private name: string;
-    private image: string;
+    // private image: string;
     private quantity: number;
     private description: string;
-    
+
     constructor(id:number, name:string, quantity:number, desc:string ){
 
         this.id = id;
@@ -28,5 +28,9 @@ class Item {
     public getDesc(){
         return this.description;
     }
-} 
+
+    public updateQuantity(amount: number){
+        this.quantity += amount
+    }
+}
 

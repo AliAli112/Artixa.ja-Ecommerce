@@ -20,17 +20,17 @@ exports.inventoryrouter = inventoryrouter;
 inventoryrouter
     .route("/")
     // Get all items
-    .get(getAllItems);
-//     .post((req: Request, res: Response) => {
-//     })
-// Inventoryrouter
-//     .route("/inventory/:itemid")
-//     // Delete item from database
-//     .delete((req: Request, res: Response) => {
-//     })
-//     // Update quantity
-//     .post((req: Request, res: Response) => {
-//     })
+    .get(getAllItems)
+    // add new item
+    .post(addItem);
+inventoryrouter
+    .route("/:itemid")
+    // Get specific item
+    .get(getItem)
+    // Delete item from database
+    .delete(deleteItem)
+    // Update quantity
+    .post(updateItemAmount);
 // Controller functions
 function getAllItems(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
@@ -44,6 +44,57 @@ function getAllItems(req, res) {
             else
                 res.json({});
         });
+    });
+}
+function addItem(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const newItem = req.body;
+            database_1.con.query('INSERT INTO inventory SET ?', [newItem]);
+            console.log("Item added");
+        }
+        catch (err) {
+            res.status(400).send(err);
+            console.log("An error occured");
+        }
+    });
+}
+function getItem(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const id = req.params.itemid;
+            database_1.con.query('SELECT * FROM inventory WHERE id = ?', [id]);
+        }
+        catch (err) {
+            res.status(400).send(err);
+            console.log("An error occured");
+        }
+    });
+}
+function deleteItem(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const id = req.params.itemid;
+            database_1.con.query('DELETE FROM inventory WHERE id = ?', [id]);
+        }
+        catch (err) {
+            res.status(400).send(err);
+            console.log("An error occured");
+        }
+    });
+}
+function updateItemAmount(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        // Need to implement so that it only updates quantity
+        try {
+            const id = req.params.itemid;
+            const updateitem = req.body;
+            database_1.con.query('UPDATE inventory SET ? WHERE id = ?', [updateitem, id]);
+        }
+        catch (err) {
+            res.status(400).send(err);
+            console.log("An error occured");
+        }
     });
 }
 //# sourceMappingURL=Inventoryroute.js.map
