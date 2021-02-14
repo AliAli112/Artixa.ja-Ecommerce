@@ -34,8 +34,10 @@ async function getAllExpense(req: Request, res: Response) {
 
 async function addExpense(req: Request, res: Response){
     try{
-        const newExpense: Expenses = req.body
-        con.query('INSERT INTO expenses SET ?', [newExpense]);
+        let { expenseName, expenseAmount , expensetype} = req.body
+        const sql = `INSERT INTO expense (expenseName, expenseAmount, expensetype) VALUES (
+            '${expenseName}','${expenseAmount}','${expensetype}')`
+    con.query(sql);
         console.log("Successfully added");
     }catch(err){
         res.status(400).send(err);

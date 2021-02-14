@@ -36,8 +36,11 @@ async function getAllItems(req: Request, res: Response): Promise<Response | void
 
 async function addItem(req: Request, res: Response){
     try{
-        const newItem: Item = req.body
-        con.query('INSERT INTO inventory SET ?', [newItem]);
+        let { itemName, itemQuantity, itemCost } = req.body
+        //const newItem: Item = req.body
+        const sql = `INSERT INTO inventory (itemName, itemQuantity, itemCost) VALUES (
+            '${itemName}', '${itemQuantity}', '${itemCost}')`
+        con.query(sql);
         console.log("Item added");
     }catch(err){
         res.status(400).send(err);
@@ -70,8 +73,8 @@ async function updateItemAmount(req: Request, res: Response){
     // Need to implement so that it only updates quantity
     try{
         const id = req.params.itemid
-        const updateitem: Item = req.body;
-        con.query('UPDATE inventory SET ? WHERE id = ?', [updateitem, id]);
+        let { itemAmount } = req.body;
+        con.query('UPDATE inventory SET itemAmount WHERE id = ?', [itemAmount, id]);
     }catch(err){
         res.status(400).send(err);
         console.log("An error occured");
