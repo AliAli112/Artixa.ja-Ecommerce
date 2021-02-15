@@ -1,6 +1,6 @@
 import { User } from './User';
 import { Name } from './Name';
-
+/*
 export class Customer extends User{
     // private username: string;
     // private password: string;
@@ -15,3 +15,5 @@ export class Customer extends User{
     }
 
 }
+
+*/
