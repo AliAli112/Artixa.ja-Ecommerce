@@ -10,10 +10,11 @@ import { shoppingrouter } from './routes/Shoppingrouter'
 
 export class App {
     app: Application;
-    public connection: Connection;
+    public connection!: Connection;
 
     constructor(
         private port: number,
+        connection = 0,
     )
     {
         this.app =  express();

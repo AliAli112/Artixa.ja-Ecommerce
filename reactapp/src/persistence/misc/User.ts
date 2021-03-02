@@ -17,4 +17,4 @@ export class User{
     public setUserName(){
         return this.password;
     }
-}
+}//to delete
