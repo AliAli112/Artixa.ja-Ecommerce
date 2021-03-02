@@ -2,6 +2,8 @@ DROP DATABASE IF EXISTS Artixa;
 CREATE DATABASE Artixa;
 USE Artixa;
 
+--Might change id auto update becuz of the attribute 'id' of classes probably need to match
+
 DROP TABLE IF EXISTS Inventory;
 CREATE TABLE Inventory (
     id INT auto_increment,
