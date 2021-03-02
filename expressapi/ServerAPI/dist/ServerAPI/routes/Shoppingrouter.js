@@ -12,18 +12,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.inventoryrouter = void 0;
+exports.shoppingrouter = void 0;
 const express_1 = __importDefault(require("express"));
 const database_1 = require("../../config/database");
-const inventoryrouter = express_1.default.Router();
-exports.inventoryrouter = inventoryrouter;
-inventoryrouter
+const shoppingrouter = express_1.default.Router();
+exports.shoppingrouter = shoppingrouter;
+shoppingrouter
     .route("/")
     // Get all items
     .get(getAllItems)
     // add new item
     .post(addItem);
-inventoryrouter
+shoppingrouter
     .route("/:itemid")
     // Get specific item
     .get(getItem)
@@ -78,7 +78,6 @@ function deleteItem(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const id = req.params.itemid;
-            console.log("backend", id);
             database_1.con.query('DELETE FROM inventory WHERE id = ?', [id]);
         }
         catch (err) {
@@ -101,4 +100,4 @@ function updateItemAmount(req, res) {
         }
     });
 }
-//# sourceMappingURL=Inventoryroute.js.map
+//# sourceMappingURL=Shoppingrouter.js.map

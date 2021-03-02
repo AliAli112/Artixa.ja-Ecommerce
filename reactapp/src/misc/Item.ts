@@ -3,14 +3,15 @@ export class Item {
     private name: string;
     // private image: string;
     private quantity: number;
-    private description: string;
+    private cost: number;
 
-    constructor(id:number, name:string, quantity:number, desc:string ){
+    constructor(id:number, name:string, quantity:number, desc:number ){
 
         this.id = id;
         this.name = name;
         this.quantity = quantity;
-        this.description = desc;
+        this.cost = desc;
+        //description to the database
     }
 
     public getId(){
@@ -25,8 +26,8 @@ export class Item {
         return this.quantity;
     }
 
-    public getDesc(){
-        return this.description;
+    public getCostS(){
+        return this.cost;
     }
 
     public updateQuantity(amount: number){

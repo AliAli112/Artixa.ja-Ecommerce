@@ -10,7 +10,6 @@ exports.indexrouter = indexrouter;
 indexrouter
     .route("/")
     .get((req, res) => {
-    res.send("/inventory for INVENTORY");
-    res.send("/accounts for EXPENSES");
+    res.send("/inventory for INVENTORY" + '\n' + "/accounts for EXPENSES");
 });
 //# sourceMappingURL=Indexroute.js.map

@@ -2,16 +2,16 @@ import express, { Request, Response } from 'express';
 import { con } from '../../config/database';
 import { Item } from '../../misc/Item'
 
-const inventoryrouter = express.Router();
+const shoppingrouter = express.Router();
 
-inventoryrouter
+shoppingrouter
     .route("/")
     // Get all items
     .get(getAllItems)
     // add new item
     .post(addItem);
 
-inventoryrouter
+shoppingrouter
      .route("/:itemid")
      // Get specific item
      .get(getItem)
@@ -61,7 +61,6 @@ async function getItem(req: Request, res: Response){
 async function deleteItem(req: Request, res: Response){
     try{
         const id = req.params.itemid
-        console.log("backend" ,id)
         con.query('DELETE FROM inventory WHERE id = ?', [id]);
     }catch(err){
         res.status(400).send(err);
@@ -81,4 +80,4 @@ async function updateItemAmount(req: Request, res: Response){
         console.log("An error occured");
     }
 }
-export { inventoryrouter }
+export { shoppingrouter }

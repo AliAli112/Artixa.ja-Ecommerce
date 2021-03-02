@@ -6,8 +6,7 @@ const indexrouter = express.Router();
 indexrouter
     .route("/")
     .get((req: Request, res: Response) => {
-        res.send("/inventory for INVENTORY")
-        res.send("/accounts for EXPENSES")
+        res.send("/inventory for INVENTORY"+'\n'+ "/accounts for EXPENSES")
     });
 
 export { indexrouter }
