@@ -1,6 +1,6 @@
 import { AccountsPage } from '../pages/Accounts'
 import { RegisterPage } from '../pages/Register'
-import { RouteEntries } from '../misc/Routes'
+import { RouteEntries } from '../../Domain Model/Routes'
 
 import axios from 'axios'
 

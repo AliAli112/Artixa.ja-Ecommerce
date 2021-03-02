@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 //import { Link } from 'react-router-dom';
 //import { Button, Title } from 'react-bootstrap'
 import axios from 'axios'
-import { Expenses } from '../misc/Expenses'
+import { Expenses } from '../Domain Model/Expenses'
 
 const server = axios.create()
 

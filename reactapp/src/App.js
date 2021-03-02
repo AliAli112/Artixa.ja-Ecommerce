@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import axios from 'axios';
 import { BrowserRouter as Router, Switch, Route, Link,  useHistory, IndexRoute } from 'react-router-dom';
-import { RouteEntries } from './misc/Routes';
+import { RouteEntries } from './Domain Model/Routes';
 import { RegisterPage } from './UI/Register';
 import { AccountsPage } from './UI/Accounts'
 import { ItemsCatalogPage } from './UI/ItemsCatalogPage'

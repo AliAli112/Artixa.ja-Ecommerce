@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Item } from '../misc/Item'
+import { Item } from '../Domain Model/Item'
 import axios from 'axios'
 
 const server = axios.create()
