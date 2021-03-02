@@ -27,7 +27,7 @@ export class ItemsCatalogPage extends Component {
             }
 
         }catch(e){
-
+            console.log(e)
         }
     }
 
