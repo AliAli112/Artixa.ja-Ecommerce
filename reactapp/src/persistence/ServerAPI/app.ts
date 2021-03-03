@@ -6,7 +6,6 @@ import { inventoryrouter } from './routes/Inventoryroute'
 import { indexrouter } from './routes/Indexroute'
 import { expenserouter } from './routes/Expensesroute'
 import { orderrouter } from './routes/Orderroutes'
-import { shoppingrouter } from './routes/Shoppingrouter'
 
 export class App {
     app: Application;
@@ -34,7 +33,6 @@ export class App {
     private routes(){
         this.app.use(indexrouter)
         this.app.use('/inventory', inventoryrouter)
-        this.app.use('/shopping', shoppingrouter)
         this.app.use('/accounts', expenserouter)
         this.app.use('/orders', orderrouter)
     }
