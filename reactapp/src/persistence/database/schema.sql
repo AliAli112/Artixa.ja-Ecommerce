@@ -21,8 +21,8 @@ CREATE TABLE Customers (
     customerFirstName varchar(255),
     customerLastName varchar(255),
     customerAddress varchar(255),
-    customerEmail varchar(255),
     customerPhoneNumber varchar(255),
+    customerEmail varchar(255),
     customerPassword varchar(255),
     PRIMARY KEY(id)
 );

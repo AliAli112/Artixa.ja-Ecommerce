@@ -30,3 +30,7 @@ async function getAllCustomers(req: Request, res: Response) {
         else res.json({});
     });
 }
+
+async function registerCustomer(req: Request, res: Response) {
+
+}

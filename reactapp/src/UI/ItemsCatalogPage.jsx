@@ -44,11 +44,13 @@ export class ItemsCatalogPage extends Component {
 
     updateItem = async (id, amount) => {
         //Create a null item object, run update item in it then getQuantity and update database
+        //Or run getItem {by id} then run the updateAmount() method on it then getQuantity
+        const updateItem = new Item('', '','',amount, '');
         try{
-            console.log(amount)
+            console.log(updateItem.getQuantity())
             let res = await server.post(`http://localhost:3005/inventory/${id}`, {
                 itemName: '',
-                itemQuantity: amount,
+                itemQuantity: updateItem.getQuantity(),
             }).then();
         }catch(err){
             console.log(err);
