@@ -51,6 +51,7 @@ function addExpense(req, res) {
             const sql = `INSERT INTO expenses (expenseName, expenseAmount, expensetype) VALUES (
             '${expenseName}','${expenseAmount}','${expensetype}')`;
             database_1.con.query(sql);
+            console.log(req.body);
             console.log("Successfully added");
         }
         catch (err) {

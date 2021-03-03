@@ -17,6 +17,7 @@ const express_1 = __importDefault(require("express"));
 const database_1 = require("../../config/database");
 const shoppingrouter = express_1.default.Router();
 exports.shoppingrouter = shoppingrouter;
+// May delete this route it is similar to inventoryroute
 shoppingrouter
     .route("/")
     // Get all items
@@ -24,7 +25,7 @@ shoppingrouter
     // add new item
     .post(addItem);
 shoppingrouter
-    .route("/:itemid")
+    .route("/:id")
     // Get specific item
     .get(getItem)
     // Delete item from database
@@ -65,7 +66,7 @@ function addItem(req, res) {
 function getItem(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const id = req.params.itemid;
+            const id = req.params.id;
             database_1.con.query('SELECT * FROM inventory WHERE id = ?', [id]);
         }
         catch (err) {
@@ -77,7 +78,7 @@ function getItem(req, res) {
 function deleteItem(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const id = req.params.itemid;
+            const id = req.params.id;
             database_1.con.query('DELETE FROM inventory WHERE id = ?', [id]);
         }
         catch (err) {
@@ -90,7 +91,7 @@ function updateItemAmount(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         // Need to implement so that it only updates quantity
         try {
-            const id = req.params.itemid;
+            const id = req.params.id;
             const { itemAmount } = req.body;
             database_1.con.query('UPDATE inventory SET itemQuantity WHERE id = ?', [itemAmount, id]);
         }

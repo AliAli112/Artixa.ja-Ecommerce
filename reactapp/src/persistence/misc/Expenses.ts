@@ -7,4 +7,4 @@ export interface Expenses{
     amount: number;
     ExpenseType: ExpenseType; // This needs to be added in database
 }
-//= moment().format('MMMM Do YYYY, h:mm:ss a');
+// = moment().format('MMMM Do YYYY, h:mm:ss a');

@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 //import { Button, Title } from 'react-bootstrap'
 import axios from 'axios'
 import { Expenses } from '../Domain Model/Expenses'
+import { addExpense, createExpense, getExpense } from '../Application/Controllers/ExpenseController'
 
 const server = axios.create()
 
@@ -19,8 +20,13 @@ export class AccountsPage extends Component {
 
     constructor(){
         super();
-        this.getExpense();
+        this.getExpense()
+        // const data = Promise.resolve(getExpense())
+        // this.setState({expenses: data});
+        // console.log(this.state.expenses)
     }
+
+
 
     createExpense(name, amount){
         console.log(name, amount)
@@ -47,6 +53,7 @@ export class AccountsPage extends Component {
         //this.createExpense(event.target.name.value, event.target.amount.value)
         const expense = new Expenses(event.target.name.value, event.target.amount.value)
         let res = await server.post('http://localhost:3005/accounts', {
+            //these correspond to the columns in the database
             expenseName: expense.getName(),
             expenseAmount: expense.getAmount(),
             expensetype: expense.getType(),

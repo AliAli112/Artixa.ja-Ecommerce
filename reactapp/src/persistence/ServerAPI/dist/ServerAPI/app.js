@@ -22,7 +22,7 @@ const Expensesroute_1 = require("./routes/Expensesroute");
 const Orderroutes_1 = require("./routes/Orderroutes");
 const Shoppingrouter_1 = require("./routes/Shoppingrouter");
 class App {
-    constructor(port) {
+    constructor(port, connection = 0) {
         this.port = port;
         this.app = express_1.default();
         this.middlewares();

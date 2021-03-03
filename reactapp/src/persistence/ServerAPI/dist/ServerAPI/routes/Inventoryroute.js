@@ -24,7 +24,7 @@ inventoryrouter
     // add new item
     .post(addItem);
 inventoryrouter
-    .route("/:itemid")
+    .route("/:id")
     // Get specific item
     .get(getItem)
     // Delete item from database
@@ -32,6 +32,7 @@ inventoryrouter
     // Update quantity
     .post(updateItemAmount);
 // Controller functions
+// Working
 function getAllItems(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         database_1.con.query('SELECT * FROM inventory', (err, result) => {
@@ -39,7 +40,7 @@ function getAllItems(req, res) {
                 res.status(400).send(err);
                 return;
             }
-            if (true)
+            if (true) // sus
                 return res.json(result);
             else
                 res.json({});
@@ -65,7 +66,7 @@ function addItem(req, res) {
 function getItem(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const id = req.params.itemid;
+            const id = req.params.id;
             database_1.con.query('SELECT * FROM inventory WHERE id = ?', [id]);
         }
         catch (err) {
@@ -74,10 +75,11 @@ function getItem(req, res) {
         }
     });
 }
+// working
 function deleteItem(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const id = req.params.itemid;
+            const id = req.params.id;
             console.log("backend", id);
             database_1.con.query('DELETE FROM inventory WHERE id = ?', [id]);
         }
@@ -90,10 +92,12 @@ function deleteItem(req, res) {
 function updateItemAmount(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         // Need to implement so that it only updates quantity
+        // This will also be implemented on shopping page to update quantity of item in stock whenever checkout is made
         try {
-            const id = req.params.itemid;
-            const { itemAmount } = req.body;
-            database_1.con.query('UPDATE inventory SET itemQuantity WHERE id = ?', [itemAmount, id]);
+            const id = req.params.id;
+            const itemAmount = req.body;
+            console.log(itemAmount);
+            database_1.con.query('UPDATE inventory SET itemQuantity = ? WHERE id = ?', [itemAmount, id]);
         }
         catch (err) {
             res.status(400).send(err);

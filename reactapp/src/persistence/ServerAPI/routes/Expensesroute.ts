@@ -38,6 +38,7 @@ async function addExpense(req: Request, res: Response){
         const sql = `INSERT INTO expenses (expenseName, expenseAmount, expensetype) VALUES (
             '${expenseName}','${expenseAmount}','${expensetype}')`
     con.query(sql);
+        console.log(req.body)
         console.log("Successfully added");
     }catch(err){
         res.status(400).send(err);
