@@ -4,15 +4,15 @@ import { OrderStatus } from './Enum'
 
 export class Order {
     private id: number;
-    private owner: Customer
+    private ownerid: number; //id of the customer
     private items: Item[];
     public status: OrderStatus;
     //private timestamp: Date.now() //Needs to be included in database in original app.
 
-    constructor(id: number, items: Item[], owner: Customer, stat: OrderStatus){
-        this.id = id;
+    constructor(id: number, items: Item[], ownerid: number, stat: OrderStatus){
+        this.id = id; 
         this.items = items;
-        this.owner = owner;
+        this.ownerid = ownerid;
         this.status = stat
     }
 
@@ -24,8 +24,8 @@ export class Order {
         this.items.pop();
     }
 
-    public getCustomer(){
-        return this.owner
+    public getCustomerID(){
+        return this.ownerid
     }
 
     public getStatus(){

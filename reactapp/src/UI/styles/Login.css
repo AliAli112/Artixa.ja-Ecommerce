@@ -1,0 +1,51 @@
+@import "themeColours.css";
+
+
+.btn-container{
+    padding-top: 30px;
+}
+
+.login-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* background-color: #fff; */
+    background-image: linear-gradient(to bottom right, var(--dark), #fff);
+    width: 400px;
+    height: 500px;
+    border: var(--main) solid 1px;
+    border-radius: 20px;
+    padding: 10px;
+}
+
+input{
+    background-color: var(--main);
+    border: var(--main) solid 2px;
+    border-radius: 10px;
+    height: 30px;
+}
+
+.input{
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+label{
+    color: var(--black);
+    text-align: left;
+    padding-left: 10px;
+    padding-bottom: 10px;
+}
+
+h2{
+    color: var(--background);
+    font-weight: 100;
+    padding-bottom: 50px;
+    font-size: 25px;
+}
+
+input:required:invalid{
+    border-color: var(--invalid);
+}

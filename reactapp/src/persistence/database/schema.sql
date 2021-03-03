@@ -2,7 +2,6 @@ DROP DATABASE IF EXISTS Artixa;
 CREATE DATABASE Artixa;
 USE Artixa;
 
---Might change id auto update becuz of the attribute 'id' of classes probably need to match
 
 DROP TABLE IF EXISTS Inventory;
 CREATE TABLE Inventory (
@@ -15,8 +14,8 @@ CREATE TABLE Inventory (
 );
 
 DROP TABLE IF EXISTS Customers;
-CREATE TABLE Customers (
-    id INT auto_increment,
+CREATE TABLE Customers ( 
+    cus_id INT auto_increment,
     customerUsername varchar(255),
     customerFirstName varchar(255),
     customerLastName varchar(255),
@@ -24,35 +23,18 @@ CREATE TABLE Customers (
     customerPhoneNumber varchar(255),
     customerEmail varchar(255),
     customerPassword varchar(255),
-    PRIMARY KEY(id)
+    PRIMARY KEY(cus_id)
 );
 
 DROP TABLE IF EXISTS Orders;
 CREATE TABLE Orders (
     id INT auto_increment,
+    cus_id INT,
+    items varchar(255),
     shippingLocation varchar(255),
-    -- customerFirstName varchar(255),
     PRIMARY KEY(id),
-    FOREIGN KEY(id) REFERENCES Customers(id) ON DELETE CASCADE,
-    -- FOREIGN KEY(customerFirstName) REFERENCES Customers(customerFirstName) ON DELETE CASCADE,
-    FOREIGN KEY(id) REFERENCES Inventory(id) ON DELETE CASCADE,
+    FOREIGN KEY(cus_id) REFERENCES Customers(cus_id) ON DELETE CASCADE
 );
-
--- DROP TABLE IF EXISTS Invoices;
--- CREATE TABLE Invoices (
---     id INT auto_increment,
---     customerID INT,
---     orderName varchar(255),
---     orderCost decimal(10,2),
---     orderSubtotal decimal(10,2),
---     itemNames Text(1000),
---     itemQuantity varchar(255),
---     orderLocation varchar(255),
---     orderPlacedDate DATE,
---     orderStatus varchar(25),
---     PRIMARY KEY(id),
---     FOREIGN KEY(id) REFERENCES Customers(id) ON DELETE CASCADE
--- );
 
 DROP TABLE IF EXISTS Expenses;
 CREATE TABLE Expenses (

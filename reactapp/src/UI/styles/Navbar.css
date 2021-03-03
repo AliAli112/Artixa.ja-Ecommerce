@@ -1,0 +1,45 @@
+@import "themeColours.css";
+
+.nav-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 70px;
+}
+
+nav{
+    background-color: var(--nav);
+}
+
+
+.nav-right{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+
+}
+
+.profile{
+    padding: 30px;
+}
+
+.cart{
+    padding: 30px;
+    padding-right: 30px;
+}
+
+.logo-container{
+    padding-top: 30px;
+    padding-bottom: 30px;
+    padding-right: 40px;
+    padding-left: 30px;
+    border: var(--dark) solid 1px;
+}
+
+.profile-icon{
+    font-size: large;
+}
+
+.link{
+    color: var(--dark);
+}
