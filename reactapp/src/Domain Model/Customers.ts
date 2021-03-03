@@ -1,4 +1,5 @@
 import { User } from './User';
+import { Order } from './Orders';
 
 export class Customer extends User{
     private id: number;
@@ -9,6 +10,7 @@ export class Customer extends User{
     private email: string;
     private firstname: string; 
     private lastname: string;
+    private orders: Order[]; 
     constructor(username: string,
         password: string,
         id: number,
@@ -16,7 +18,8 @@ export class Customer extends User{
         addr: string, 
         email: string, 
         fname: string,
-        lname: string ){
+        lname: string,
+        orders: Order[] ){
         super(username, password)
 
         this.id = id;
@@ -25,6 +28,7 @@ export class Customer extends User{
         this.email = email;
         this.firstname = fname; 
         this.lastname = lname;
+        this.orders = orders;
         
     }
     public getFirstName(){
@@ -54,5 +58,10 @@ export class Customer extends User{
     public getaddress(){
         return this.address;
     }
+
+    public getOrders(){
+        return this.orders;
+    }
+
 }
 

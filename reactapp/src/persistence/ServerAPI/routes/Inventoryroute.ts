@@ -39,10 +39,10 @@ async function getAllItems(req: Request, res: Response): Promise<Response | void
 
 async function addItem(req: Request, res: Response){
     try{
-        const { itemName, itemQuantity, itemCost } = req.body
+        const { itemName, itemQuantity, itemDescription, itemCost } = req.body
         // const newItem: Item = req.body
-        const sql = `INSERT INTO inventory (itemName, itemQuantity, itemCost) VALUES (
-            '${itemName}', '${itemQuantity}', '${itemCost}')`
+        const sql = `INSERT INTO inventory (itemName, itemQuantity, itemDescription, itemCost) VALUES (
+            '${itemName}', '${itemQuantity}', '${itemDescription}','${itemCost}')`
         con.query(sql);
         console.log("Item added");
     }catch(err){
@@ -73,7 +73,7 @@ async function deleteItem(req: Request, res: Response){
 
 }
 
-//Working somewhat
+// Working somewhat
 async function updateItemAmount(req: Request, res: Response){
     // Need to implement so that it only updates quantity
     // This will also be implemented on shopping page to update quantity of item in stock whenever checkout is made

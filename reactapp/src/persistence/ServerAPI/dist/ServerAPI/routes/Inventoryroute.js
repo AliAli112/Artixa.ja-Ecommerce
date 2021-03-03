@@ -50,10 +50,10 @@ function getAllItems(req, res) {
 function addItem(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const { itemName, itemQuantity, itemCost } = req.body;
+            const { itemName, itemQuantity, itemDescription, itemCost } = req.body;
             // const newItem: Item = req.body
-            const sql = `INSERT INTO inventory (itemName, itemQuantity, itemCost) VALUES (
-            '${itemName}', '${itemQuantity}', '${itemCost}')`;
+            const sql = `INSERT INTO inventory (itemName, itemQuantity, itemDescription, itemCost) VALUES (
+            '${itemName}', '${itemQuantity}', '${itemDescription}','${itemCost}')`;
             database_1.con.query(sql);
             console.log("Item added");
         }
@@ -89,6 +89,7 @@ function deleteItem(req, res) {
         }
     });
 }
+// Working somewhat
 function updateItemAmount(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         // Need to implement so that it only updates quantity
