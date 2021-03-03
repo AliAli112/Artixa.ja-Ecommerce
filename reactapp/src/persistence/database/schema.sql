@@ -30,9 +30,11 @@ DROP TABLE IF EXISTS Orders;
 CREATE TABLE Orders (
     id INT auto_increment,
     shippingLocation varchar(255),
+    -- customerFirstName varchar(255),
     PRIMARY KEY(id),
     FOREIGN KEY(id) REFERENCES Customers(id) ON DELETE CASCADE,
-    FOREIGN KEY(id) REFERENCES Inventory(id) ON DELETE CASCADE
+    -- FOREIGN KEY(customerFirstName) REFERENCES Customers(customerFirstName) ON DELETE CASCADE,
+    FOREIGN KEY(id) REFERENCES Inventory(id) ON DELETE CASCADE,
 );
 
 DROP TABLE IF EXISTS Invoices;

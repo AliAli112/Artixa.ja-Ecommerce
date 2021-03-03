@@ -12,7 +12,7 @@ shoppingrouter
     .post(addItem);
 
 shoppingrouter
-     .route("/:itemid")
+     .route("/:id")
      // Get specific item
      .get(getItem)
       // Delete item from database
@@ -50,7 +50,7 @@ async function addItem(req: Request, res: Response){
 
 async function getItem(req: Request, res: Response){
     try{
-        const id = req.params.itemid
+        const id = req.params.id
         con.query('SELECT * FROM inventory WHERE id = ?', [id]);
     }catch(err){
         res.status(400).send(err);
@@ -60,7 +60,7 @@ async function getItem(req: Request, res: Response){
 
 async function deleteItem(req: Request, res: Response){
     try{
-        const id = req.params.itemid
+        const id = req.params.id
         con.query('DELETE FROM inventory WHERE id = ?', [id]);
     }catch(err){
         res.status(400).send(err);
@@ -72,7 +72,7 @@ async function deleteItem(req: Request, res: Response){
 async function updateItemAmount(req: Request, res: Response){
     // Need to implement so that it only updates quantity
     try{
-        const id = req.params.itemid
+        const id = req.params.id
         const { itemAmount } = req.body;
         con.query('UPDATE inventory SET itemQuantity WHERE id = ?', [itemAmount, id]);
     }catch(err){

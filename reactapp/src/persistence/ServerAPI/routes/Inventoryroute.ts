@@ -12,13 +12,15 @@ inventoryrouter
     .post(addItem);
 
 inventoryrouter
-     .route("/:itemid")
+     .route("/:id")
      // Get specific item
      .get(getItem)
       // Delete item from database
      .delete(deleteItem)
       // Update quantity
      .post(updateItemAmount)
+
+
 
 // Controller functions
 
@@ -28,7 +30,7 @@ async function getAllItems(req: Request, res: Response): Promise<Response | void
             res.status(400).send(err);
             return;
         }
-        if(true)
+        if(true) //sus
             return res.json(result);
         else res.json({});
     })
@@ -50,17 +52,17 @@ async function addItem(req: Request, res: Response){
 
 async function getItem(req: Request, res: Response){
     try{
-        const id = req.params.itemid
+        const id = req.params.id
         con.query('SELECT * FROM inventory WHERE id = ?', [id]);
     }catch(err){
         res.status(400).send(err);
         console.log("An error occured");
     }
 }
-
+//working
 async function deleteItem(req: Request, res: Response){
     try{
-        const id = req.params.itemid
+        const id = req.params.id
         console.log("backend" ,id)
         con.query('DELETE FROM inventory WHERE id = ?', [id]);
     }catch(err){
@@ -75,7 +77,7 @@ async function updateItemAmount(req: Request, res: Response){
     try{
         const id = req.params.itemid
         const { itemAmount } = req.body;
-        con.query('UPDATE inventory SET itemQuantity WHERE id = ?', [itemAmount, id]);
+        con.query('UPDATE inventory SET itemQuantity = ? WHERE id = ?', [itemAmount, id]);
     }catch(err){
         res.status(400).send(err);
         console.log("An error occured");

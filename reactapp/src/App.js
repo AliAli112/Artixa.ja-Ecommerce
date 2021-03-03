@@ -17,7 +17,7 @@ class App extends Component {
         <Router>
           <div>
             <Switch>
-              <Route exact path = {/*Should change this to register later or item catalog*/RouteEntries.index} component={AccountsPage}>
+              <Route exact path = {/*Should change this to register later or item catalog*/RouteEntries.index} component={ItemsCatalogPage}>
                 {/* <AccountsPage /> */}
               </Route>
             </Switch>

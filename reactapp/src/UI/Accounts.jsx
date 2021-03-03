@@ -20,9 +20,10 @@ export class AccountsPage extends Component {
 
     constructor(){
         super();
-        const data = Promise.resolve(getExpense())
-        this.setState({expenses: data});
-        console.log(this.state.expenses)
+        this.getExpense()
+        // const data = Promise.resolve(getExpense())
+        // this.setState({expenses: data});
+        // console.log(this.state.expenses)
     }
 
 
@@ -36,30 +37,30 @@ export class AccountsPage extends Component {
     }
 
 
-    // getExpense = async () => {
-    //     try{
-    //         let data = await server.get('http://localhost:3005/accounts').then(({data}) =>
-    //         data);
-    //         console.log(data)
-    //         this.setState({expenses: data})
-    //     }catch(err){
-    //         console.log(err);
-    //     }
-    // }
+    getExpense = async () => {
+        try{
+            let data = await server.get('http://localhost:3005/accounts').then(({data}) =>
+            data);
+            console.log(data)
+            this.setState({expenses: data})
+        }catch(err){
+            console.log(err);
+        }
+    }
     
-    // addExpense = async (event) => {
-    //     event.preventDefault();
-    //     //this.createExpense(event.target.name.value, event.target.amount.value)
-    //     const expense = new Expenses(event.target.name.value, event.target.amount.value)
-    //     let res = await server.post('http://localhost:3005/accounts', {
-    //         expenseName: expense.getName(),
-    //         expenseAmount: expense.getAmount(),
-    //         expensetype: expense.getType(),
-    //         }).then((res) =>{
-    //             console.log(res)
-    //             this.getExpenses();
-    //         })
-    //     }
+    addExpense = async (event) => {
+        event.preventDefault();
+        //this.createExpense(event.target.name.value, event.target.amount.value)
+        const expense = new Expenses(event.target.name.value, event.target.amount.value)
+        let res = await server.post('http://localhost:3005/accounts', {
+            expenseName: expense.getName(),
+            expenseAmount: expense.getAmount(),
+            expensetype: expense.getType(),
+            }).then((res) =>{
+                console.log(res)
+                this.getExpenses();
+            })
+        }
     render(){
         return(
             <div>
@@ -68,7 +69,7 @@ export class AccountsPage extends Component {
                 <h3>Expenses</h3>
                 {this.state.expenses.map(expenses => <p key={expenses.id}>{expenses.expenseName}</p>)}
                 <h3>Add an Expense</h3>
-                <form onSubmit={addExpense}>
+                <form onSubmit={this.addExpense}>
                     <label>Expense Name
                     <input type='text' name='name'/>
                     </label>
