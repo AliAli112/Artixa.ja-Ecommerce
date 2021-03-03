@@ -53,6 +53,7 @@ export class AccountsPage extends Component {
         //this.createExpense(event.target.name.value, event.target.amount.value)
         const expense = new Expenses(event.target.name.value, event.target.amount.value)
         let res = await server.post('http://localhost:3005/accounts', {
+            //these correspond to the columns in the database
             expenseName: expense.getName(),
             expenseAmount: expense.getAmount(),
             expensetype: expense.getType(),

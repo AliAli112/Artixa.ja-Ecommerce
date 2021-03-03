@@ -1,16 +1,18 @@
 export class Item {
     private id: number;
     private name: string;
+    private description: string;
     // private image: string;
     private quantity: number;
     private cost: number;
 
-    constructor(id:number, name:string, quantity:number, desc:number ){
+    constructor(id:number, name:string, desc: string, quantity:number, cost:number ){
 
         this.id = id;
         this.name = name;
+        this.description = desc;
         this.quantity = quantity;
-        this.cost = desc;
+        this.cost = cost;
         //description to the database
     }
 
@@ -22,11 +24,15 @@ export class Item {
         return this.name;
     }
 
+    public getDescription(){
+        return this.description;
+    }
+
     public getQuantity(){
         return this.quantity;
     }
 
-    public getCostS(){
+    public getCost(){
         return this.cost;
     }
 

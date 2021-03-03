@@ -13,6 +13,8 @@ export class ItemsCatalogPage extends Component {
         super()
         this.getallItems();
     }
+
+    //Need to add these controller functions to Application/Controllers then export them
     getallItems = async () =>{
         try{
             console.log("run")
@@ -40,13 +42,29 @@ export class ItemsCatalogPage extends Component {
         }
     }
 
+    updateItem = async (id, amount) => {
+        //Create a null item object, run update item in it then getQuantity and update database
+        try{
+            console.log(amount)
+            let res = await server.post(`http://localhost:3005/inventory/${id}`, {
+                itemName: '',
+                itemQuantity: amount,
+            }).then();
+        }catch(err){
+            console.log(err);
+        }
+    }
+
     render(){
 
         return(
             <div>
                 ITEMS
                 {this.state.items.map(items => <p key={items.id}>{items.itemName}
-                <button onClick={() => {this.deleteItem(items.id)}}>Deleteitem 1</button></p>)}
+                <button onClick={() => {this.deleteItem(items.id)}}>Deleteitem 1</button>
+                <input type='number' id='update' />
+                <button onClick={() => 
+                    {this.updateItem(items.id, 55)} }>Update</button></p>)}
             </div>
         )
     }

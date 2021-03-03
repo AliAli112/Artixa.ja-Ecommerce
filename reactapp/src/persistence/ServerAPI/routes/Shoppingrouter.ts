@@ -3,7 +3,7 @@ import { con } from '../../config/database';
 import { Item } from '../../misc/Item'
 
 const shoppingrouter = express.Router();
-
+// May delete this route it is similar to inventoryroute
 shoppingrouter
     .route("/")
     // Get all items

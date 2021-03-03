@@ -9,6 +9,7 @@ CREATE TABLE Inventory (
     id INT auto_increment,
     itemName varchar(255),
     itemQuantity INT,
+    itemDescription Text(1000),
     itemCost decimal(10,2),
     PRIMARY KEY(id)
 );
@@ -37,21 +38,21 @@ CREATE TABLE Orders (
     FOREIGN KEY(id) REFERENCES Inventory(id) ON DELETE CASCADE,
 );
 
-DROP TABLE IF EXISTS Invoices;
-CREATE TABLE Invoices (
-    id INT auto_increment,
-    customerID INT,
-    orderName varchar(255),
-    orderCost decimal(10,2),
-    orderSubtotal decimal(10,2),
-    itemNames Text(1000),
-    itemQuantity varchar(255),
-    orderLocation varchar(255),
-    orderPlacedDate DATE,
-    orderStatus varchar(25),
-    PRIMARY KEY(id),
-    FOREIGN KEY(id) REFERENCES Customers(id) ON DELETE CASCADE
-);
+-- DROP TABLE IF EXISTS Invoices;
+-- CREATE TABLE Invoices (
+--     id INT auto_increment,
+--     customerID INT,
+--     orderName varchar(255),
+--     orderCost decimal(10,2),
+--     orderSubtotal decimal(10,2),
+--     itemNames Text(1000),
+--     itemQuantity varchar(255),
+--     orderLocation varchar(255),
+--     orderPlacedDate DATE,
+--     orderStatus varchar(25),
+--     PRIMARY KEY(id),
+--     FOREIGN KEY(id) REFERENCES Customers(id) ON DELETE CASCADE
+-- );
 
 DROP TABLE IF EXISTS Expenses;
 CREATE TABLE Expenses (
