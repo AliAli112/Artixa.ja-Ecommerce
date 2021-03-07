@@ -20,7 +20,6 @@ const Inventoryroute_1 = require("./routes/Inventoryroute");
 const Indexroute_1 = require("./routes/Indexroute");
 const Expensesroute_1 = require("./routes/Expensesroute");
 const Orderroutes_1 = require("./routes/Orderroutes");
-const Shoppingrouter_1 = require("./routes/Shoppingrouter");
 class App {
     constructor(port, connection = 0) {
         this.port = port;
@@ -39,7 +38,6 @@ class App {
     routes() {
         this.app.use(Indexroute_1.indexrouter);
         this.app.use('/inventory', Inventoryroute_1.inventoryrouter);
-        this.app.use('/shopping', Shoppingrouter_1.shoppingrouter);
         this.app.use('/accounts', Expensesroute_1.expenserouter);
         this.app.use('/orders', Orderroutes_1.orderrouter);
     }

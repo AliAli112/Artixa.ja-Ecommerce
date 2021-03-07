@@ -27,7 +27,7 @@ export class ItemsCatalogPage extends Component {
             // for( i=0 ; i<data.lenght ; i++){
             //     console.log(data[i].id)
             //     //items += new Item(data[i].id)
-            // }
+            // } 
 
         }catch(e){
             console.log(e)

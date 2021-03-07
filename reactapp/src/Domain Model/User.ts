@@ -1,21 +1,16 @@
-export class User{
-    protected username: string;
+export abstract class User{
+    protected email: string;
     protected password: string;
     //private usercookie: string;
-    constructor(uname: string, pword: string){
-        this.username = uname;
+    constructor(email: string, pword: string){
+        this.email = email;
         this.password = pword;
 
     }
-    public getUserName(){
-        return this.username;
+    public getEmail(){
+        
     }
-
-    public setPassword(){
-        return this.password;
-    }
-
-    public setUserName(){
-        return this.password;
-    }
+    // public getCookie(){
+        
+    // }
 }
