@@ -8,6 +8,7 @@ export const getallItems = async () =>{
         let data = await server.get('http://localhost:3005/inventory').then(({data}) =>
         data);
         console.log(data)
+        return data;
     }catch(e){
         console.log(e)
     }

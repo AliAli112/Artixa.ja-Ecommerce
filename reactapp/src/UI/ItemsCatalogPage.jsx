@@ -1,17 +1,21 @@
 import React, { Component } from 'react'
 import { Item } from '../Domain Model/Item'
 import axios from 'axios'
+import './styles/ItemCatalogue.css';
+import { BrowserRouter as Router, Link } from 'react-router-dom'
 
 const server = axios.create()
+
 
 export class ItemsCatalogPage extends Component {
 
     state = {
         items: []
     }
-    constructor(){
-        super()
+    constructor(props){
+        super(props)
         this.getallItems();
+        console.log(this.props.shoppingCart)
     }
 
     //Need to add these controller functions to Application/Controllers then export them
@@ -20,10 +24,18 @@ export class ItemsCatalogPage extends Component {
             console.log("run")
             let data = await server.get('http://localhost:3005/inventory').then(({data}) =>
             data);
-            console.log(data)
-            this.setState({items: data})
+            var items = [];
+
+            for(let i = 0; i < data.length; i++){
+              let item = new Item(data[i].id, data[i].itemName, data[i].itemDescription, data[i].itemQuantity, data[i].itemCost)
+              items.push(item)
+
+            }
+            console.log(data.length)
+            
+            this.setState({items: items})
             var i;
-            var items;
+            
             // for( i=0 ; i<data.lenght ; i++){
             //     console.log(data[i].id)
             //     //items += new Item(data[i].id)
@@ -58,16 +70,56 @@ export class ItemsCatalogPage extends Component {
     }
 
     render(){
-
         return(
-            <div>
-                ITEMS
-                {this.state.items.map(items => <p key={items.id}>{items.itemName}
-                <button onClick={() => {this.deleteItem(items.id)}}>Deleteitem 1</button>
-                <input type='number' id='update' />
-                <button onClick={() => 
-                    {this.updateItem(items.id, 55)} }>Update</button></p>)}
+            <>
+                                
+
+            <div className="hero is-primary">
+        <div className="hero-body container">
+          <h4 className="title">Our Products</h4>
+        </div>
+      </div>
+      <br />
+      <Link to='/shoppingCart'>Cart</Link>
+      <div className="container">
+        <div className="column columns is-multiline">
+            {this.state.items.map(item => 
+<div className=" column is-half">
+<div className="box">
+  <div className="media">
+    <div className="media-left">
+      <figure className="image is-64x64">
+                <img src="https://bulma.io/images/placeholders/128x128.png" alt="asa"/>
+      </figure>
+    </div>
+    <div className="media-content">
+      <b style={{ textTransform: "capitalize" }}>
+        {item.getName()}{"  "}
+        <span className="tag is-primary">${item.getCost().toFixed(2)}</span>
+      </b>
+      <div>{item.getDescription()}</div>
+      {item.getQuantity() > 0 ? (
+              <small>{item.getQuantity() + " Available"}</small>
+            ) : (
+              <small className="has-text-danger">Out Of Stock</small>
+            )}
+
+      <div className="is-clearfix">
+        <button
+          className="button is-small is-outlined is-primary   is-pulled-right"
+         onClick={()=>this.props.addToCart(item, 1)}
+        >
+          Add to Cart
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+            )}
             </div>
+            </div>
+            </>
         )
     }
 
