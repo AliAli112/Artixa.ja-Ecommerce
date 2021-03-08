@@ -22,14 +22,15 @@ orderrouter
     // display in order collator
     .get(getAllOrders)
     // add an order to the database
-    .post();
+    .post(addOrder);
 orderrouter
     .route("/:id")
     .get()
     // delete an order
-    .delete();
+    .delete(deleteOrder);
 orderrouter
     .route('/customer')
+    // get customer specific orders this should maybe be post
     .get();
 function getAllOrders(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
@@ -71,9 +72,10 @@ function getAllMyOrders(req, res) {
 function addOrder(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const { cus_id, items, shippingLocation } = req.body;
-            const sql = `INSERT INTO orders ( cus_id, items, shippingLocation ) VALUES (
-            '${cus_id}', '${items}', '${shippingLocation}')`;
+            console.log(req.body);
+            const { items, shippingLocation } = req.body;
+            const sql = `INSERT INTO orders (items, shippingLocation ) VALUES (
+            '${items}', '${shippingLocation}')`;
             database_1.con.query(sql);
             console.log("Order added");
         }

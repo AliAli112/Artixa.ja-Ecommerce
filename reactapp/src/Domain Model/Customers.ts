@@ -3,7 +3,7 @@ import { Order } from './Orders';
 
 export class Customer extends User{
     private id: number;
-    // private password: string;
+    protected password: string;
     private phonenum: string;
     private address: string;
     protected email: string;
@@ -27,6 +27,7 @@ export class Customer extends User{
         this.firstname = fname; 
         this.lastname = lname;
         this.orders = orders;
+        this.password = password;
         
     }
     public getFirstName(){
@@ -55,6 +56,10 @@ export class Customer extends User{
 
     public getOrders(){
         return this.orders;
+    }
+
+    public getPassword(){
+        return this.password;
     }
     // public getCookie(){
         

@@ -8,6 +8,7 @@ import { RegisterPage } from './UI/Register';
 import { AccountsPage } from './UI/Accounts'
 import { ItemsCatalogPage } from './UI/ItemsCatalogPage'
 import { LoginPage } from './UI/LoginPage'
+import { OrderCollartorPage } from './UI/OrderCollartor'
 
 
 class App extends Component {
@@ -18,7 +19,7 @@ class App extends Component {
         <Router>
           <div>
             <Switch>
-              <Route exact path = {/*Should change this to register later or item catalog*/RouteEntries.index} component={LoginPage}>
+              <Route exact path = {/*Should change this to register later or item catalog*/RouteEntries.index} component={ RegisterPage}>
                 {/* <AccountsPage /> */}
               </Route>
             </Switch>

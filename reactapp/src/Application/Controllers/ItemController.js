@@ -12,3 +12,5 @@ export const getallItems = async () =>{
         console.log(e)
     }
 }
+
+//A function which stores the orders in the order table is needed

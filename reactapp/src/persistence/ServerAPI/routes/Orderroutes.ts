@@ -18,7 +18,7 @@ orderrouter
 
 orderrouter
     .route('/customer')
-    //get customer specific orders this should maybe be post
+    // get customer specific orders this should maybe be post
     .get()
 
 
@@ -60,9 +60,10 @@ async function getAllMyOrders(req: Request, res: Response) {
 // This function needs to take the order id and shippinglocation and make reference keys to the items
 async function addOrder(req: Request, res: Response){
     try{
-        const { cus_id, items, shippingLocation } = req.body
-        const sql = `INSERT INTO orders ( cus_id, items, shippingLocation ) VALUES (
-            '${cus_id}', '${items}', '${shippingLocation}')`
+        console.log(req.body)
+        const { items, shippingLocation } = req.body
+        const sql = `INSERT INTO orders (items, shippingLocation ) VALUES (
+            '${items}', '${shippingLocation}')`
         con.query(sql);
         console.log("Order added");
     }catch(err){
