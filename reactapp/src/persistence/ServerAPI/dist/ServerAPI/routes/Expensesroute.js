@@ -38,9 +38,8 @@ function getAllExpense(req, res) {
                 return;
             }
             if (true)
-                return res.json(result);
-            else
-                res.json({});
+                console.log("All expenses");
+            return res.json(result);
         });
     });
 }

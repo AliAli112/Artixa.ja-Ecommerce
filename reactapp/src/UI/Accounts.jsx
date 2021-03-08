@@ -24,7 +24,7 @@ export class AccountsPage extends Component {
     constructor(){
         super();
         this.setState.loading = true;
-        //this.getExpense()
+        this.getExpense()
         this.controller = new ExpensesController()
         // this.setState({expenses: this.controller.getExpenses()})
         // console.log(this.state.expenses)
@@ -40,16 +40,16 @@ export class AccountsPage extends Component {
     //     console.log(this.state.expenses)
     // }
 
-    // getExpense = async () => {
-    //     try{
-    //         let data = await server.get('http://localhost:3005/accounts').then(({data}) =>
-    //         data);
-    //         console.log(data)
-    //         this.setState({expenses: data})
-    //     }catch(err){
-    //         console.log(err);
-    //     }
-    // }
+    getExpense = async () => {
+        try{
+            let data = await server.get('http://localhost:3005/accounts').then(({data}) =>
+            data);
+            console.log(data)
+            this.setState({expenses: data})
+        }catch(err){
+            console.log(err);
+        }
+    }
     
     handleEvent = (event) => {
         const name = event.target.name.value
