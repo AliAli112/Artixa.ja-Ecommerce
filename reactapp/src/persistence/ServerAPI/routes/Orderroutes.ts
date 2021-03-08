@@ -8,16 +8,17 @@ orderrouter
     // display in order collator
     .get(getAllOrders)
     // add an order to the database
-    .post()
+    .post(addOrder)
 
 orderrouter
     .route("/:id")
     .get()
     // delete an order
-    .delete()
+    .delete(deleteOrder)
 
 orderrouter
     .route('/customer')
+    //get customer specific orders this should maybe be post
     .get()
 
 
