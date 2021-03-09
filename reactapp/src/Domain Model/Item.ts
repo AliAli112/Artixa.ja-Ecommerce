@@ -13,7 +13,6 @@ export class Item {
         this.description = desc;
         this.quantity = quantity;
         this.cost = cost;
-        //description to the database
     }
 
     public getId(){

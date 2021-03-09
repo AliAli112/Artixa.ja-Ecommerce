@@ -8,7 +8,7 @@ import axios from 'axios'
 const server = axios.create()
 
 export class OrderCollartorPage extends Component{
-    items = [{name: 'meme', age: 40}, {name: 'me', age: 4}]
+    list = [{name: 'meme', age: 40}, {name: 'me', age: 4}]
     state = {
         orders: [],
         
@@ -34,13 +34,13 @@ export class OrderCollartorPage extends Component{
             let data = await server.get('http://localhost:3005/orders')
         .then(({data}) => data)
         var orders = [];
-        
+        console.log(data)
         
 
         // for(let i = 0; i < data.lenght; i++){
         //     let order = new
         // }
-        //console.log(JSON.parse(data[0].items))
+        console.log(JSON.parse(data[0].items))
         }catch(err){
             console.log(err)
         }

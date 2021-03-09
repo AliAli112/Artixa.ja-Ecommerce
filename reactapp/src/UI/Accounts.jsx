@@ -24,10 +24,11 @@ export class AccountsPage extends Component {
     constructor(){
         super();
         this.setState.loading = true;
-        this.getExpense()
+        //this.getExpense()
         this.controller = new ExpensesController()
-        // this.setState({expenses: this.controller.getExpenses()})
-        // console.log(this.state.expenses)
+
+        this.setState({expenses: this.controller.getExpenses()})
+         console.log(this.state.expenses)
         //console.log(this.setState.expenses)
         // const data = Promise.resolve(getExpense())
         // this.setState({expenses: data});
@@ -61,7 +62,7 @@ export class AccountsPage extends Component {
     render(){
         var exp
         this.controller.getExpenses().then(({data}) => exp = data)
-        console.log(exp)
+        //console.log(exp)
         //this.setState({expenses: this.controller.getExpenses()})
         // if(){
         //     this.setState({loading: false})
