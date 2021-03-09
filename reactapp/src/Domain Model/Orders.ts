@@ -6,14 +6,18 @@ export class Order {
     private id: number;
     private ownerid: number; //id of the customer
     private items: Item[];
+    private shippingLocation: string; //Needs to be added to class diagram
     public status: OrderStatus;
+    private total: number;
     //private timestamp: Date.now() //Needs to be included in database in original app.
 
-    constructor(id: number, items: Item[], ownerid: number, stat: OrderStatus){
+    constructor(id: number, ownerid: number, items: Item[], location: string, stat: OrderStatus, total: number = 0){
         this.id = id; 
-        this.items = items;
         this.ownerid = ownerid;
-        this.status = stat
+        this.items = items;
+        this.shippingLocation = location;
+        this.status = stat;
+        this.total = total;
     }
 
     public addItem(newitem: Item){
@@ -30,6 +34,14 @@ export class Order {
 
     public getStatus(){
         return this.status;
+    }
+
+    public calcTotal(){
+        return this.total;
+    }
+    
+    public getLocation(){
+        return this.shippingLocation
     }
 }
 

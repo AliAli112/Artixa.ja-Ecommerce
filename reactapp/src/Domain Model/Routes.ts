@@ -3,7 +3,7 @@ export const RouteEntries = Object.freeze({
     register: "register",
     accounts: "accounts",
   });
-  
+  //To be moved to the application layer
   export const Routes = Object.freeze({
     index: RouteEntries.index,
     register: RouteEntries.index + "/" + RouteEntries.register,

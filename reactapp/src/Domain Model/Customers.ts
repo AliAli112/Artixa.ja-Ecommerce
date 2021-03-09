@@ -3,24 +3,22 @@ import { Order } from './Orders';
 
 export class Customer extends User{
     private id: number;
-    // private username: string;
-    // private password: string;
+    protected password: string;
     private phonenum: string;
     private address: string;
-    private email: string;
+    protected email: string;
     private firstname: string; 
     private lastname: string;
     private orders: Order[]; 
-    constructor(username: string,
+    constructor(email: string,
         password: string,
         id: number,
         phonenum: string, 
         addr: string, 
-        email: string, 
         fname: string,
         lname: string,
         orders: Order[] ){
-        super(username, password)
+        super(email, password)
 
         this.id = id;
         this.phonenum = phonenum;
@@ -29,6 +27,7 @@ export class Customer extends User{
         this.firstname = fname; 
         this.lastname = lname;
         this.orders = orders;
+        this.password = password;
         
     }
     public getFirstName(){
@@ -39,16 +38,12 @@ export class Customer extends User{
         return this.lastname;
     }
 
-    public setFirstName(fname: string){
-        return this.firstname = fname;
-    }
-
-    public setLastName(lname: string){
-        return this.lastname = lname;
-    }
-
     public getid(){
         return this.id;
+    }
+
+    public getEmail(){
+        return this.email
     }
 
     public getphonenum(){
@@ -63,5 +58,11 @@ export class Customer extends User{
         return this.orders;
     }
 
+    public getPassword(){
+        return this.password;
+    }
+    // public getCookie(){
+        
+    // }
 }
 

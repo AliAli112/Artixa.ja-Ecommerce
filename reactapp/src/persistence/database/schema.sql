@@ -16,11 +16,11 @@ CREATE TABLE Inventory (
 DROP TABLE IF EXISTS Customers;
 CREATE TABLE Customers ( 
     cus_id INT auto_increment,
-    customerUsername varchar(255),
     customerFirstName varchar(255),
     customerLastName varchar(255),
     customerAddress varchar(255),
     customerPhoneNumber varchar(255),
+    customerOrders Text(1000),
     customerEmail varchar(255),
     customerPassword varchar(255),
     PRIMARY KEY(cus_id)
@@ -32,6 +32,8 @@ CREATE TABLE Orders (
     cus_id INT,
     items varchar(255),
     shippingLocation varchar(255),
+    status INT,
+    total decimal(10,2),
     PRIMARY KEY(id),
     FOREIGN KEY(cus_id) REFERENCES Customers(cus_id) ON DELETE CASCADE
 );

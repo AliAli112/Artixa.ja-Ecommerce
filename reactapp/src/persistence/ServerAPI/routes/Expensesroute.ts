@@ -27,8 +27,8 @@ async function getAllExpense(req: Request, res: Response) {
             return;
         }
         if(true)
+            console.log("All expenses")
             return res.json(result);
-        else res.json({});
     });
 }
 

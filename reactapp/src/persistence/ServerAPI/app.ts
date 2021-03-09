@@ -6,6 +6,7 @@ import { inventoryrouter } from './routes/Inventoryroute'
 import { indexrouter } from './routes/Indexroute'
 import { expenserouter } from './routes/Expensesroute'
 import { orderrouter } from './routes/Orderroutes'
+import { customerrouter } from './routes/Customerroutes'
 
 export class App {
     app: Application;
@@ -35,6 +36,7 @@ export class App {
         this.app.use('/inventory', inventoryrouter)
         this.app.use('/accounts', expenserouter)
         this.app.use('/orders', orderrouter)
+        this.app.use('/customer', customerrouter)
     }
 
     public async listen(): Promise<void> {
