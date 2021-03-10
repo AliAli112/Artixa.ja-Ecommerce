@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import { Customer } from '../Domain Model/Customers'
+import { Authenticate } from '../Security/Auth'
 
 const server = axios.create()
 
@@ -11,7 +12,6 @@ export class LoginPage extends Component {
     }
     constructor(){
         super();
-        
     }
 
     loginCustomer = async (email, password) => {
@@ -27,7 +27,7 @@ export class LoginPage extends Component {
                 customerEmail: email,
                 customerPassword: password
             }).then((res) =>{
-                console.log(res)
+                console.log(res.data)
             })
         }catch(e){
             console.log(e)
@@ -45,6 +45,14 @@ export class LoginPage extends Component {
                 customerPassword: pass
             }).then((res) =>{
                 console.log(res)
+                //The implementation of this should be only in the customercontroller where it takes the email only 
+                //then returns the user found to Auth.js which will use the /authenciate api to find matching password
+                if(res.data.length > 0){
+                    Authenticate(res.data, pass)
+                    console.log('customer found')
+                }else{
+                    console.log('no customer found')
+                }
             })
         }catch(e){
             console.log(e)

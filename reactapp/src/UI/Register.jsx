@@ -12,7 +12,7 @@ export class RegisterPage extends Component {
     #controller
     constructor(){
         super()
-        this.#controller = new CustomerController();
+        this.controller = new CustomerController();
     }
 
     handleEvent = (event) => {

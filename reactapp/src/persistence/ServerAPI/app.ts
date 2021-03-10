@@ -7,6 +7,9 @@ import { indexrouter } from './routes/Indexroute'
 import { expenserouter } from './routes/Expensesroute'
 import { orderrouter } from './routes/Orderroutes'
 import { customerrouter } from './routes/Customerroutes'
+import bodyParser from 'body-parser';
+import session from 'express-session';
+import cookieParser from 'cookie-parser';
 
 export class App {
     app: Application;
@@ -25,10 +28,22 @@ export class App {
 
     private middlewares(){
         this.app.use(express.json());
-        this.app.use(cors());
+        this.app.use(cors({
+            origin: ["http://localhost:3000"],
+            methods: ["GET", "POST"],
+            credentials: true
+        }));
         this.app.use(express.urlencoded({
             extended: true
         }));
+        this.app.use(cookieParser());
+        this.app.use(session({
+            secret: "babylon",
+            resave: false,
+            saveUninitialized: true,
+            cookie: { expires: new Date("2021-03-25")}
+
+        }))
     }
 
     private routes(){

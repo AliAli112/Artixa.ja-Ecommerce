@@ -29,6 +29,9 @@ customerrouter
     // get customer specific data like email and address to auto fill out form
     .route("/:id")
     .get(getCustomer);
+customerrouter
+    .route("/authenciate")
+    .get();
 function loginCustomer(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
@@ -40,9 +43,12 @@ function loginCustomer(req, res) {
                     console.log('not in database');
                     res.send({ err });
                 }
-                if (true) {
+                if (result.length > 0) {
                     console.log("Customer logged in");
                     return res.json(result);
+                }
+                else {
+                    return res.json({});
                 }
             });
         }
@@ -55,11 +61,11 @@ function registerCustomer(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         // This function will store the data received in the req body in the database.
         try {
-            const { customerUsername, customerFirstName, customerLastName, customerAddress, customerPhoneNumber, customerEmail, customerPassword } = req.body;
-            const sql = `INSERT INTO customers (customerUsername, customerFirstName, customerLastName,
-            customerAddress, customerPhoneNumber, customerEmail, customerPassword)
-            VALUES (${customerUsername}, ${customerFirstName},${customerLastName},${customerAddress},
-                ${customerPhoneNumber},${customerEmail},${customerPassword})`;
+            const { customerFirstName, customerLastName, customerAddress, customerPhoneNumber, customerOrders, customerEmail, customerPassword } = req.body;
+            const sql = `INSERT INTO customers (customerFirstName, customerLastName,
+            customerAddress, customerPhoneNumber, customerOrders, customerEmail, customerPassword)
+            VALUES (${customerFirstName},${customerLastName},${customerAddress},
+                ${customerPhoneNumber}, ${customerOrders},${customerEmail},${customerPassword})`;
             database_1.con.query(sql);
             console.log(req.body);
             console.log("Successfully added");

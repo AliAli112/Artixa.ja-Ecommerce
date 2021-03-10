@@ -26,9 +26,11 @@ async function getAllExpense(req: Request, res: Response) {
             res.status(400).send(err);
             return;
         }
-        if(true)
-            console.log("All expenses")
+        if(result.length > 0){
             return res.json(result);
+        }else{
+            return res.json({})
+        }
     });
 }
 

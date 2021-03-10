@@ -11,14 +11,14 @@ export class AccountsPage extends Component {
 //Will make this page create a incomestatement class in the constructor.
     #controller
     state = {
-        loading: false,
+        loaded: false,
         expenses: [],
-        expense: {
-            expenseName: '',
-            expenseAmount: 0,
-            expensetype: 0,
-        },
-        exp: Expenses
+        // expense: {
+        //     expenseName: '',
+        //     expenseAmount: 0,
+        //     expensetype: 0,
+        // },
+        // exp: Expenses
     }
 
     constructor(){
@@ -27,8 +27,9 @@ export class AccountsPage extends Component {
         //this.getExpense()
         this.controller = new ExpensesController()
 
-        this.setState({expenses: this.controller.getExpenses()})
-         console.log(this.state.expenses)
+        // this.setState({expenses: this.controller.getExpenses()})
+        // console.log(this.controller.getExpenses())
+        //  console.log(this.state.expenses)
         //console.log(this.setState.expenses)
         // const data = Promise.resolve(getExpense())
         // this.setState({expenses: data});
@@ -36,10 +37,11 @@ export class AccountsPage extends Component {
     }
 
 
-    // async componentDidMount() {
-    //     this.controller.getExpenses()
-    //     console.log(this.state.expenses)
-    // }
+    componentDidMount() {
+        this.controller.getExpenses().then(({data}) => 
+        this.setState({loaded: true , expenses: data})
+        )
+    }
 
     getExpense = async () => {
         try{
@@ -59,9 +61,10 @@ export class AccountsPage extends Component {
         event.preventDefault();
     }
 
+    
     render(){
         var exp
-        this.controller.getExpenses().then(({data}) => exp = data)
+        this.controller.getExpenses().then()
         //console.log(exp)
         //this.setState({expenses: this.controller.getExpenses()})
         // if(){
@@ -93,4 +96,5 @@ export class AccountsPage extends Component {
             </div>
         )
     }
+    
 }

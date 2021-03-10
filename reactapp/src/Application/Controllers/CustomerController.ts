@@ -20,6 +20,7 @@ export class CustomerController {
             customerLastName: customer.getLastName(),
             customerAddress: customer.getaddress(),
             customerPhoneNumber: customer.getphonenum,
+            customerOrders: JSON.stringify([]),
             customerEmail: customer.getEmail,
             customerPassword: customer.getPassword()
             }).then((res) =>{

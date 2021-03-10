@@ -14,7 +14,7 @@ export class ExpensesController {
         try{
         let data = await this.server.get('http://localhost:3005/accounts');
         if (data.status === 200){
-            return data.data
+            return data
         }
         //.then(({data}) => data);
         //console.log(data)

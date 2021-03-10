@@ -20,6 +20,9 @@ customerrouter
     .route("/:id")
     .get(getCustomer)
 
+customerrouter
+    .route("/authenciate")
+    .get()
 
 
 async function loginCustomer(req: Request, res: Response) {
@@ -33,9 +36,11 @@ async function loginCustomer(req: Request, res: Response) {
                  console.log('not in database')
                  res.send({err})
              }
-             if(true){
+             if(result.length > 0){
                 console.log("Customer logged in");
                  return res.json(result)
+             }else{
+                 return res.json({})
              }
          } );
     }catch(e){
@@ -46,12 +51,12 @@ async function loginCustomer(req: Request, res: Response) {
 async function registerCustomer(req: Request, res: Response) {
     // This function will store the data received in the req body in the database.
     try{
-        const { customerUsername, customerFirstName, customerLastName, customerAddress,
-            customerPhoneNumber, customerEmail, customerPassword} = req.body;
-        const sql = `INSERT INTO customers (customerUsername, customerFirstName, customerLastName,
-            customerAddress, customerPhoneNumber, customerEmail, customerPassword)
-            VALUES (${customerUsername}, ${customerFirstName},${customerLastName},${customerAddress},
-                ${customerPhoneNumber},${customerEmail},${customerPassword})`
+        const { customerFirstName, customerLastName, customerAddress,
+            customerPhoneNumber, customerOrders, customerEmail, customerPassword} = req.body;
+        const sql = `INSERT INTO customers (customerFirstName, customerLastName,
+            customerAddress, customerPhoneNumber, customerOrders, customerEmail, customerPassword)
+            VALUES (${customerFirstName},${customerLastName},${customerAddress},
+                ${customerPhoneNumber}, ${customerOrders},${customerEmail},${customerPassword})`
         con.query(sql);
         console.log(req.body)
         console.log("Successfully added");
@@ -60,6 +65,7 @@ async function registerCustomer(req: Request, res: Response) {
         console.log("An error occured");
     }
 }
+
 async function getCustomer(req: Request, res: Response) {
     try{
         const cusid = req.params.id
