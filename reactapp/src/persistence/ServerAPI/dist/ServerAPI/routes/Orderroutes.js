@@ -27,7 +27,9 @@ orderrouter
     .route("/:id")
     .get()
     // delete an order
-    .delete(deleteOrder);
+    .delete(deleteOrder)
+    // update order status (not sure if needed to store order status in database)
+    .post();
 orderrouter
     .route('/customer')
     // get customer specific orders this should maybe be post

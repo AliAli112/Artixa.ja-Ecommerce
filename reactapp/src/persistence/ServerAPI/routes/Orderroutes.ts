@@ -15,6 +15,8 @@ orderrouter
     .get()
     // delete an order
     .delete(deleteOrder)
+    // update order status (not sure if needed to store order status in database)
+    .post(updateOrderStatus)
 
 orderrouter
     .route('/customer')
@@ -81,5 +83,16 @@ async function deleteOrder(req: Request, res: Response){
         console.log("An error occured");
     }
 
+}
+
+async function updateOrderStatus(req: Request, res: Response){
+    try{
+        const id = req.params.id;
+        const stat = req.body;
+        con.query('UPDATE orders SET status = ? WHERE id = ?', [stat, id]);
+    }catch(err){
+        res.status(400).send(err);
+        console.log("An error occured");
+    }
 }
 export { orderrouter }

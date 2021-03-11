@@ -1,17 +1,27 @@
 import React, { Component } from 'react'
 import { Item } from '../Domain Model/Item'
+import { ItemsController } from '../Application/Controllers/ItemController'
 import axios from 'axios'
 
 const server = axios.create()
 
 export class ItemsCatalogPage extends Component {
 
+    #controller
     state = {
         items: []
     }
     constructor(){
         super()
-        this.getallItems();
+        this.controller = new ItemsController();
+        console.log(this.controller.getallItems())
+        //this.getallItems();
+
+    }
+
+    componentDidMount(){
+        this.controller.getallItems().then(({data}) => 
+        this.setState({loaded: true , items: data}))
     }
 
     //Need to add these controller functions to Application/Controllers then export them
