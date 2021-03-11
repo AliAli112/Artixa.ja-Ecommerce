@@ -3,6 +3,7 @@ import axios from 'axios'
 import { Link } from 'react-router-dom'
 import { Button, Title } from 'react-bootstrap'
 import { RouteEntries } from '../Domain Model/Routes';
+import { Customer } from '../Domain Model/Customers'
 import { CustomerController } from '../Application/Controllers/CustomerController'
  
 const server = axios.create()
@@ -16,7 +17,15 @@ export class RegisterPage extends Component {
     }
 
     handleEvent = (event) => {
-
+        event.preventDefault()
+        const fname = event.target.fname.value
+        const lname = event.target.lname.value
+        const addr = event.target.addr.value
+        const pnum = event.target.pnum.value
+        const email = event.target.email.value
+        const pass = event.target.password.value
+        const customer = new Customer(email,pass,null,pnum,addr,fname,lname, [])
+        this.controller.registerCustomer(customer)
     }
 
     render(){

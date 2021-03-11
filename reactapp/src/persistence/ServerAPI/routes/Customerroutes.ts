@@ -21,23 +21,23 @@ customerrouter
     .get(getCustomer)
 
 customerrouter
-    .route("/authenciate")
-    .get()
+    .route("/authenticate")
+    .get(authenticateCustomer)
 
 
 async function loginCustomer(req: Request, res: Response) {
     try{
         console.log(req.body)
-        const { customerEmail, customerPassword } = req.body
-        console.log(customerEmail, customerPassword)
-        con.query('SELECT * FROM customers WHERE customerEmail = ? AND customerPassword = ?',
-         [customerEmail, customerPassword], (err, result) => {
+        const { customerEmail } = req.body
+        console.log(customerEmail)
+        con.query('SELECT * FROM customers WHERE customerEmail = ?',
+         [customerEmail], (err, result) => {
              if(err){
                  console.log('not in database')
                  res.send({err})
              }
              if(result.length > 0){
-                console.log("Customer logged in");
+                console.log("Customer found");
                  return res.json(result)
              }else{
                  return res.json({})
@@ -81,6 +81,29 @@ async function getCustomer(req: Request, res: Response) {
     }catch(e){
         console.log(e)
     }
+}
+
+    async function authenticateCustomer(req: Request, res: Response){
+        try{
+            console.log(req.body)
+            const { customerEmail, customerPassword } = req.body
+            console.log(customerEmail, customerPassword)
+            con.query('SELECT * FROM customers WHERE customerEmail = ? AND customerPassword = ?',
+             [customerEmail , customerPassword], (err, result) => {
+                 if(err){
+                     console.log('not in database')
+                     res.send({err})
+                 }
+                 if(result.length > 0){
+                    console.log("Customer found");
+                     return res.json(result)
+                 }else{
+                     return res.json({})
+                 }
+             } );
+        }catch(e){
+            console.log(e)
+        }
 }
 
 export { customerrouter }

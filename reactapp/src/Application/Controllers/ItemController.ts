@@ -70,6 +70,9 @@ export class ItemsController {
             console.log(err)
         }
     }
-}
 
-//A function which stores the orders in the order table is needed
+    // public updateItemAmountSold = async () => {
+    //might implement for reports page
+    // }
+}
+//A function which stores the orders in the order table is in the order controller

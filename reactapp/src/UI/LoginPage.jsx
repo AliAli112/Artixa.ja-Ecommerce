@@ -14,25 +14,25 @@ export class LoginPage extends Component {
         super();
     }
 
-    loginCustomer = async (email, password) => {
-        try {
-            console.log(email, password)
-            let res = await server.get('http://localhost:3005/customer/login', {
-                cus_id: '',
-                customerUserName:'',
-                customerFirstName: '',
-                customerLastName: '',
-                customerAddress: '',
-                customerPhoneNumber: '',
-                customerEmail: email,
-                customerPassword: password
-            }).then((res) =>{
-                console.log(res.data)
-            })
-        }catch(e){
-            console.log(e)
-        }
-    }
+    // loginCustomer = async (email, password) => {
+    //     try {
+    //         console.log(email, password)
+    //         let res = await server.get('http://localhost:3005/customer/login', {
+    //             cus_id: '',
+    //             customerUserName:'',
+    //             customerFirstName: '',
+    //             customerLastName: '',
+    //             customerAddress: '',
+    //             customerPhoneNumber: '',
+    //             customerEmail: email,
+    //             customerPassword: password
+    //         }).then((res) =>{
+    //             console.log(res.data)
+    //         })
+    //     }catch(e){
+    //         console.log(e)
+    //     }
+    // }
 
     handleEvent = async (event) => {
         event.preventDefault()
@@ -42,16 +42,15 @@ export class LoginPage extends Component {
             console.log(email, pass)
             let res = await server.post('http://localhost:3005/customer/login', {
                 customerEmail: email,
-                customerPassword: pass
             }).then((res) =>{
                 console.log(res)
-                //The implementation of this should be only in the customercontroller where it takes the email only 
-                //then returns the user found to Auth.js which will use the /authenciate api to find matching password
                 if(res.data.length > 0){
-                    Authenticate(res.data, pass)
-                    console.log('customer found')
+                     if(Authenticate(res.data.customerEmail, pass)){
+                        console.log('customer is authenticiation, session formed')
+                     }
+                    
                 }else{
-                    console.log('no customer found')
+                    console.log('authenticiation failed')
                 }
             })
         }catch(e){

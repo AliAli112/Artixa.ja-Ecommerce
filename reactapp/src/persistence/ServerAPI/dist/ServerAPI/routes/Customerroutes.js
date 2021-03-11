@@ -36,15 +36,15 @@ function loginCustomer(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             console.log(req.body);
-            const { customerEmail, customerPassword } = req.body;
-            console.log(customerEmail, customerPassword);
-            database_1.con.query('SELECT * FROM customers WHERE customerEmail = ? AND customerPassword = ?', [customerEmail, customerPassword], (err, result) => {
+            const { customerEmail } = req.body;
+            console.log(customerEmail);
+            database_1.con.query('SELECT * FROM customers WHERE customerEmail = ?', [customerEmail], (err, result) => {
                 if (err) {
                     console.log('not in database');
                     res.send({ err });
                 }
                 if (result.length > 0) {
-                    console.log("Customer logged in");
+                    console.log("Customer found");
                     return res.json(result);
                 }
                 else {
