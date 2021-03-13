@@ -61,6 +61,10 @@ export class Customer extends User{
     public getPassword(){
         return this.password;
     }
+
+    public addOrder(order: Order){ //new
+        this.orders.push(order);
+    }
     // public getCookie(){
         
     // }

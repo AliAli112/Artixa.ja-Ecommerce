@@ -45,12 +45,12 @@ export class LoginPage extends Component {
             }).then((res) =>{
                 console.log(res)
                 if(res.data.length > 0){
-                     if(Authenticate(res.data.customerEmail, pass)){
+                     if(Authenticate(res.data[0].customerEmail, pass)){
                         console.log('customer is authenticiation, session formed')
                      }
                     
                 }else{
-                    console.log('authenticiation failed')
+                    console.log('authenticiation failed or customer email not correct')
                 }
             })
         }catch(e){

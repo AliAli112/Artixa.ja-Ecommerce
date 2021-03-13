@@ -30,8 +30,8 @@ customerrouter
     .route("/:id")
     .get(getCustomer);
 customerrouter
-    .route("/authenciate")
-    .get();
+    .route("/authenticate")
+    .post(authenticateCustomer);
 function loginCustomer(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
@@ -61,11 +61,12 @@ function registerCustomer(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         // This function will store the data received in the req body in the database.
         try {
+            console.log(req.body);
             const { customerFirstName, customerLastName, customerAddress, customerPhoneNumber, customerOrders, customerEmail, customerPassword } = req.body;
             const sql = `INSERT INTO customers (customerFirstName, customerLastName,
             customerAddress, customerPhoneNumber, customerOrders, customerEmail, customerPassword)
-            VALUES (${customerFirstName},${customerLastName},${customerAddress},
-                ${customerPhoneNumber}, ${customerOrders},${customerEmail},${customerPassword})`;
+            VALUES ('${customerFirstName}','${customerLastName}','${customerAddress}',
+                '${customerPhoneNumber}',' ${customerOrders}','${customerEmail}','${customerPassword}')`;
             database_1.con.query(sql);
             console.log(req.body);
             console.log("Successfully added");
@@ -86,6 +87,31 @@ function getCustomer(req, res) {
                 }
                 if (true) {
                     return res.json(result);
+                }
+            });
+        }
+        catch (e) {
+            console.log(e);
+        }
+    });
+}
+function authenticateCustomer(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            console.log(req.body);
+            const { customerEmail, customerPassword } = req.body;
+            console.log(customerEmail, customerPassword);
+            database_1.con.query('SELECT * FROM customers WHERE customerEmail = ? AND customerPassword = ?', [customerEmail, customerPassword], (err, result) => {
+                if (err) {
+                    console.log('not in database');
+                    res.send({ err });
+                }
+                if (result.length > 0) {
+                    console.log("Customer found auth");
+                    return res.json(result);
+                }
+                else {
+                    return res.json({});
                 }
             });
         }

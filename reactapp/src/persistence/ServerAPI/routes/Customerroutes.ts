@@ -22,7 +22,7 @@ customerrouter
 
 customerrouter
     .route("/authenticate")
-    .get(authenticateCustomer)
+    .post(authenticateCustomer)
 
 
 async function loginCustomer(req: Request, res: Response) {
@@ -51,12 +51,13 @@ async function loginCustomer(req: Request, res: Response) {
 async function registerCustomer(req: Request, res: Response) {
     // This function will store the data received in the req body in the database.
     try{
+        console.log(req.body)
         const { customerFirstName, customerLastName, customerAddress,
             customerPhoneNumber, customerOrders, customerEmail, customerPassword} = req.body;
         const sql = `INSERT INTO customers (customerFirstName, customerLastName,
             customerAddress, customerPhoneNumber, customerOrders, customerEmail, customerPassword)
-            VALUES (${customerFirstName},${customerLastName},${customerAddress},
-                ${customerPhoneNumber}, ${customerOrders},${customerEmail},${customerPassword})`
+            VALUES ('${customerFirstName}','${customerLastName}','${customerAddress}',
+                '${customerPhoneNumber}',' ${customerOrders}','${customerEmail}','${customerPassword}')`
         con.query(sql);
         console.log(req.body)
         console.log("Successfully added");
@@ -83,7 +84,7 @@ async function getCustomer(req: Request, res: Response) {
     }
 }
 
-    async function authenticateCustomer(req: Request, res: Response){
+    async function authenticateCustomer(req: Request, res: Response): Promise<Response | void>{
         try{
             console.log(req.body)
             const { customerEmail, customerPassword } = req.body
@@ -95,7 +96,7 @@ async function getCustomer(req: Request, res: Response) {
                      res.send({err})
                  }
                  if(result.length > 0){
-                    console.log("Customer found");
+                    console.log("Customer found auth");
                      return res.json(result)
                  }else{
                      return res.json({})
