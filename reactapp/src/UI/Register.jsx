@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import { Link } from 'react-router-dom'
-import { Button, Title } from 'react-bootstrap'
-import { RouteEntries } from '../Domain Model/Routes';
+import { Routes } from '../Domain Model/Routes';
 import { Customer } from '../Domain Model/Customers'
 import { CustomerController } from '../Application/Controllers/CustomerController'
  
@@ -14,6 +12,9 @@ export class RegisterPage extends Component {
     constructor(){
         super()
         this.controller = new CustomerController();
+    }
+    nextPath(path) {
+        this.props.history.push(path);
     }
 
     handleEvent = (event) => {
@@ -54,6 +55,7 @@ export class RegisterPage extends Component {
                         </label>
                         <input type='submit' value='Sign Up'/>
                     </form>
+                    <button onClick={() => this.nextPath(Routes.index)} >Sign In</button>
                 </div>
             </div>
         )

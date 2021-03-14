@@ -15,11 +15,11 @@ export class CustomerController {
         try{
             let res = await this.server.post('http://localhost:3005/customer/register', {
             cus_id: customer.getid(),
-             //to be removed and to add orders instead
+             //to check if in database first
             customerFirstName: customer.getFirstName(),
             customerLastName: customer.getLastName(),
             customerAddress: customer.getaddress(),
-            customerPhoneNumber: customer.getphonenum,
+            customerPhoneNumber: customer.getphonenum(),
             customerOrders: JSON.stringify([]),
             customerEmail: customer.getEmail(),
             customerPassword: customer.getPassword()
@@ -34,11 +34,15 @@ export class CustomerController {
 
     public isLoggedin = () => {
             let user = JSON.parse(sessionStorage.getItem('user') || '{}')
-            if(user.isloggedin || user.isloggedin === 'admin'){
+            if(user.isloggedIn || user.isloggedIn === 'admin'){
                 return true
             }else{
                 return false
             }
+    }
+
+    public getSessionUser = () => {
+        return JSON.parse(sessionStorage.getItem('user') || '{}')
     }
 
     // public loginCustomer = async (email: string) => {
