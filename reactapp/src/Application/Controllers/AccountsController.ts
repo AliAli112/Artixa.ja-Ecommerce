@@ -14,18 +14,18 @@ export class ExpensesController {
         try{
         let data = await this.server.get('http://localhost:3005/accounts');
         if (data.status === 200){
-            return data.data
+            return data
         }
         //.then(({data}) => data);
         //console.log(data)
-    }catch(err){
+    }catch(err){ 
         console.log(err);
     }
     }
 
-    public async addExpense(name: string, amount: number){
+    public async addExpense(expense: Expenses){
     //this.createExpense(event.target.name.value, event.target.amount.value)
-    const expense = new Expenses(name, amount)
+    //const expense = new Expenses(name, amount)
     let res = await this.server.post('http://localhost:3005/accounts', {
         expenseName: expense.getName(),
         expenseAmount: expense.getAmount(),

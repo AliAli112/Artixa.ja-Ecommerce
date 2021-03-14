@@ -28,6 +28,11 @@ export class Order {
         this.items.pop();
     }
 
+    public getItems(){
+        return this.items;
+    }
+
+
     public getCustomerID(){
         return this.ownerid
     }
@@ -42,6 +47,10 @@ export class Order {
     
     public getLocation(){
         return this.shippingLocation
+    }
+
+    public getTotal(){
+        return this.total;
     }
 }
 

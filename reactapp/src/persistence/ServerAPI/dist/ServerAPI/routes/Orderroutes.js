@@ -27,7 +27,9 @@ orderrouter
     .route("/:id")
     .get()
     // delete an order
-    .delete(deleteOrder);
+    .delete(deleteOrder)
+    // update order status (not sure if needed to store order status in database)
+    .post(updateOrderStatus);
 orderrouter
     .route('/customer')
     // get customer specific orders this should maybe be post
@@ -90,6 +92,19 @@ function deleteOrder(req, res) {
         try {
             const id = req.params.id;
             database_1.con.query('DELETE FROM orders WHERE id = ?', [id]);
+        }
+        catch (err) {
+            res.status(400).send(err);
+            console.log("An error occured");
+        }
+    });
+}
+function updateOrderStatus(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const id = req.params.id;
+            const stat = req.body;
+            database_1.con.query('UPDATE orders SET status = ? WHERE id = ?', [stat, id]);
         }
         catch (err) {
             res.status(400).send(err);
