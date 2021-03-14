@@ -11,66 +11,44 @@ export class AccountsPage extends Component {
 //Will make this page create a incomestatement class in the constructor.
     #controller
     state = {
-        loading: false,
+        loaded: false,
         expenses: [],
-        expense: {
-            expenseName: '',
-            expenseAmount: 0,
-            expensetype: 0,
-        },
-        exp: Expenses
     }
 
     constructor(){
         super();
-        this.setState.loading = true;
-        //this.getExpense()
         this.controller = new ExpensesController()
-
-        this.setState({expenses: this.controller.getExpenses()})
-         console.log(this.state.expenses)
-        //console.log(this.setState.expenses)
-        // const data = Promise.resolve(getExpense())
-        // this.setState({expenses: data});
-        // console.log(this.state.expenses)
     }
 
 
-    // async componentDidMount() {
-    //     this.controller.getExpenses()
-    //     console.log(this.state.expenses)
+    componentDidMount() {
+        this.controller.getExpenses().then(({data}) => 
+        this.setState({loaded: true , expenses: data})
+        )
+    }
+
+    // getExpense = async () => {
+    //     try{
+    //         let data = await server.get('http://localhost:3005/accounts').then(({data}) =>
+    //         data);
+    //         console.log(data)
+    //         this.setState({expenses: data})
+    //     }catch(err){
+    //         console.log(err);
+    //     }
     // }
-
-    getExpense = async () => {
-        try{
-            let data = await server.get('http://localhost:3005/accounts').then(({data}) =>
-            data);
-            console.log(data)
-            this.setState({expenses: data})
-        }catch(err){
-            console.log(err);
-        }
-    }
     
     handleEvent = (event) => {
         const name = event.target.name.value
         const amount = event.target.amount.value
-        this.controller.addExpense(name, amount)
+        const expense = new Expenses(name, amount)
+        this.controller.addExpense(expense)
         event.preventDefault();
     }
 
+    
     render(){
-        var exp
-        this.controller.getExpenses().then(({data}) => exp = data)
-        //console.log(exp)
-        //this.setState({expenses: this.controller.getExpenses()})
-        // if(){
-        //     this.setState({loading: false})
-        //     console.log("loading...")
-        // }
-        // else{
-        //     this.state.expenses.map(expenses => <p key={expenses.id}>{expenses.expenseName}</p>)
-        // }
+        
         return(
             <div>
                 <h1>This is the AccountsPage</h1>
@@ -93,4 +71,5 @@ export class AccountsPage extends Component {
             </div>
         )
     }
+    
 }

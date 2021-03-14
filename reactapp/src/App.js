@@ -3,7 +3,8 @@ import logo from './logo.svg';
 import './App.css';
 import axios from 'axios';
 import { BrowserRouter as Router, Switch, Route, Link, useHistory, IndexRoute } from 'react-router-dom';
-import { RouteEntries } from './Domain Model/Routes';
+import { RouteEntries, Routes } from './Domain Model/Routes';
+import { ProtectedRoutes } from './Security/ProtectedRoutes'
 import { RegisterPage } from './UI/Register';
 import { AccountsPage } from './UI/Accounts'
 import { ItemsCatalogPage } from './UI/ItemsCatalogPage'
@@ -19,12 +20,15 @@ class App extends Component {
         <Router>
           <div>
             <Switch>
-              <Route exact path={/*Should change this to register later or item catalog*/RouteEntries.index} component={OrderCollartorPage}>
-                {/* <AccountsPage /> */}
-              </Route>
+              <Route exact path={/*Should change this to register later or item catalog*/Routes.index} component={OrderCollartorPage} />
+              <Route exact path={Routes.register} component={RegisterPage} />
+              <ProtectedRoutes
+                exact
+                path='item'
+                component={ItemsCatalogPage} />
             </Switch>
           </div>
-          <Route path={RouteEntries.accounts}>
+          <Route path={Routes.accounts}>
             {/* <AccountsPage />  */}
           </Route>
           <h1>Home</h1>

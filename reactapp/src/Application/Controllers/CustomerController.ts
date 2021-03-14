@@ -11,16 +11,17 @@ export class CustomerController {
         this.server = axios.create();
     }
 
-    public async registerCustomer(customer: Customer){
+    public registerCustomer = async (customer: Customer) => {
         try{
             let res = await this.server.post('http://localhost:3005/customer/register', {
             cus_id: customer.getid(),
-            customerUserName: customer.getFirstName(), //to be removed and to add orders instead
+             //to check if in database first
             customerFirstName: customer.getFirstName(),
             customerLastName: customer.getLastName(),
             customerAddress: customer.getaddress(),
-            customerPhoneNumber: customer.getphonenum,
-            customerEmail: customer.getEmail,
+            customerPhoneNumber: customer.getphonenum(),
+            customerOrders: JSON.stringify([]),
+            customerEmail: customer.getEmail(),
             customerPassword: customer.getPassword()
             }).then((res) =>{
                 console.log(res)
@@ -28,6 +29,25 @@ export class CustomerController {
         }catch(err){
             console.log(err);
         }
-        
+    
     }
+
+    public isLoggedin = () => {
+            let user = JSON.parse(sessionStorage.getItem('user') || '{}')
+            if(user.isloggedIn || user.isloggedIn === 'admin'){
+                return true
+            }else{
+                return false
+            }
+    }
+
+    public getSessionUser = () => {
+        return JSON.parse(sessionStorage.getItem('user') || '{}')
+    }
+
+    // public loginCustomer = async (email: string) => {
+    //     try{
+    //         this
+    //     }
+    // } 
 }

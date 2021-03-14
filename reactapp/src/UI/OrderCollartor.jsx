@@ -9,7 +9,7 @@ const server = axios.create()
 export class OrderCollartorPage extends Component {
 
     state = {
-        list: [{ name: 'meme', age: 40 }, { name: 'me', age: 4 }],
+        list: [{ id: 0, name: 'meme', age: 40 }, { id: 1, name: 'me', age: 4 }],
         orders: []
 
 
@@ -47,6 +47,7 @@ export class OrderCollartorPage extends Component {
 
     }
 
+
     render() {
         return (
             <div>
@@ -56,15 +57,32 @@ export class OrderCollartorPage extends Component {
                 </span>
 
                 {this.state.list.map(item => (
-                    <div className="col-orders">
+                    <div id={item["id"]} className="col-orders">
                         <input type="checkbox" />
                         <h3>{item["name"]}</h3>
                         <h3>Location</h3>
-                        <img src="https://www.pinclipart.com/picdir/big/130-1304123_drop-down-arrow-svg-png-icon-free-download.png" alt="Drop Down"></img>
+                        <img onClick={() => this.dropDown(item["id"])} className="drop-arrow" src="https://www.pinclipart.com/picdir/big/130-1304123_drop-down-arrow-svg-png-icon-free-download.png" alt="Drop Down"></img>
+                        <div id={"drop-" + item["id"].toString()} className="order-drop hidden">
+                            <h3>{item["name"]}</h3>
+                            <h3>DESCRIPTION DESCRIPTION</h3>
+                            <h3>TOTAL PRICE</h3>
+                        </div>
                     </div>
-                ))}
-                <button onClick={this.addOrders}>Add</button>
+                ))
+                }
             </div>
         )
+    }
+
+    dropDown = (id) => {
+        let dropId = ("drop-" + id.toString())
+        let drop = document.getElementById(dropId);
+        console.log(drop);
+        if (drop.classList.contains("hidden")) {
+            drop.classList.remove("hidden");
+        } else {
+            drop.classList.add("hidden");
+        }
+
     }
 }

@@ -20,22 +20,27 @@ customerrouter
     .route("/:id")
     .get(getCustomer)
 
+customerrouter
+    .route("/authenticate")
+    .post(authenticateCustomer)
 
 
 async function loginCustomer(req: Request, res: Response) {
     try{
         console.log(req.body)
-        const { customerEmail, customerPassword } = req.body
-        console.log(customerEmail, customerPassword)
-        con.query('SELECT * FROM customers WHERE customerEmail = ? AND customerPassword = ?',
-         [customerEmail, customerPassword], (err, result) => {
+        const { customerEmail } = req.body
+        console.log(customerEmail)
+        con.query('SELECT * FROM customers WHERE customerEmail = ?',
+         [customerEmail], (err, result) => {
              if(err){
                  console.log('not in database')
                  res.send({err})
              }
-             if(true){
-                console.log("Customer logged in");
+             if(result.length > 0){
+                console.log("Customer found");
                  return res.json(result)
+             }else{
+                 return res.json({})
              }
          } );
     }catch(e){
@@ -46,12 +51,13 @@ async function loginCustomer(req: Request, res: Response) {
 async function registerCustomer(req: Request, res: Response) {
     // This function will store the data received in the req body in the database.
     try{
-        const { customerUsername, customerFirstName, customerLastName, customerAddress,
-            customerPhoneNumber, customerEmail, customerPassword} = req.body;
-        const sql = `INSERT INTO customers (customerUsername, customerFirstName, customerLastName,
-            customerAddress, customerPhoneNumber, customerEmail, customerPassword)
-            VALUES (${customerUsername}, ${customerFirstName},${customerLastName},${customerAddress},
-                ${customerPhoneNumber},${customerEmail},${customerPassword})`
+        console.log(req.body)
+        const { customerFirstName, customerLastName, customerAddress,
+            customerPhoneNumber, customerOrders, customerEmail, customerPassword} = req.body;
+        const sql = `INSERT INTO customers (customerFirstName, customerLastName,
+            customerAddress, customerPhoneNumber, customerOrders, customerEmail, customerPassword)
+            VALUES ('${customerFirstName}','${customerLastName}','${customerAddress}',
+                '${customerPhoneNumber}',' ${customerOrders}','${customerEmail}','${customerPassword}')`
         con.query(sql);
         console.log(req.body)
         console.log("Successfully added");
@@ -60,6 +66,7 @@ async function registerCustomer(req: Request, res: Response) {
         console.log("An error occured");
     }
 }
+
 async function getCustomer(req: Request, res: Response) {
     try{
         const cusid = req.params.id
@@ -75,6 +82,29 @@ async function getCustomer(req: Request, res: Response) {
     }catch(e){
         console.log(e)
     }
+}
+
+    async function authenticateCustomer(req: Request, res: Response): Promise<Response | void>{
+        try{
+            console.log(req.body)
+            const { customerEmail, customerPassword } = req.body
+            console.log(customerEmail, customerPassword)
+            con.query('SELECT * FROM customers WHERE customerEmail = ? AND customerPassword = ?',
+             [customerEmail , customerPassword], (err, result) => {
+                 if(err){
+                     console.log('not in database')
+                     res.send({err})
+                 }
+                 if(result.length > 0){
+                    console.log("Customer found auth");
+                     return res.json(result)
+                 }else{
+                     return res.json({})
+                 }
+             } );
+        }catch(e){
+            console.log(e)
+        }
 }
 
 export { customerrouter }
