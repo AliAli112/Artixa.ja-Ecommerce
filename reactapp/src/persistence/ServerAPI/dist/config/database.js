@@ -8,9 +8,9 @@ exports.con = void 0;
 const mysql_1 = __importDefault(require("mysql"));
 const con = mysql_1.default.createConnection({
     host: "localhost",
-    user: "root",
-    password: "",
-    database: "artixa"
+    user: "user1",
+    password: "access12",
+    database: "Artixa"
 });
 exports.con = con;
 //# sourceMappingURL=database.js.map

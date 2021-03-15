@@ -9,11 +9,14 @@ const server = axios.create()
 export class OrderCollartorPage extends Component {
 
     state = {
-        list: [{ id: 0, name: 'meme', age: 40 }, { id: 1, name: 'me', age: 4 }],
-        orders: []
-
-
+        list: [
+            { id: 0, name: 'Teriq Strachan', location: "2 Eltham Vista Drive, Spanish Town, St. Catherine", description: "2 Necklaces, 1 MK Handbag", total: 50.00, status: 0 },
+            { id: 1, name: 'Aliyah Mills', location: "2 Eltham View Parkway, Bull Bay, St. Andrew", description: "2 Rasta Bracelets", total: 20.59, status: 0 },
+            { id: 2, name: 'Jason Gayle', location: "23 Roberts Ave, Old Harbour, St. Catherine", description: "2 Necklaces, 1 MK Handbag", total: 50.00, status: 0 },
+            { id: 3, name: 'Jordon Porter', location: "2 Greendale Lane, Spanish Town, St. Catherine", description: "2 Necklaces, 1 MK Handbag", total: 50.00, status: 0 }
+        ]
     }
+
     constructor() {
         super()
         this.getOrders()
@@ -52,26 +55,61 @@ export class OrderCollartorPage extends Component {
         return (
             <div>
                 <span id="order-col-head">
-                    <h2 className="active order-head">Outstanding Order</h2>
-                    <h2 className="order-head">Finished Orders</h2>
+                    <h2 onClick={() => this.showCurrent()} className="active order-head">Outstanding Order</h2>
+                    <h2 onClick={() => this.showFinished()} className="order-head">Finished Orders</h2>
                 </span>
-
-                {this.state.list.map(item => (
+                {this.state.list.filter(item => item["status"] === 0).map(item =>
                     <div id={item["id"]} className="col-orders">
-                        <input type="checkbox" />
+                        <input onClick={() => this.changeStatus(item)} type="checkbox" />
                         <h3>{item["name"]}</h3>
-                        <h3>Location</h3>
+                        <h3>{item['location']}</h3>
                         <img onClick={() => this.dropDown(item["id"])} className="drop-arrow" src="https://www.pinclipart.com/picdir/big/130-1304123_drop-down-arrow-svg-png-icon-free-download.png" alt="Drop Down"></img>
                         <div id={"drop-" + item["id"].toString()} className="order-drop hidden">
                             <h3>{item["name"]}</h3>
-                            <h3>DESCRIPTION DESCRIPTION</h3>
-                            <h3>TOTAL PRICE</h3>
+                            <h3>{item['description']}</h3>
+                            <h3>{"$" + item['total'].toString()}</h3>
                         </div>
                     </div>
-                ))
-                }
+                )}
             </div>
         )
+
+    }
+
+    showCurrent = () => {
+        let bod = document.getElementById("order-bod");
+        bod.innerHTML =
+            this.state.list.filter(item => item["status"] === 0).map(item =>
+                <div id={item["id"]} className="col-orders">
+                    <input onClick={() => this.changeStatus(item)} type="checkbox" />
+                    <h3>{item["name"]}</h3>
+                    <h3>{item['location']}</h3>
+                    <img onClick={() => this.dropDown(item["id"])} className="drop-arrow" src="https://www.pinclipart.com/picdir/big/130-1304123_drop-down-arrow-svg-png-icon-free-download.png" alt="Drop Down"></img>
+                    <div id={"drop-" + item["id"].toString()} className="order-drop hidden">
+                        <h3>{item["name"]}</h3>
+                        <h3>{item['description']}</h3>
+                        <h3>{"$" + item['total'].toString()}</h3>
+                    </div>
+                </div>
+            )
+    }
+
+
+
+    showFinished = () => {
+        this.state.list.filter(item => item["status"] === 1).map((item =>
+            <div id={item["id"]} className="col-orders">
+                <input onClick={() => this.changeStatus(item)} type="checkbox" />
+                <h3>{item["name"]}</h3>
+                <h3>{item['location']}</h3>
+                <img onClick={() => this.dropDown(item["id"])} className="drop-arrow" src="https://www.pinclipart.com/picdir/big/130-1304123_drop-down-arrow-svg-png-icon-free-download.png" alt="Drop Down"></img>
+                <div id={"drop-" + item["id"].toString()} className="order-drop hidden">
+                    <h3>{item["name"]}</h3>
+                    <h3>{item['description']}</h3>
+                    <h3>{"$" + item['total'].toString()}</h3>
+                </div>
+            </div>
+        ))
     }
 
     dropDown = (id) => {
@@ -83,6 +121,12 @@ export class OrderCollartorPage extends Component {
         } else {
             drop.classList.add("hidden");
         }
+        console.log(this.getOrders())
+    }
 
+    changeStatus = (item) => {
+        item["state"] = 1;
+        const newList = this.state.list.splice(this.state.list.indexOf((item), 1));
+        this.setState(newList);
     }
 }

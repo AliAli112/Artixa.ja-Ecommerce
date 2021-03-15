@@ -51,7 +51,7 @@ h1,h2,h3,h4,h5{
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  gap: 20%;
+  gap: 10%;
   width: 80%;
   padding-bottom: 10px;
 }
