@@ -12,6 +12,7 @@ export class OrdersController {
     }
 
     public getOrders = async () => {
+        //order collator
         try{
             console.log("Controller get all orders")
             let data = await this.server.get("http://localhost:3005/orders");
@@ -25,6 +26,7 @@ export class OrdersController {
     }
 
     public addOrders = async (order: Order) => {
+        //checkout
         try{
             console.log("Controller add an orders")
             let res = await this.server.post("http://localhost:3005/orders", {
@@ -42,6 +44,7 @@ export class OrdersController {
     }
 
     public deleteOrder = async (id: number) => {
+        //ordercollator
         try{
             let res = await this.server.delete(`http://localhost:3005/orders/${id}`).then(); 
             
@@ -51,6 +54,7 @@ export class OrdersController {
     }
 
     public updateOrderstatus = async (id: number, newstat: number) => {
+        //order collator
         try{
             let res = await this.server.post(`http://localhost:3005/orders/${id}`,{
                 status: newstat,

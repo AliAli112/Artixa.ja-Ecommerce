@@ -4,18 +4,20 @@ import { useHistory } from 'react-router-dom';
 import { Customer } from '../Domain Model/Customers'
 import { Authenticate } from '../Security/Auth'
 import { Routes } from '../Domain Model/Routes'
+import { CustomerController } from '../Application/Controllers/CustomerController'
 
 const server = axios.create()
 
 
 export class LoginPage extends Component {
 
+    #controller
     state = {
         customer: []
     }
     constructor(){
-
         super();
+        this.controller = new CustomerController();
     }
 
     nextPath(path) {
@@ -40,6 +42,14 @@ export class LoginPage extends Component {
                 }else{
                     console.log('authenticiation failed or customer email not correct')
                 }
+                if (this.controller.getSessionUser().isloggedIn === true){
+                             this.props.history.push('/item')
+                            //this.nextPath('/item')
+                         }
+                         else if (this.controller.getSessionUser().isloggedIn === 'admin'){
+                            this.props.history.push(Routes.dashboard)
+                            //this.nextPath(Routes.dashboard)
+                        }
             })
         }catch(e){
             console.log(e)
@@ -57,7 +67,7 @@ export class LoginPage extends Component {
                     <label>Password
                     <input type='text' name='password'/>
                     </label>
-                    <input type='submit' value='Sign In'/> 
+                    <input  type='submit' value='Sign In'/> 
                 </form>
                 <button onClick={ () => this.nextPath(Routes.register)}>Sign Up</button>
             </div>
