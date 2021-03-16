@@ -35,4 +35,9 @@ export class Expenses{
     public setType(type: ExpenseType){
         this.ExpenseType = type ;
     }
+
+    //new function 
+    public updateAmount(amount: number){
+        this.amount += amount;
+    } //then store it back into the database
 }

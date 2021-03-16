@@ -4,12 +4,12 @@ import { Route , Redirect } from 'react-router-dom'
 import { CustomerController } from '../Application/Controllers/CustomerController'
 import { Routes } from '../Domain Model/Routes';
 
-export const ProtectedRoutes = ({ component: Component, ...rest }) => {
+export const ProtectedRoutesAdmin = ({ component: Component, ...rest }) => {
     return (
         <Route 
          {...rest}
          render = {props => {
-             if(JSON.parse(sessionStorage.getItem('user') || '{}').isloggedIn === true){
+             if(JSON.parse(sessionStorage.getItem('user') || '{}').isloggedIn === 'admin'){
                  return <Component { ...props} />
              }else {
                  return (

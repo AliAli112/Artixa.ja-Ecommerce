@@ -36,9 +36,8 @@ export class ExpensesController {
         })
     }
 
-    public handleaddEvent(event: Event){
-
-    }
+    //Add an expense named revunue which is updated each time an order is placed.
+    //A SQL statement which updates the amount in of the revenue expense should be made.
 }
 
 
