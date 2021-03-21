@@ -3,8 +3,8 @@ import mysql from 'mysql';
 
 const con = mysql.createConnection({
     host: "localhost",
-    user: "user1",
-    password: "access12",
+    user: "root",
+    password: "",
     database: "Artixa"
 });
 export { con }

@@ -8,8 +8,8 @@ exports.con = void 0;
 const mysql_1 = __importDefault(require("mysql"));
 const con = mysql_1.default.createConnection({
     host: "localhost",
-    user: "user1",
-    password: "access12",
+    user: "root",
+    password: "",
     database: "Artixa"
 });
 exports.con = con;
