@@ -46,14 +46,14 @@ export class CustomerController {
         return JSON.parse(sessionStorage.getItem('user') || '{}')
     }
 
-    public updateCustomerOrders = async (id: number, order: Order) => {
+    public updateCustomerOrders = async (id: number, orders: Order) => {
         //This function is run after checkout
-        //the order should be the current list of orders in the customer's orders after running the 
+        //the orders should be the current list of orders in the customer's orders after running the 
         //updateOrders() in the Customer.ts on the session customer
         try{
             let res = await this.server.post('http://localhost:3005/customer', {
                 cus_id: id,
-                customerOrders: JSON.stringify(order)
+                customerOrders: JSON.stringify(orders)
             })
         }catch(err){
             console.log(err)

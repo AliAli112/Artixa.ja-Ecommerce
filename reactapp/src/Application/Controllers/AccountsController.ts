@@ -36,6 +36,29 @@ export class ExpensesController {
         })
     }
 
+    public async updateRevenue(amount: number){
+        const id = 9999
+        try{
+            let data = await this.server.get(`http://localhost:3005/accounts/${id}`);
+            if(data.status === 200){
+                return data
+            }
+            const revenue = data.data[0] //gets the revenue with special id 9999
+            const expense = new Expenses(revenue.expenseName, revenue.expenseAmount, revenue.expensetype)
+            expense.updateAmount(amount) //updated the revenue amount
+            let res = await this.server.post(`http://localhost:3005/accounts/${id}`, {
+                //store the revenue back into the database
+                expenseName: expense.getName(),
+                expenseAmount: expense.getAmount(),
+                expenseType: expense.getType()
+            }).then((res) =>{
+                console.log(res)
+            })
+        }catch(err){
+            console.log(err);
+        }
+    }
+
     //Add an expense named revunue which is updated each time an order is placed.
     //A SQL statement which updates the amount in of the revenue expense should be made.
 }

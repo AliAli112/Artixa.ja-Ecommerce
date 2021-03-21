@@ -69,7 +69,7 @@ export class ItemsCatalogPage extends Component {
 
     render(){
 
-        return(
+        return( 
             <div>
                 ITEMS
                 {this.state.items.map(items => <p key={items.id}>{items.itemName}
