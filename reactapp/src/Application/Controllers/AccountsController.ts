@@ -41,18 +41,21 @@ export class ExpensesController {
         try{
             let data = await this.server.get(`http://localhost:3005/accounts/${id}`);
             if(data.status === 200){
-                return data
+                console.log(data);
+               
             }
             const revenue = data.data[0] //gets the revenue with special id 9999
+            console.log(revenue)
             const expense = new Expenses(revenue.expenseName, revenue.expenseAmount, revenue.expensetype)
             expense.updateAmount(amount) //updated the revenue amount
             let res = await this.server.post(`http://localhost:3005/accounts/${id}`, {
                 //store the revenue back into the database
+                
                 expenseName: expense.getName(),
                 expenseAmount: expense.getAmount(),
                 expenseType: expense.getType()
+                
             }).then((res) =>{
-                console.log(expense.getAmount())
 
                 console.log(res)
             })
@@ -60,7 +63,6 @@ export class ExpensesController {
             console.log(err);
 
         }
-        console.log("hello");
 
         
     }

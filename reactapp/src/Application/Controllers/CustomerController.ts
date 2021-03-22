@@ -12,16 +12,16 @@ export class CustomerController {
         this.server = axios.create();
     }
 
-    public registerCustomer = async (customer: Customer) => {
+    public registerCustomer = async (email: string, pass:string, pnum: string, 
+                        addr:string, fname:string, lname:string) => {
         try{
+            const customer = new Customer(email,pass,0,pnum,addr,fname,lname)
             let res = await this.server.post('http://localhost:3005/customer/register', {
-            cus_id: customer.getid(),
              //to check if in database first
             customerFirstName: customer.getFirstName(),
             customerLastName: customer.getLastName(),
             customerAddress: customer.getaddress(),
             customerPhoneNumber: customer.getphonenum(),
-            customerOrders: JSON.stringify([]),
             customerEmail: customer.getEmail(),
             customerPassword: customer.getPassword()
             }).then((res) =>{
@@ -46,17 +46,17 @@ export class CustomerController {
         return JSON.parse(sessionStorage.getItem('user') || '{}')
     }
 
-    public updateCustomerOrders = async (id: number, order: Order) => {
-        //This function is run after checkout
-        //the order should be the current list of orders in the customer's orders after running the 
-        //updateOrders() in the Customer.ts on the session customer
-        try{
-            let res = await this.server.post('http://localhost:3005/customer', {
-                cus_id: id,
-                customerOrders: JSON.stringify(order)
-            })
-        }catch(err){
-            console.log(err)
-        }
-    }
+    // public updateCustomerOrders = async (id: number, orders: Order) => {
+    //     //This function is run after checkout
+    //     //the orders should be the current list of orders in the customer's orders after running the 
+    //     //updateOrders() in the Customer.ts on the session customer
+    //     try{
+    //         let res = await this.server.post('http://localhost:3005/customer', {
+    //             cus_id: id,
+    //             customerOrders: JSON.stringify(orders)
+    //         })
+    //     }catch(err){
+    //         console.log(err)
+    //     }
+    // }
 }

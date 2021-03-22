@@ -11,7 +11,6 @@ export class AccountsPage extends Component {
 //Will make this page create a incomestatement class in the constructor.
     #controller
     state = {
-        loaded: false,
         expenses: [],
     }
 
@@ -23,7 +22,7 @@ export class AccountsPage extends Component {
 
     componentDidMount() {
         this.controller.getExpenses().then(({data}) => 
-        this.setState({loaded: true , expenses: data})
+        this.setState({expenses: data})
         )
     }
 

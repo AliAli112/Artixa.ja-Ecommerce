@@ -34,9 +34,9 @@ export class ShoppingCart extends Component {
     }
     this.itemsController = new ItemsController();
     this.expenseController = new ExpensesController();
-  //  this.customerController = new custo
+  
    this.itemsController.getallItems().then(({data})=>{
-    //  data = data.data;
+    
         
         items = []
         for(let i = 0; i < data.length; i++){
@@ -51,17 +51,14 @@ export class ShoppingCart extends Component {
         this.handleQuantity = this.handleQuantity.bind(this);
         this.handleClick = this.handleClick.bind(this);
         this.checkout = this.checkout.bind(this);
-      //  this.checkInventory = this.checkInventory(this);
+      
 
     }
     componentDidMount(){
         
         this.ordersController = new OrdersController();
         this.customerController = new CustomerController();
-        let shoppingCart = this.state.shoppingCart;
-//for(let i = 0;i < shoppingCart.length; i++){
-          // this.state.cartItemsCost.push(shoppingCart[i].getCost() * shoppingCart[i].getQuantity())
-//}
+
       this.total();
       let user = JSON.parse(sessionStorage.getItem('user'));
       user= user.user;
@@ -119,14 +116,8 @@ export class ShoppingCart extends Component {
        let user = JSON.parse(sessionStorage.getItem('user'));
        user= user.user;
        //let customerOrders = JSON.parse(user.orders);
-       let customerOrders = null;
-
-       if(customerOrders == null){
-        customerOrders = [];
-       }
-       let customer = new Customer(user.email, user.password, user.id, user.phonenum, user.address, user.firstname, user.lastname,  customerOrders);
-     //  let customer = new Customer(user.)
-      console.log(user.id);
+       
+       let customer = new Customer(user.email, user.password, user.id, user.phonenum, user.address, user.firstname, user.lastname);
   
         
      let sucess = await this.checkInventory();
@@ -137,7 +128,7 @@ export class ShoppingCart extends Component {
        let order = new Order(null , customer.id, this.state.shoppingCart, customer.address, OrderStatus.pending , this.state.total.toFixed(2));
        console.log(JSON.stringify(order));
        this.ordersController.addOrders(order);
-       this.expenseController.updateRevenue(this.state.total);
+       this.expenseController.updateRevenue(order.getTotal());
        //customer.addOrder(order);
       // this.customerController.updateCustomerOrders(customer.id, order);
        localStorage.setItem('shoppingCart', JSON.stringify([]));
