@@ -5,15 +5,24 @@ const orderrouter = express.Router()
 
 orderrouter
     .route("/")
+    // display in order collator
     .get(getAllOrders)
     // add an order to the database
-    .post()
+    .post(addOrder)
 
 orderrouter
-    .route("/:orderid")
+    .route("/:id")
     .get()
     // delete an order
-    .delete()
+    .delete(deleteOrder)
+    // update order status (not sure if needed to store order status in database)
+    .post(updateOrderStatus)
+
+orderrouter
+    .route('/customer')
+    // get customer specific orders this should maybe be post
+    .get()
+
 
 
 async function getAllOrders(req: Request, res: Response): Promise<Response | void>{
@@ -28,31 +37,62 @@ async function getAllOrders(req: Request, res: Response): Promise<Response | voi
     })
 }
 
-/*
-This function needs to take the order id and shippinglocation and make reference keys to the items
+
+// This needs a new route /:cusid/
+async function getAllMyOrders(req: Request, res: Response) {
+    try{
+        // const orderid = req.params.id
+        const cusid = req.body // in a hidden field pass this.Customer.getId
+        con.query('SELECT * from orders WHERE cus_id = ?', [cusid],
+        (err, result) => {
+            if(err) {
+                res.status(400).send(err);
+                return;
+            }
+            if(true)
+                return res.json(result);
+            else res.json({});
+        });
+    }catch(e){
+        console.log(e)
+    }
+}
+
+
+// This function needs to take the order id and shippinglocation and make reference keys to the items
 async function addOrder(req: Request, res: Response){
     try{
-        const { itemName, itemQuantity, itemCost } = req.body
-        // const newItem: Item = req.body
-        const sql = `INSERT INTO inventory (itemName, itemQuantity, itemCost) VALUES (
-            '${itemName}', '${itemQuantity}', '${itemCost}')`
+        console.log(req.body)
+        const { cus_id, items, shippingLocation, status, total } = req.body
+        const sql = `INSERT INTO orders (cus_id, items, shippingLocation, status, total ) VALUES (
+            '${cus_id}', '${items}', '${shippingLocation}', '${status}', '${total}')`
         con.query(sql);
-        console.log("Item added");
+        console.log("Order added");
     }catch(err){
         res.status(400).send(err);
         console.log("An error occured");
     }
 }
-*/
 
-async function deleteItem(req: Request, res: Response){
+async function deleteOrder(req: Request, res: Response){
     try{
-        const id = req.params.itemid
+        const id = req.params.id
         con.query('DELETE FROM orders WHERE id = ?', [id]);
     }catch(err){
         res.status(400).send(err);
         console.log("An error occured");
     }
 
+}
+
+async function updateOrderStatus(req: Request, res: Response){
+    try{
+        const id = req.params.id;
+        const stat = req.body;
+        con.query('UPDATE orders SET status = ? WHERE id = ?', [stat, id]);
+    }catch(err){
+        res.status(400).send(err);
+        console.log("An error occured");
+    }
 }
 export { orderrouter }

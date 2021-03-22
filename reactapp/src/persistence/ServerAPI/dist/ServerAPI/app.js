@@ -20,6 +20,9 @@ const Inventoryroute_1 = require("./routes/Inventoryroute");
 const Indexroute_1 = require("./routes/Indexroute");
 const Expensesroute_1 = require("./routes/Expensesroute");
 const Orderroutes_1 = require("./routes/Orderroutes");
+const Customerroutes_1 = require("./routes/Customerroutes");
+const express_session_1 = __importDefault(require("express-session"));
+const cookie_parser_1 = __importDefault(require("cookie-parser"));
 class App {
     constructor(port, connection = 0) {
         this.port = port;
@@ -30,9 +33,20 @@ class App {
     }
     middlewares() {
         this.app.use(express_1.default.json());
-        this.app.use(cors_1.default());
+        this.app.use(cors_1.default({
+            origin: ["http://localhost:3000"],
+            methods: ["GET", "POST", "DELETE", "PUT", "PATCH"],
+            credentials: true
+        }));
         this.app.use(express_1.default.urlencoded({
             extended: true
+        }));
+        this.app.use(cookie_parser_1.default());
+        this.app.use(express_session_1.default({
+            secret: "babylon",
+            resave: false,
+            saveUninitialized: true,
+            cookie: { expires: new Date("2021-03-25") }
         }));
     }
     routes() {
@@ -40,6 +54,7 @@ class App {
         this.app.use('/inventory', Inventoryroute_1.inventoryrouter);
         this.app.use('/accounts', Expensesroute_1.expenserouter);
         this.app.use('/orders', Orderroutes_1.orderrouter);
+        this.app.use('/customer', Customerroutes_1.customerrouter);
     }
     listen() {
         return __awaiter(this, void 0, void 0, function* () {

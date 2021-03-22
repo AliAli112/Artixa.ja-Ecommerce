@@ -1,15 +1,23 @@
 export const RouteEntries = Object.freeze({
-    index: "/",
+    index: "",
     register: "register",
     accounts: "accounts",
-    shoppingCart: "shoppingCart"
+    login:  "login",
+    dashboard: "admin",
+    shoppingCart: "shoppingCart",
+    inventory: "inventory"
   });
-  
+  //To be moved to the application layer
   export const Routes = Object.freeze({
-    index: RouteEntries.index,
+    index: RouteEntries.index + "/",
     register: RouteEntries.index + "/" + RouteEntries.register,
     accounts: RouteEntries.index + "/" + RouteEntries.accounts,
-    shoppingCart: RouteEntries.index + "/" + RouteEntries.shoppingCart
+    login: RouteEntries.index + "/" + RouteEntries.login,
+    dashboard: RouteEntries.index + "/" + RouteEntries.dashboard,
+    shoppingCart: RouteEntries.index + "/" + RouteEntries.shoppingCart,
+    inventory: RouteEntries.index + "/" + RouteEntries.inventory
+
+
     // auctiondetails: RouteEntries.home + "/" + RouteEntries.auctiondetails,
     // authenticate: RouteEntries.welcome + "/" + RouteEntries.authenticate,
     // myauctions: RouteEntries.home + "/" + RouteEntries.myauctions,

@@ -5,7 +5,7 @@ export class Item {
     // private image: string;
     private quantity: number;
     private cost: number;
-
+    //muust add field which holds the total amount of items sold
     constructor(id:number, name:string, desc: string, quantity:number, cost:number ){
 
         this.id = id;
@@ -13,7 +13,6 @@ export class Item {
         this.description = desc;
         this.quantity = quantity;
         this.cost = cost;
-        //description to the database
     }
 
     public getId(){

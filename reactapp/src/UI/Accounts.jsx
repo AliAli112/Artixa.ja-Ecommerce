@@ -3,66 +3,52 @@ import React, { Component } from 'react'
 //import { Button, Title } from 'react-bootstrap'
 import axios from 'axios'
 import { Expenses } from '../Domain Model/Expenses'
-import { addExpense, createExpense, getExpense } from '../Application/Controllers/ExpenseController'
+import { ExpensesController } from '../Application/Controllers/AccountsController'
 
 const server = axios.create()
 
 export class AccountsPage extends Component {
+//Will make this page create a incomestatement class in the constructor.
+    #controller
     state = {
+        loaded: false,
         expenses: [],
-        expense: {
-            expenseName: '',
-            expenseAmount: 0,
-            expensetype: 0,
-        },
-        exp: Expenses
     }
 
     constructor(){
         super();
-        this.getExpense()
-        // const data = Promise.resolve(getExpense())
-        // this.setState({expenses: data});
-        // console.log(this.state.expenses)
+        this.controller = new ExpensesController()
     }
 
 
-
-    createExpense(name, amount){
-        console.log(name, amount)
-        const expens = new Expenses(name, amount)
-        console.log(expens)
-        this.setState({exp: expens})
-        console.log("expense created")
+    componentDidMount() {
+        this.controller.getExpenses().then(({data}) => 
+        this.setState({loaded: true , expenses: data})
+        )
     }
 
-
-    getExpense = async () => {
-        try{
-            let data = await server.get('http://localhost:3005/accounts').then(({data}) =>
-            data);
-            console.log(data)
-            this.setState({expenses: data})
-        }catch(err){
-            console.log(err);
-        }
-    }
+    // getExpense = async () => {
+    //     try{
+    //         let data = await server.get('http://localhost:3005/accounts').then(({data}) =>
+    //         data);
+    //         console.log(data)
+    //         this.setState({expenses: data})
+    //     }catch(err){
+    //         console.log(err);
+    //     }
+    // }
     
-    addExpense = async (event) => {
+    handleEvent = (event) => {
+        const name = event.target.name.value
+        const amount = event.target.amount.value
+        const expense = new Expenses(name, amount)
+        this.controller.addExpense(expense)
         event.preventDefault();
-        //this.createExpense(event.target.name.value, event.target.amount.value)
-        const expense = new Expenses(event.target.name.value, event.target.amount.value) //this should take one more arg
-        let res = await server.post('http://localhost:3005/accounts', {
-            //these correspond to the columns in the database
-            expenseName: expense.getName(),
-            expenseAmount: expense.getAmount(),
-            expensetype: expense.getType(),
-            }).then((res) =>{
-                console.log(res)
-                this.getExpenses();
-            })
-        }
+    }
+
+    
     render(){
+        
         return(
             <div>
                 <h1>This is the AccountsPage</h1>
@@ -70,7 +56,7 @@ export class AccountsPage extends Component {
                 <h3>Expenses</h3>
                 {this.state.expenses.map(expenses => <p key={expenses.id}>{expenses.expenseName}</p>)}
                 <h3>Add an Expense</h3>
-                <form onSubmit={this.addExpense}>
+                <form onSubmit={this.handleEvent}>
                     <label>Expense Name
                     <input type='text' name='name'/>
                     </label>
@@ -85,4 +71,5 @@ export class AccountsPage extends Component {
             </div>
         )
     }
+    
 }
