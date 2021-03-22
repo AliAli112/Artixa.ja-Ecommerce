@@ -19,9 +19,9 @@ orderrouter
     .post(updateOrderStatus)
 
 orderrouter
-    .route('/customer')
+    .route('/customer/:id')
     // get customer specific orders this should maybe be post
-    .get()
+    .get(getCustomerOrders)
 
 
 
@@ -39,17 +39,16 @@ async function getAllOrders(req: Request, res: Response): Promise<Response | voi
 
 
 // This needs a new route /:cusid/
-async function getAllMyOrders(req: Request, res: Response) {
+async function getCustomerOrders(req: Request, res: Response) {
     try{
         // const orderid = req.params.id
-        const cusid = req.body // in a hidden field pass this.Customer.getId
-        con.query('SELECT * from orders WHERE cus_id = ?', [cusid],
-        (err, result) => {
+        const id = req.params.id // in a hidden field pass this.Customer.getId
+        con.query('SELECT * from orders WHERE cus_id = ?', [id],(err, result) => {
             if(err) {
                 res.status(400).send(err);
                 return;
             }
-            if(true)
+            if(result.length > 0)
                 return res.json(result);
             else res.json({});
         });
@@ -88,8 +87,9 @@ async function deleteOrder(req: Request, res: Response){
 async function updateOrderStatus(req: Request, res: Response){
     try{
         const id = req.params.id;
-        const stat = req.body;
-        con.query('UPDATE orders SET status = ? WHERE id = ?', [stat, id]);
+        const status = req.body;
+        console.log(id,status)
+        con.query('UPDATE orders SET status = ? WHERE id = ?', [status, id]);
     }catch(err){
         res.status(400).send(err);
         console.log("An error occured");

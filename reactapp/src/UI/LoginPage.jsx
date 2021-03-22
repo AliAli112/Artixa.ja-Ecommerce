@@ -62,10 +62,10 @@ export class LoginPage extends Component {
                 <h2>Login</h2>
                 <form onSubmit={this.handleEvent}>
                     <label>Email
-                    <input type='text' name='email'/>
+                    <input type='text' name='email' required/>
                     </label>
                     <label>Password
-                    <input type='text' name='password'/>
+                    <input type='text' name='password'required/>
                     </label>
                     <input  type='submit' value='Sign In'/> 
                 </form>

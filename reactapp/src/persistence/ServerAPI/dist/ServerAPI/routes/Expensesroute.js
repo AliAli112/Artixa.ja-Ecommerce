@@ -23,12 +23,13 @@ expenserouter
     .get(getAllExpense)
     // Add an expense or revenue
     .post(addExpense);
-/*
 expenserouter
-    .route('/:expenseid')
-    //Delete expense or revenue (cant delete expense, add negative figure)
-    .delete()
-*/
+    .route('/:id')
+    // Delete expense or revenue (cant delete expense, add negative figure)
+    // get the revenue expense
+    .get(getExpense)
+    // update the amount in the revenue expense, most work done on frontend
+    .post(updateRevenue);
 // Controller Functions
 function getAllExpense(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
@@ -46,6 +47,19 @@ function getAllExpense(req, res) {
         });
     });
 }
+function getExpense(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const id = req.params.id;
+            database_1.con.query(`SELECT * from expenses WHERE id = ?`, [id]);
+            console.log("Expense with id" + id + "retrived");
+        }
+        catch (err) {
+            res.status(400).send(err);
+            console.log("An error occured");
+        }
+    });
+}
 function addExpense(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
@@ -55,6 +69,20 @@ function addExpense(req, res) {
             database_1.con.query(sql);
             console.log(req.body);
             console.log("Successfully added");
+        }
+        catch (err) {
+            res.status(400).send(err);
+            console.log("An error occured");
+        }
+    });
+}
+function updateRevenue(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        // The revenue in the database will have an unique id '9999' that is updated
+        try {
+            const id = req.params.id;
+            const { expenseAmount } = req.body;
+            database_1.con.query(`UPDATE expenses SET expenseAmount = ? WHERE id = ?`, [expenseAmount, id]);
         }
         catch (err) {
             res.status(400).send(err);

@@ -20,7 +20,6 @@ CREATE TABLE Customers (
     customerLastName varchar(255),
     customerAddress varchar(255),
     customerPhoneNumber varchar(255),
-    customerOrders Text(1000),
     customerEmail varchar(255),
     customerPassword varchar(255),
     PRIMARY KEY(cus_id)

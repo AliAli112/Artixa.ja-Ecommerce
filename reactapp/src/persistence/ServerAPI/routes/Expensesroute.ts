@@ -14,10 +14,10 @@ expenserouter
 
 expenserouter
     .route('/:id')
-    //Delete expense or revenue (cant delete expense, add negative figure)
-    //get the revenue expense
+    // Delete expense or revenue (cant delete expense, add negative figure)
+    // get the revenue expense
     .get(getExpense)
-    //update the amount in the revenue expense, most work done on frontend
+    // update the amount in the revenue expense, most work done on frontend
     .post(updateRevenue)
 
 
@@ -40,7 +40,8 @@ async function getAllExpense(req: Request, res: Response) {
 async function getExpense(req: Request, res: Response): Promise<Response | void>{
     try{
         const id = req.params.id
-        con.query(`SELECT * from expenses WHERE id = ?`, [id])
+        const data = con.query(`SELECT * from expenses WHERE id ='9999'`);
+        res.json(data)
         console.log("Expense with id"+ id + "retrived")
     }catch(err){
         res.status(400).send(err);
@@ -63,7 +64,7 @@ async function addExpense(req: Request, res: Response){
 }
 
 async function updateRevenue(req:Request, res: Response){
-    //The revenue in the database will have an unique id '9999' that is updated
+    // The revenue in the database will have an unique id '9999' that is updated
     try{
         const id = req.params.id
         const {expenseAmount} = req.body
