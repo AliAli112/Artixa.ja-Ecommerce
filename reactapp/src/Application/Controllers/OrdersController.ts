@@ -67,4 +67,16 @@ export class OrdersController {
             console.log(e)
         }
     }
+
+    public getmyOrders = async (id: number) => {
+        try{
+            let data =  await this.server.get(`http://localhost:3005/orders/customer/${id}`);
+            console.log(data)
+            if(data.status === 200){
+                return data
+            }
+            }catch(e){
+                console.log(e)
+        }
+    }
 }
