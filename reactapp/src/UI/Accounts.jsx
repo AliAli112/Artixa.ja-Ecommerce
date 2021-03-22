@@ -4,15 +4,16 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import { Expenses } from '../Domain Model/Expenses'
 import { ExpensesController } from '../Application/Controllers/AccountsController'
+import { queryHelpers } from '@testing-library/dom'
+import { Routes } from '../Domain Model/Routes'
 
 const server = axios.create()
 
 export class AccountsPage extends Component {
-//Will make this page create a incomestatement class in the constructor.
+//Will make this page create a income statement class in the constructor.
     #controller
     state = {
-        loaded: false,
-        expenses: [],
+        expenses: []
     }
 
     constructor(){
@@ -23,9 +24,17 @@ export class AccountsPage extends Component {
 
     componentDidMount() {
         this.controller.getExpenses().then(({data}) => 
-        this.setState({loaded: true , expenses: data})
-        )
+        {
+            let tExpenses = [];
+            for(let i=0;i<data.length;i++){
+            let exp = new Expenses(data[i]["id"],data[i]["expenseName"],data[i]["expenseAmount"], data[i]["expenseType"])
+            tExpenses.push(exp)
+            }
+        
+            this.setState({expenses: tExpenses})
+    })
     }
+
 
     // getExpense = async () => {
     //     try{
@@ -51,7 +60,7 @@ export class AccountsPage extends Component {
         
         return(
             <div>
-                <h1>This is the AccountsPage</h1>
+                <h1>This is the Accounts Page</h1>
                 <h2>Income Statement</h2>
                 <h3>Expenses</h3>
                 {this.state.expenses.map(expenses => <p key={expenses.id}>{expenses.expenseName}</p>)}
@@ -64,10 +73,22 @@ export class AccountsPage extends Component {
                     <input type='number' name='amount'/>
                     </label>
                     <label>Expense Type
-                    <input type='number' name='type'/>
+                    <input type='text' name='type'/>
                     </label>
                     <input type='submit' value='Submit'/>
                 </form>
+                {this.state.expenses.map(expense => 
+                    <div>
+
+                        <h3>Expenses</h3>
+                        <h4>{expense.getName()} </h4>
+                        <h4>{expense.getAmount()} </h4>
+
+                    </div>
+                    )}
+                
+
+
             </div>
         )
     }

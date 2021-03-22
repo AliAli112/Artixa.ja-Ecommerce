@@ -1,6 +1,8 @@
 import { ControlBox } from '@chakra-ui/control-box';
 import axios from 'axios'
 import { Expenses } from '../../Domain Model/Expenses'
+import { Orders } from '../../persistence/misc/Orders';
+import { OrdersController } from './OrdersController';
 
 
 export class ExpensesController {
@@ -36,8 +38,7 @@ export class ExpensesController {
         })
     }
 
-    //Add an expense named revunue which is updated each time an order is placed.
-    //A SQL statement which updates the amount in of the revenue expense should be made.
+    
 }
 
 
