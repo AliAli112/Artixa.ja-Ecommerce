@@ -50,7 +50,8 @@ export class AccountsPage extends Component {
     handleEvent = (event) => {
         const name = event.target.name.value
         const amount = event.target.amount.value
-        const expense = new Expenses(name, amount)
+        const type = event.target.type.value
+        const expense = new Expenses(name, amount, type)
         this.controller.addExpense(expense)
         event.preventDefault();
     }
@@ -73,7 +74,7 @@ export class AccountsPage extends Component {
                     <input type='number' name='amount'/>
                     </label>
                     <label>Expense Type
-                    <input type='text' name='type'/>
+                    <input type='number' name='type'/>
                     </label>
                     <input type='submit' value='Submit'/>
                 </form>
@@ -83,6 +84,7 @@ export class AccountsPage extends Component {
                         <h3>Expenses</h3>
                         <h4>{expense.getName()} </h4>
                         <h4>{expense.getAmount()} </h4>
+                        <h4>{expense.getType()} </h4>
 
                     </div>
                     )}

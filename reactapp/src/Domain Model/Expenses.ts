@@ -9,7 +9,7 @@ export class Expenses{
     private ExpenseType: ExpenseType; // This needs to be added in database
     //public date = moment().format('MMMM Do YYYY, h:mm:ss a');
 
-    constructor(name: string, amount: number){
+    constructor(name: string, amount: number, type= ExpenseType){
         this.name = name;
         this.amount = amount;
         this.ExpenseType = 0;
