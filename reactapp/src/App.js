@@ -22,7 +22,7 @@ class App extends Component {
         <Router>
           <div>
             <Switch>
-              <Route exact path = {/*Should change this to register later or item catalog*/Routes.index} component={ItemsCatalogPage}/>
+              <Route exact path = {/*Should change this to register later or item catalog*/Routes.index} component={RegisterPage}/>
               <Route exact path = {Routes.register} component = {RegisterPage} />
               <ProtectedRoutesAdmin
               exact

@@ -9,15 +9,13 @@ export class Customer extends User{
     protected email: string;
     private firstname: string; 
     private lastname: string;
-    private orders: Order[]; 
     constructor(email: string,
         password: string,
         id: number,
         phonenum: string, 
         addr: string, 
         fname: string,
-        lname: string,
-        orders: Order[] ){
+        lname: string ){
         super(email, password)
 
         this.id = id;
@@ -26,7 +24,6 @@ export class Customer extends User{
         this.email = email;
         this.firstname = fname; 
         this.lastname = lname;
-        this.orders = orders;
         this.password = password;
         
     }
@@ -54,19 +51,9 @@ export class Customer extends User{
         return this.address;
     }
 
-    public getOrders(){
-        return this.orders;
-    }
-
     public getPassword(){
         return this.password;
     }
 
-    public addOrder(order: Order){ //new
-        this.orders.push(order);
-    }
-    // public getCookie(){
-        
-    // }
 }
 

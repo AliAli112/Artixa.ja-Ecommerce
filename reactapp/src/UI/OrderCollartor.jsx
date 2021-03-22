@@ -16,7 +16,7 @@ export class OrderCollartorPage extends Component {
 
     constructor() {
         super()
-        this.controller = new OrdersController;
+        this.controller = new OrdersController();
     }
 
     componentDidMount(){
@@ -38,16 +38,6 @@ export class OrderCollartorPage extends Component {
         this.setState(newOrders);
     }
 
-
-    // addOrders = async () => {
-    //     let res = await server.post('http://localhost:3005/orders', {
-    //         items: JSON.stringify(this.list),
-    //         shippingLocation: 'space',
-    //     }).then((res) => {
-    //         console.log(res)
-    //         this.getExpenses();
-    //     })
-    // }
 
     render() {
         if(this.state.active === 0){

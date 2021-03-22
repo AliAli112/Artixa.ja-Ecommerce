@@ -25,8 +25,7 @@ export class RegisterPage extends Component {
         const pnum = event.target.pnum.value
         const email = event.target.email.value
         const pass = event.target.password.value
-        const customer = new Customer(email,pass,null,pnum,addr,fname,lname, [])
-        this.controller.registerCustomer(customer)
+        this.controller.registerCustomer(email,pass,pnum,addr,fname,lname)
     }
 
     render(){
