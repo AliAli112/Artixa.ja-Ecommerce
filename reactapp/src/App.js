@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import axios from 'axios';
-import { BrowserRouter as Router, Switch, Route, Link,  useHistory, IndexRoute } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Link, useHistory, IndexRoute } from 'react-router-dom';
 import { RouteEntries, Routes } from './Domain Model/Routes';
 import { ProtectedRoutes } from './Security/ProtectedRoutes'
 import { ProtectedRoutesAdmin } from './Security/ProtectedRoutesAdmin'
@@ -16,7 +16,7 @@ import { OrderCollartorPage } from './UI/OrderCollartor'
 
 class App extends Component {
 
-  render () {
+  render() {
     return (
       <div className="App">
         <Router>
@@ -34,15 +34,15 @@ class App extends Component {
               component={ItemsCatalogPage}/>
             </Switch>
           </div>
-          <Route path = {Routes.accounts}>
+          <Route path={Routes.accounts}>
             {/* <AccountsPage />  */}
           </Route>
-            <h1>Home</h1>
+          <h1>Home</h1>
         </Router>
       </div>
     );
   }
-  
+
 }
 
 export default App;

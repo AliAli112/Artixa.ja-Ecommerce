@@ -1,58 +1,111 @@
 import React, { Component } from 'react'
 import { Item } from '../Domain Model/Item'
 import { Order } from '../Domain Model/Orders'
-
+import {OrdersController } from '../Application/Controllers/OrdersController'
 //import { json } from '../json/data';
 import axios from 'axios'
 
 const server = axios.create()
 
-export class OrderCollartorPage extends Component{
-    list = [{name: 'meme', age: 40}, {name: 'me', age: 4}]
+export class OrderCollartorPage extends Component {
+
     state = {
-        orders: [],
-        
-
+        active : 0,
+        orders: []
     }
-    constructor(){
+
+    constructor() {
         super()
-        this.getOrders()
+        this.controller = new OrdersController;
     }
 
-    addOrders = async () => {
-        let res = await server.post('http://localhost:3005/orders', {
-        items: JSON.stringify(this.list),
-        shippingLocation: 'space',
-        }).then((res) =>{
-            console.log(res)
-            this.getExpenses();
-        })
+    componentDidMount(){
+        this.controller.getOrders().then(({data})=> 
+        {
+            
+            let tOrders = [];
+            for(let i=0;i<data.length;i++){
+            let ord = new Order(data[i]["id"],data[i]["cus_id"],data[i]["items"],data[i]["shippingLocation"],data[i]["status"],data[i]["total"]) 
+            tOrders.push(ord)    
+            }
+            this.setState({orders: tOrders})
+    })
     }
-    
-    getOrders = async () => {
-        try{
-            let data = await server.get('http://localhost:3005/orders')
-        .then(({data}) => data)
-        var orders = [];
-        console.log(data)
-        
 
-        // for(let i = 0; i < data.lenght; i++){
-        //     let order = new
-        // }
-        console.log(JSON.parse(data[0].items))
-        }catch(err){
-            console.log(err)
-        }
-        
+    handleEvent = (order) => {
+        this.controller.updateOrderstatus(order, 1)
+        const newOrders = this.state.orders.splice(this.state.orders.indexOf((order), 1));
+        this.setState(newOrders);
     }
+
+
+    // addOrders = async () => {
+    //     let res = await server.post('http://localhost:3005/orders', {
+    //         items: JSON.stringify(this.list),
+    //         shippingLocation: 'space',
+    //     }).then((res) => {
+    //         console.log(res)
+    //         this.getExpenses();
+    //     })
+    // }
 
     render() {
-        return(
-            <div>
-                <h2>OrderCollatorPage</h2>
-                 <button onClick={this.addOrders}>Add</button>
-            </div>
-        )
+        if(this.state.active === 0){
+            return (
+                <div id="Main">
+                    <span id="order-col-head">
+                        <h2 onClick={() => this.setState({active:0})} className="active order-head">Outstanding Order</h2>
+                        <h2 onClick={() => this.setState({active:1})} className="order-head">Finished Orders</h2>
+                    </span>
+                    {this.state.orders.filter(order => order.getStatus() === 0).map(order =>
+                        <div id={order.getId()} className="col-orders">
+                            <input onClick={() => this.handleEvent(order)} type="checkbox" />
+                            <h3>{order.getItems()}</h3>
+                            <h3>{order.getLocation()}</h3>
+                            <img onClick={() => this.dropDown(order.getId())} className="drop-arrow" src="https://www.pinclipart.com/picdir/big/130-1304123_drop-down-arrow-svg-png-icon-free-download.png" alt="Drop Down"></img>
+                            <div id={"drop-" + order.getId().toString()} className="order-drop hidden">
+                                <h3>{order.getCustomerID()}</h3>
+                                <h3>{order.getItems()}</h3>
+                                <h3>{"$" + order.getTotal().toString()}</h3>
+                            </div>
+                        </div>
+                    )}
+                </div>
+            )
+        } else{
+            return (
+                <div id="Main">
+                    <span id="order-col-head">
+                        <h2 onClick={() => this.setState({active:0})} className="order-head">Outstanding Order</h2>
+                        <h2 onClick={() => this.setState({active:1})} className="active order-head">Finished Orders</h2>
+                    </span>
+                    {this.state.orders.filter(order => order.getStatus() === 1).map(order =>
+                        <div id={order.getId()} className="col-orders">
+                            <h3>{order.getItems()}</h3>
+                            <h3>{order.getLocation()}</h3>
+                            <img onClick={() => this.dropDown(order.getId())} className="drop-arrow" src="https://www.pinclipart.com/picdir/big/130-1304123_drop-down-arrow-svg-png-icon-free-download.png" alt="Drop Down"></img>
+                            <div id={"drop-" + order.getId().toString()} className="order-drop hidden">
+                                <h3>{order.getCustomerID()}</h3>
+                                <h3>{order.getItems()}</h3>
+                                <h3>{"$" + order.getTotal().toString()}</h3>
+                            </div>
+                        </div>
+                    )}
+                </div>
+            )
+        }
+
+
     }
+
+    dropDown = (id) => {
+        let dropId = ("drop-" + id.toString())
+        let drop = document.getElementById(dropId);
+        if (drop.classList.contains("hidden")) {
+            drop.classList.remove("hidden");
+        } else {
+            drop.classList.add("hidden");
+        }
+    }
+
 }
