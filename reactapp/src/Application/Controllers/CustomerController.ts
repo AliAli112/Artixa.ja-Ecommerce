@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import { Customer } from '../../Domain Model/Customers'
+import { Order } from '../../Domain Model/Orders'
 
 
 
@@ -45,9 +46,17 @@ export class CustomerController {
         return JSON.parse(sessionStorage.getItem('user') || '{}')
     }
 
-    // public loginCustomer = async (email: string) => {
-    //     try{
-    //         this
-    //     }
-    // } 
+    public updateCustomerOrders = async (id: number, orders: Order) => {
+        //This function is run after checkout
+        //the orders should be the current list of orders in the customer's orders after running the 
+        //updateOrders() in the Customer.ts on the session customer
+        try{
+            let res = await this.server.post('http://localhost:3005/customer', {
+                cus_id: id,
+                customerOrders: JSON.stringify(orders)
+            })
+        }catch(err){
+            console.log(err)
+        }
+    }
 }

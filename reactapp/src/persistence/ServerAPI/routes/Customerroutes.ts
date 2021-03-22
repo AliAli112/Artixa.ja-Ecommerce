@@ -24,6 +24,10 @@ customerrouter
     .route("/authenticate")
     .post(authenticateCustomer)
 
+customerrouter
+    .route('/')
+    .post(updateCustomerOrders)
+
 
 async function loginCustomer(req: Request, res: Response) {
     try{
@@ -43,8 +47,9 @@ async function loginCustomer(req: Request, res: Response) {
                  return res.json({})
              }
          } );
-    }catch(e){
-        console.log(e)
+    }catch(err){
+        res.status(400).send(err);
+        console.log("An error occured");
     }
 }
 
@@ -104,6 +109,16 @@ async function getCustomer(req: Request, res: Response) {
              } );
         }catch(e){
             console.log(e)
+        }
+    }
+
+    async function updateCustomerOrders(req: Request, res: Response){
+        try{
+            const { cus_id, customerOrders } = req.body;
+            con.query('UPDATE customers SET customerOrders = ? WHERE cus_id = ?', [ customerOrders, cus_id ]);
+        }catch(err){
+            res.status(400).send(err);
+            console.log("An error occured");
         }
 }
 

@@ -32,6 +32,9 @@ customerrouter
 customerrouter
     .route("/authenticate")
     .post(authenticateCustomer);
+customerrouter
+    .route('/')
+    .post(updateCustomerOrders);
 function loginCustomer(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
@@ -52,8 +55,9 @@ function loginCustomer(req, res) {
                 }
             });
         }
-        catch (e) {
-            console.log(e);
+        catch (err) {
+            res.status(400).send(err);
+            console.log("An error occured");
         }
     });
 }
@@ -117,6 +121,18 @@ function authenticateCustomer(req, res) {
         }
         catch (e) {
             console.log(e);
+        }
+    });
+}
+function updateCustomerOrders(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const { cus_id, customerOrders } = req.body;
+            database_1.con.query('UPDATE customers SET customerOrders = ? WHERE cus_id = ?', [customerOrders, cus_id]);
+        }
+        catch (err) {
+            res.status(400).send(err);
+            console.log("An error occured");
         }
     });
 }
