@@ -1,5 +1,6 @@
 import { ControlBox } from '@chakra-ui/control-box';
 import axios from 'axios'
+import { ExpenseType } from '../../Domain Model/Enum';
 import { Expenses } from '../../Domain Model/Expenses'
 
 
@@ -23,13 +24,13 @@ export class ExpensesController {
     }
     }
 
-    public async addExpense(expense: Expenses){
+    public async addExpense(name: string, amount: number, type: ExpenseType){
     //this.createExpense(event.target.name.value, event.target.amount.value)
-    //const expense = new Expenses(name, amount)
+    const expense = new Expenses(name, amount, type)
     let res = await this.server.post('http://localhost:3005/accounts', {
         expenseName: expense.getName(),
         expenseAmount: expense.getAmount(),
-        expensetype: expense.getType(),
+        expensetype: expense.getType(), 
         }).then((res) =>{
             console.log(res)
             this.getExpenses();

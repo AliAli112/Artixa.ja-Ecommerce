@@ -40,8 +40,8 @@ export class AccountsPage extends Component {
     handleEvent = (event) => {
         const name = event.target.name.value
         const amount = event.target.amount.value
-        const expense = new Expenses(name, amount)
-        this.controller.addExpense(expense)
+        const type = event.target.type.value
+        this.controller.addExpense(name, amount, type) 
         event.preventDefault();
     }
 
