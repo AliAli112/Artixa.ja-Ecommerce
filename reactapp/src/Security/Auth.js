@@ -42,22 +42,5 @@ export async function Authenticate(email, password){ //takes in a customer
                 return false
         }
     });
-    // if(user.getEmail() === 'admin@gmail.com'){
-    //     console.log(user)
-    //     const admin = new Admin(user.getEmail(), user.getPassword(), 9999)
-    //     const sessionuser = JSON.stringify({isloggedIn: 'admin', user: admin})
-    //     sessionStorage.setItem('user', sessionuser)
-    //     console.log(sessionStorage.getItem('user'))
-    //     return true
-    // }else{
-    //     console.log(user)
-    //     const sessionuser = JSON.stringify({isloggedIn: true, user: user})
-    //     sessionStorage.setItem('user', sessionuser)
-    //     console.log(sessionStorage.getItem('user'))
-    //     return true
-    // }
-    //     //store session as an admin so make admin object
-    // }else{
-    //     //store as a customer
-    // }
+    
 }

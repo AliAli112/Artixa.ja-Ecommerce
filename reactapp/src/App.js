@@ -12,6 +12,10 @@ import { ItemsCatalogPage } from './UI/ItemsCatalogPage'
 import { LoginPage } from './UI/LoginPage'
 import { DashBoardPage } from './UI/DashBoard'
 import { OrderCollartorPage } from './UI/OrderCollartor'
+import { ShoppingCart } from './UI/ShoppingCart'
+import { InventoryPage } from './UI/Inventory'
+
+
 
 
 class App extends Component {
@@ -28,16 +32,27 @@ class App extends Component {
               exact
               path= {Routes.dashboard}
               component={DashBoardPage}/>
+               <Route
+              exact
+              path= {Routes.inventory}
+              component={InventoryPage}/>
               <ProtectedRoutes
               exact
-              path= '/item'
+              path= {Routes.itemcatalog}
               component={ItemsCatalogPage}/>
+               <ProtectedRoutes
+              exact
+              path= {Routes.shoppingCart}
+              component={ShoppingCart}/>
+              <ProtectedRoutes
+              exact
+              path={Routes.orders}
+              component={OrderCollartorPage}/>
             </Switch>
           </div>
-          <Route path={Routes.accounts}>
+          <Route path = {Routes.accounts}>
             {/* <AccountsPage />  */}
           </Route>
-          <h1>Home</h1>
         </Router>
       </div>
     );

@@ -63,9 +63,9 @@ async function getAllMyOrders(req: Request, res: Response) {
 async function addOrder(req: Request, res: Response){
     try{
         console.log(req.body)
-        const { items, shippingLocation } = req.body
-        const sql = `INSERT INTO orders (items, shippingLocation ) VALUES (
-            '${items}', '${shippingLocation}')`
+        const { cus_id, items, shippingLocation, status, total } = req.body
+        const sql = `INSERT INTO orders (cus_id, items, shippingLocation, status, total ) VALUES (
+            '${cus_id}', '${items}', '${shippingLocation}', '${status}', '${total}')`
         con.query(sql);
         console.log("Order added");
     }catch(err){
