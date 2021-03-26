@@ -7,7 +7,7 @@ import { Admin } from '../Domain Model/Admin'
 const server = axios.create()
 
 export async function Authenticate(email, password){ //takes in a customer
-    let user = new Customer('','',null,'','','','',[])
+    let user = new Customer('','',null,'','','','')
     let res = await server.post('http://localhost:3005/customer/authenticate', {
         customerEmail: email,
         customerPassword: password
@@ -15,7 +15,7 @@ export async function Authenticate(email, password){ //takes in a customer
         if(res.data.length > 0 ){
             let data = new Customer(res.data[0].customerEmail, res.data[0].customerPassword, 
                 res.data[0].cus_id, res.data[0].customerPhoneNumber, res.data[0].customerAddress, 
-                res.data[0].customerFirstName, res.data[0].customerLastName, JSON.parse(res.data[0].customerOrders) )
+                res.data[0].customerFirstName, res.data[0].customerLastName)
                 user = data
                 console.log(user)
                 if(user.getEmail() === 'admin@gmail.com'){
