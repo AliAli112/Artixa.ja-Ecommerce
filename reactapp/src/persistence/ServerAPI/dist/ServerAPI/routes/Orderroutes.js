@@ -103,8 +103,9 @@ function updateOrderStatus(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const id = req.params.id;
-            const stat = req.body;
-            database_1.con.query('UPDATE orders SET status = ? WHERE id = ?', [stat, id]);
+            const status = req.body;
+            console.log(id, status);
+            database_1.con.query('UPDATE orders SET status = ? WHERE id = ?', [status, id]);
         }
         catch (err) {
             res.status(400).send(err);

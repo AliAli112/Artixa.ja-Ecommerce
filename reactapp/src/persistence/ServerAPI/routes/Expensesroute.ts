@@ -40,7 +40,8 @@ async function getAllExpense(req: Request, res: Response) {
 async function getExpense(req: Request, res: Response): Promise<Response | void>{
     try{
         const id = req.params.id
-        con.query(`SELECT * from expenses WHERE id = ?`, [id])
+        const data = con.query(`SELECT * from expenses WHERE id ='9999'`);
+        res.json(data)
         console.log("Expense with id"+ id + "retrived")
     }catch(err){
         res.status(400).send(err);

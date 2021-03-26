@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "target": "es5",
+    "noImplicitAny": false,
     "lib": [
       "dom",
       "dom.iterable",
@@ -9,8 +10,13 @@
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
+<<<<<<< HEAD
     "emitDecoratorMetadata": true,//
     "experimentalDecorators": true,//
+=======
+    "emitDecoratorMetadata": true, //
+    "experimentalDecorators": true, //
+>>>>>>> front-end
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,

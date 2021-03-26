@@ -7,7 +7,7 @@ import {
     formatCVC,
     formatExpirationDate,
     formatFormData
-  } from "../Application/Controllers/CreditCardInfoUtl";
+  } from "../Application/CreditCardInfoUtl";
 
 export class CreditCardInfo extends Component {
 
