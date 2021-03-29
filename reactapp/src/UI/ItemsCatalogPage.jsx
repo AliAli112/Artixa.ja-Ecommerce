@@ -2,8 +2,13 @@ import React, { Component } from 'react'
 import { Item } from '../Domain Model/Item'
 import { ItemsController } from '../Application/Controllers/ItemController'
 import axios from 'axios'
+import './styles/ItemCatalogue.css';
+import { BrowserRouter as Router, Link } from 'react-router-dom'
+import { OrdersController } from '../Application/Controllers/OrdersController'
+import { Order } from '../Domain Model/Orders';
 
 const server = axios.create()
+
 
 export class ItemsCatalogPage extends Component {
 
@@ -13,36 +18,32 @@ export class ItemsCatalogPage extends Component {
     }
     constructor(){
         super()
-        this.controller = new ItemsController();
-        console.log(this.controller.getallItems())
+        this.ordersController = new OrdersController();
+        this.itemsController = new ItemsController();
         //this.getallItems();
+        this.addToCart = this.addToCart.bind(this)
 
     }
 
     componentDidMount(){
-        this.controller.getallItems().then(({data}) => 
-        this.setState({loaded: true , items: data}))
+        this.itemsController.getallItems().then(({data}) => {
+          let items = []
+          for(let i = 0; i < data.length; i++){
+            let item = new Item(data[i].id, data[i].itemName, data[i].itemDescription, data[i].itemQuantity, data[i].itemCost)
+            items.push(item)
+
+          }
+          this.setState({loaded: true , items: items})})
+
+          if(localStorage.getItem("shoppingCart") === null){
+            let shoppingCart = [];
+            localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart));
+          }
+       
+       
     }
 
-    //Need to add these controller functions to Application/Controllers then export them
-    getallItems = async () =>{
-        try{
-            console.log("run")
-            let data = await server.get('http://localhost:3005/inventory').then(({data}) =>
-            data);
-            console.log(data)
-            this.setState({items: data})
-            var i;
-            var items;
-            // for( i=0 ; i<data.lenght ; i++){
-            //     console.log(data[i].id)
-            //     //items += new Item(data[i].id)
-            // } 
-
-        }catch(e){
-            console.log(e)
-        }
-    }
+   
 
     deleteItem = async (id) => {
         try{
@@ -51,7 +52,39 @@ export class ItemsCatalogPage extends Component {
             console.log(e);
         }
     }
+    addToCart(item){
+      
+      let shoppingCart = JSON.parse(localStorage.getItem('shoppingCart'));
+      
+      var items = [];
+      for(let i = 0; i < shoppingCart.length; i++){
+        let item = new Item(shoppingCart[i].id, shoppingCart[i].name, shoppingCart[i].description, shoppingCart[i].quantity, shoppingCart[i].cost)
+        items.push(item)
+      }
+      let index = -1;
+      if(items.length > 0){
+        index = items.findIndex(function (element){return item.getId() == element.getId()})
+        
+      }
+      let quantity = item.getQuantity();
+      console.log(items);
 
+      if(quantity > 0){
+      if(index == -1){
+        let addedItem = new Item(item.getId(), item.getName(), item.getDescription(), 1, item.getCost());
+        items.push(addedItem);
+      }
+      else if(items[index].getQuantity()+1 <= quantity){
+        console.log(items);
+        let addedItem = items[index];
+        addedItem.updateQuantity(1);
+        items[index] = addedItem;
+      }
+    }
+      
+      localStorage.setItem('shoppingCart', JSON.stringify(items));
+      
+    }
     updateItem = async (id, amount) => {
         //Create a null item object, run update item in it then getQuantity and update database
         //Or run getItem {by id} then run the updateAmount() method on it then getQuantity
@@ -68,16 +101,56 @@ export class ItemsCatalogPage extends Component {
     }
 
     render(){
+        return(
+            <>
+                                
 
-        return( 
-            <div>
-                ITEMS
-                {this.state.items.map(items => <p key={items.id}>{items.itemName}
-                <button onClick={() => {this.deleteItem(items.id)}}>Deleteitem 1</button>
-                <input type='number' id='update' />
-                <button onClick={() => 
-                    {this.updateItem(items.id, 55)} }>Update</button></p>)}
+            <div className="hero is-primary">
+        <div className="hero-body container">
+          <h4 className="title">Our Products</h4>
+        </div>
+      </div>
+      <br />
+      <Link to='/shoppingCart'>Cart</Link>
+      <div className="container">
+        <div className="column columns is-multiline">
+            {this.state.items.map(item => 
+<div  key={item.getId()} className=" column is-half">
+<div className="box">
+  <div className="media">
+    <div className="media-left">
+      <figure className="image is-64x64">
+                <img src="https://bulma.io/images/placeholders/128x128.png" alt="asa"/>
+      </figure>
+    </div>
+    <div className="media-content">
+      <b style={{ textTransform: "capitalize" }}>
+        {item.getName()}{"  "}
+        <span className="tag is-primary">${item.getCost().toFixed(2)}</span>
+      </b>
+      <div>{item.getDescription()}</div>
+      {item.getQuantity() > 0 ? (
+              <small>{item.getQuantity() + " Available"}</small>
+            ) : (
+              <small className="has-text-danger">Out Of Stock</small>
+            )}
+
+      <div className="is-clearfix">
+        <button
+          className="button is-small is-outlined is-primary   is-pulled-right"
+         onClick={()=> {this.addToCart(item)}}
+        >
+          Add to Cart
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+            )}
             </div>
+            </div>
+            </>
         )
     }
 

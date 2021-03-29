@@ -26,22 +26,12 @@ export class AccountsPage extends Component {
         )
     }
 
-    // getExpense = async () => {
-    //     try{
-    //         let data = await server.get('http://localhost:3005/accounts').then(({data}) =>
-    //         data);
-    //         console.log(data)
-    //         this.setState({expenses: data})
-    //     }catch(err){
-    //         console.log(err);
-    //     }
-    // }
     
     handleEvent = (event) => {
         const name = event.target.name.value
         const amount = event.target.amount.value
-        const expense = new Expenses(name, amount)
-        this.controller.addExpense(expense)
+        const type = event.target.type.value
+        this.controller.addExpense(name, amount, type) 
         event.preventDefault();
     }
 

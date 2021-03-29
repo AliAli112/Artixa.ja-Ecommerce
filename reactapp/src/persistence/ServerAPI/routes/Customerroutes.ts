@@ -58,11 +58,11 @@ async function registerCustomer(req: Request, res: Response) {
     try{
         console.log(req.body)
         const { customerFirstName, customerLastName, customerAddress,
-            customerPhoneNumber, customerOrders, customerEmail, customerPassword} = req.body;
+            customerPhoneNumber, customerEmail, customerPassword} = req.body;
         const sql = `INSERT INTO customers (customerFirstName, customerLastName,
-            customerAddress, customerPhoneNumber, customerOrders, customerEmail, customerPassword)
+            customerAddress, customerPhoneNumber, customerEmail, customerPassword)
             VALUES ('${customerFirstName}','${customerLastName}','${customerAddress}',
-                '${customerPhoneNumber}',' ${customerOrders}','${customerEmail}','${customerPassword}')`
+                '${customerPhoneNumber}','${customerEmail}','${customerPassword}')`
         con.query(sql);
         console.log(req.body)
         console.log("Successfully added");

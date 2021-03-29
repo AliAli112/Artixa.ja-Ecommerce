@@ -56,4 +56,3 @@ export class Customer extends User{
     }
 
 }
-

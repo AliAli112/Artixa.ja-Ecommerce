@@ -75,9 +75,9 @@ function addOrder(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             console.log(req.body);
-            const { items, shippingLocation } = req.body;
-            const sql = `INSERT INTO orders (items, shippingLocation ) VALUES (
-            '${items}', '${shippingLocation}')`;
+            const { cus_id, items, shippingLocation, status, total } = req.body;
+            const sql = `INSERT INTO orders (cus_id, items, shippingLocation, status, total ) VALUES (
+            '${cus_id}', '${items}', '${shippingLocation}', '${status}', '${total}')`;
             database_1.con.query(sql);
             console.log("Order added");
         }
