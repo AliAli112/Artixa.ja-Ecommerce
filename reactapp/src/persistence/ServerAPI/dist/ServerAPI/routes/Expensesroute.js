@@ -51,7 +51,8 @@ function getExpense(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const id = req.params.id;
-            database_1.con.query(`SELECT * from expenses WHERE id = ?`, [id]);
+            const data = database_1.con.query(`SELECT * from expenses WHERE id ='9999'`);
+            res.json(data);
             console.log("Expense with id" + id + "retrived");
         }
         catch (err) {
