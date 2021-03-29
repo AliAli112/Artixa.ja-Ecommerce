@@ -39,6 +39,7 @@ export async function Authenticate(email, password){ //takes in a customer
                 const sessionuser = JSON.stringify({isloggedIn: false , user: user})
                 sessionStorage.setItem('user', sessionuser)
                 console.log(sessionStorage.getItem('user'))
+                alert('Authenticiation failed, Customer credentials are incorrect')
                 return false
         }
     });
