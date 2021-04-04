@@ -7,7 +7,8 @@ export const RouteEntries = Object.freeze({
     shoppingCart: "shoppingCart",
     inventory: "inventory",
     orders: "orders",
-    itemcatalog: "item"
+    itemcatalog: "item",
+    myorders: "myorders"
   });
   //To be moved to the application layer
   export const Routes = Object.freeze({
@@ -19,7 +20,8 @@ export const RouteEntries = Object.freeze({
     shoppingCart: RouteEntries.index + "/" + RouteEntries.shoppingCart,
     inventory: RouteEntries.index + "/" + RouteEntries.inventory,
     orders: RouteEntries.index + "/" + RouteEntries.orders,
-    itemcatalog: RouteEntries.index + "/" + RouteEntries.itemcatalog
+    itemcatalog: RouteEntries.index + "/" + RouteEntries.itemcatalog,
+    myorders: RouteEntries.index + "/" + RouteEntries.myorders
 
 
     // auctiondetails: RouteEntries.home + "/" + RouteEntries.auctiondetails,
