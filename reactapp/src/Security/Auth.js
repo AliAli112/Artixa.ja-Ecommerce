@@ -15,7 +15,11 @@ export async function Authenticate(email, password){ //takes in a customer
         if(res.data.length > 0 ){
             let data = new Customer(res.data[0].customerEmail, res.data[0].customerPassword, 
                 res.data[0].cus_id, res.data[0].customerPhoneNumber, res.data[0].customerAddress, 
+<<<<<<< HEAD
                 res.data[0].customerFirstName, res.data[0].customerLastName )
+=======
+                res.data[0].customerFirstName, res.data[0].customerLastName)
+>>>>>>> 41d594a6de5be4afc2f2bbb204ee381561e26699
                 user = data
                 console.log(user)
                 if(user.getEmail() === 'admin@gmail.com'){
@@ -42,22 +46,5 @@ export async function Authenticate(email, password){ //takes in a customer
                 return false
         }
     });
-    // if(user.getEmail() === 'admin@gmail.com'){
-    //     console.log(user)
-    //     const admin = new Admin(user.getEmail(), user.getPassword(), 9999)
-    //     const sessionuser = JSON.stringify({isloggedIn: 'admin', user: admin})
-    //     sessionStorage.setItem('user', sessionuser)
-    //     console.log(sessionStorage.getItem('user'))
-    //     return true
-    // }else{
-    //     console.log(user)
-    //     const sessionuser = JSON.stringify({isloggedIn: true, user: user})
-    //     sessionStorage.setItem('user', sessionuser)
-    //     console.log(sessionStorage.getItem('user'))
-    //     return true
-    // }
-    //     //store session as an admin so make admin object
-    // }else{
-    //     //store as a customer
-    // }
+    
 }
