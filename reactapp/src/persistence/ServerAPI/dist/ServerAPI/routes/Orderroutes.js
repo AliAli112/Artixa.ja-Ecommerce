@@ -31,9 +31,9 @@ orderrouter
     // update order status (not sure if needed to store order status in database)
     .post(updateOrderStatus);
 orderrouter
-    .route('/customer')
+    .route('/customer/:id')
     // get customer specific orders this should maybe be post
-    .get();
+    .get(getCustomerOrders);
 function getAllOrders(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         database_1.con.query('SELECT * FROM orders', (err, result) => {
@@ -49,17 +49,17 @@ function getAllOrders(req, res) {
     });
 }
 // This needs a new route /:cusid/
-function getAllMyOrders(req, res) {
+function getCustomerOrders(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             // const orderid = req.params.id
-            const cusid = req.body; // in a hidden field pass this.Customer.getId
-            database_1.con.query('SELECT * from orders WHERE cus_id = ?', [cusid], (err, result) => {
+            const id = req.params.id; // in a hidden field pass this.Customer.getId
+            database_1.con.query('SELECT * from orders WHERE cus_id = ?', [id], (err, result) => {
                 if (err) {
                     res.status(400).send(err);
                     return;
                 }
-                if (true)
+                if (result.length > 0)
                     return res.json(result);
                 else
                     res.json({});
