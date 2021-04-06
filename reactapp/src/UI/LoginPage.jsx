@@ -61,25 +61,25 @@ export class LoginPage extends Component {
     //make the login page route to itemcatalog
     render() {
         return(
-            <div>
-                <h2>Login</h2>
-                <div className="login-container">
+            <div className="main">
+                <div className="main-container">
+                    <div id='title'>Sign-In</div>
                     <form onSubmit={this.handleEvent}>
-                        <div className="input-fields">
-                            <label>Email
-                            <input type='text' name='email' required/>
-                            </label>
-                        </div>
-                        <div className="input-fields">
-                            <label>Password
-                            <input type='text' name='password'required/>
-                            </label>
-                        </div>
-                        <div className="input-fields">
-                            <input className="oth-btn"  type='submit' value='Sign In'/> 
+                        <div className="details-container">
+                            <div className="input-fields">
+                                <div><label>Email</label></div>
+                                <div><input type='email' name='email' required/></div>
+                            </div>
+                            <div className="input-fields">
+                                <div><label>Password</label></div>
+                                <div><input type='password' name='password'required/></div>
+                            </div>
+                            <div className="btn-container">
+                                <input className="oth-btn"  type='submit' value='Sign In'/> 
+                                <button className="oth-btn" onClick={ () => this.nextPath(Routes.register)}>Sign Up</button>
+                            </div>
                         </div>
                     </form>
-                <button className="oth-btn" onClick={ () => this.nextPath(Routes.register)}>Sign Up</button>
                 </div>
             </div>
         )
