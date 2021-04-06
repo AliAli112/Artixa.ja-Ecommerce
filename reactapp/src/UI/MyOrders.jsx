@@ -50,7 +50,7 @@ export class MyOrders extends Component {
             if(this.state.active === 0){
                 return (
                     <div id="Main">
-                        <span id="order-col-head">
+                        <span class="order-col-head">
                             <h2 onClick={() => this.setState({active:0})} className="active order-head">Active Orders</h2>
                             <h2 onClick={() => this.setState({active:1})} className="order-head">Past Orders</h2>
                         </span>
@@ -66,7 +66,7 @@ export class MyOrders extends Component {
             } else{
                 return (
                     <div id="Main">
-                        <span id="order-col-head">
+                        <span class="order-col-head">
                             <h2 onClick={() => this.setState({active:0})} className="order-head">Outstanding Order</h2>
                             <h2 onClick={() => this.setState({active:1})} className="active order-head">Finished Orders</h2>
                         </span>
