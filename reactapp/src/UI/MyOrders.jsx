@@ -30,7 +30,13 @@ export class MyOrders extends Component {
             
             let tOrders = [];
             for(let i=0;i<data.length;i++){
-            let ord = new Order(data[i]["id"],data[i]["cus_id"],data[i]["items"],data[i]["shippingLocation"],data[i]["status"],data[i]["total"]) 
+                let items = []
+                let tempItems = eval(data[i]["items"]);
+                for(let i=0;i<tempItems.length;i++){
+                    let item = new Item(tempItems[i]["id"],tempItems[i]["name"],tempItems[i]["desc"],tempItems[i]["quantity"],tempItems[i]["cost"])
+                    items.push(item.getName()+", ")
+                }
+            let ord = new Order(data[i]["id"],data[i]["cus_id"],items,data[i]["shippingLocation"],data[i]["status"],data[i]["total"]) 
             tOrders.push(ord)    
             }
             this.setState({orders: tOrders})
