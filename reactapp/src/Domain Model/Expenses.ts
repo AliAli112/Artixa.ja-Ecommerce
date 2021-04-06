@@ -25,8 +25,7 @@ export class Expenses{
         return this.ExpenseType;
     }
 
-    //new function 
     public updateAmount(amount: number){
         this.amount += amount;
-    } //then store it back into the database
+    }
 }

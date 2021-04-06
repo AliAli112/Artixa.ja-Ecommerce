@@ -2,10 +2,16 @@
 
 
 .btn-container{
-    padding-top: 30px;
+    display: flex;
+    flex-direction: row;
 }
 
-.login-container{
+.main{
+    display: flex;
+    justify-content: center;
+}
+
+.main-container{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -18,11 +24,30 @@
     padding: 10px;
 }
 
+.detail-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 400px;
+}
+
+#title{
+    font-size: 30px;
+    color: var(--black);
+    padding: 0 0 60px 0;
+}
+
+#rtitle{
+    font-size: 30px;
+    color: var(--black);
+}
+
 input{
     background-color: var(--main);
     border: var(--main) solid 2px;
     border-radius: 10px;
     height: 30px;
+    width: 100%;
 }
 
 .input{
@@ -33,17 +58,27 @@ input{
 }
 
 label{
+    width:100%;
     color: var(--black);
-    text-align: left;
+    text-align: left !important;
     padding-left: 10px;
     padding-bottom: 10px;
 }
 
-h2{
-    color: var(--background);
+.input-fields {
+    padding: 5px;
+    width: 100%;
+}
+
+form{
+    width: 60%;
+}
+
+span{
+    color: var(--black);
     font-weight: 100;
     padding-bottom: 50px;
-    font-size: 25px;
+    font-size: 50px;
 }
 
 input:required:invalid{
