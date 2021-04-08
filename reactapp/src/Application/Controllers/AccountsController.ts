@@ -22,9 +22,9 @@ export class ExpensesController {
     }
     }
 
-    public async addExpense(name: string, amount: number, type: ExpenseType){
+    public async addExpense(id: number,name: string, amount: number, type: ExpenseType){
     //this.createExpense(event.target.name.value, event.target.amount.value)
-    const expense = new Expenses(name, amount, type)
+    const expense = new Expenses(id, name, amount, type)
     let res = await this.server.post('http://localhost:3005/accounts', {
         expenseName: expense.getName(),
         expenseAmount: expense.getAmount(),
@@ -35,15 +35,15 @@ export class ExpensesController {
         })
     }
 
-    public async updateRevenue(amount: number){
-        const id = 9999
+    public async updateRevenue(ident: number, amount: number){
+        const id = ident;
         try{
             let data = await this.server.get(`http://localhost:3005/accounts/${id}`);
             if(data.status === 200){
                 return data
             }
             const revenue = data.data[0] //gets the revenue with special id 9999
-            const expense = new Expenses(revenue.expenseName, revenue.expenseAmount, revenue.expensetype)
+            const expense = new Expenses(revenue.id, revenue.expenseName, revenue.expenseAmount, revenue.expensetype)
             expense.updateAmount(amount) //updated the revenue amount
             let res = await this.server.post(`http://localhost:3005/accounts/${id}`, {
                 //store the revenue back into the database

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Item } from '../Domain Model/Item'
 import { Order } from '../Domain Model/Orders'
 import {OrdersController } from '../Application/Controllers/OrdersController'
+import './styles/orders.css';
 
 //import { json } from '../json/data';
 import axios from 'axios'

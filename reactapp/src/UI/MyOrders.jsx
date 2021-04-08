@@ -4,7 +4,8 @@ import { Order } from '../Domain Model/Orders'
 import { Customer } from '../Domain Model/Customers'
 import { CustomerController } from '../Application/Controllers/CustomerController'
 import {OrdersController } from '../Application/Controllers/OrdersController'
-//import { json } from '../json/data';
+import './styles/orders.css';
+
 import axios from 'axios'
 
 const server = axios.create()
