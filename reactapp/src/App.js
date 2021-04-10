@@ -61,7 +61,7 @@ class App extends Component {
             </Switch>
           </div>
           <Route path = {Routes.accounts}>
-            {/* <AccountsPage />  */}
+            <AccountsPage /> 
           </Route>
         </Router>
       </div>

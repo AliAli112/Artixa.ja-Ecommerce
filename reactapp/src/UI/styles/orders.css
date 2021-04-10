@@ -1,0 +1,139 @@
+@import "themeColours.css";
+
+body{
+  background: var(--background);
+  font-size: 20px;
+  font-family: sans-serif,serif,Georgia, 'Times New Roman', Times, serif !important;
+  margin: 0;
+  height: 1200px;
+}
+
+#Main{
+  width: 60%;
+  margin-left: 20%;
+}
+
+
+
+h1,h2,h3,h4,h5{
+    margin: 0;
+    padding: 20px 30px;
+}
+
+.col-orders{
+  padding: 2px 16px;
+}
+
+.col-order{
+  min-height: 130px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  border-radius: 5px; 
+  padding: 2px 16px;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.col-order:hover{
+  cursor: pointer;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  min-height: 180px;
+  width: 90%;
+}
+
+.removed-item {
+  animation: removed-item-animation .8s cubic-bezier(.65,-0.02,.72,.29);
+}
+
+@keyframes removed-item-animation {
+ 0% {
+      opacity: 1;
+      transform: translateX(0);
+  }
+
+  30% {
+      opacity: 1;
+      transform: translateX(50px);
+  }
+
+  80% {
+      opacity: 1;
+      transform: translateX(-800px);
+  }
+
+  100% {
+      opacity: 0;
+      transform: translateX(-800px);
+  }
+}
+
+.col-orders h3{
+  padding: 10px;
+  font-size: 1.2em;
+  color: rgb(26, 25, 25);
+  font-weight: bold;
+}
+
+.order-row{
+  display: flex;
+  flex-direction: row;
+}
+
+.order-row h3{
+  padding-top: 30px;
+}
+
+.order-row h3:first-of-type{
+  font-size: 1.5em;
+}
+
+.order-col-head{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  padding-bottom: 20px;
+}
+
+.order-col-head h2{
+  width: 50%;
+  text-align: center;
+  padding-top: 20px !important;
+  padding-bottom: 20px !important;
+  font-size: 2em;
+  font-weight: bold;
+
+}
+
+.order-head:hover{
+  cursor: pointer;
+  background: #e6cf87;
+
+}
+.active{
+  background: #e6b563;
+}
+
+.order-drop{
+  border: 0.5px solid hsl(0, 0%, 75%);
+  transition: 0.3s;
+  background: #ffffff;
+  overflow: hidden;
+  padding-top: 20px;
+  display: flex;
+  flex-direction: row;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 300px;
+  margin: auto;
+  text-align: center;
+  font-family: arial;
+  width: 100% !important;
+}
+
+.order-drop h3{
+  padding-left: 10%;
+}
+
+.hidden{
+  display: none;
+  transition: 0.3s;
+}
