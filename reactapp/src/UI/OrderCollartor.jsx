@@ -13,7 +13,8 @@ export class OrderCollartorPage extends Component {
 
     state = {
         active : 0,
-        orders: []
+        orders: [],
+        customer: []
     }
 
     constructor() {
@@ -41,7 +42,10 @@ export class OrderCollartorPage extends Component {
     }
 
     handleEvent = (order) => {
+        let or = document.getElementById(order.getId());
+        or.classList.add("removed-item");
         this.controller.updateOrderstatus(order, 1)
+
         const newOrders = this.state.orders.splice(this.state.orders.indexOf((order), 1));
         this.setState(newOrders);
     }
@@ -55,40 +59,47 @@ export class OrderCollartorPage extends Component {
                         <h2 onClick={() => this.setState({active:0})} className="active order-head">Outstanding Order</h2>
                         <h2 onClick={() => this.setState({active:1})} className="order-head">Finished Orders</h2>
                     </span>
-                    {this.state.orders.filter(order => order.getStatus() === 0).map(order =>
-                        <div id={order.getId()} className="col-orders">
-                            <input onClick={() => this.handleEvent(order)} type="checkbox" />
-                            <h3>{order.getItems()}</h3>
-                            <h3>{order.getLocation()}</h3>
-                            <img onClick={() => this.dropDown(order.getId())} className="drop-arrow" src="https://www.pinclipart.com/picdir/big/130-1304123_drop-down-arrow-svg-png-icon-free-download.png" alt="Drop Down"></img>
-                            <div id={"drop-" + order.getId().toString()} className="order-drop hidden">
-                                <h3>{order.getCustomerID()}</h3>
-                                <h3>{order.getItems()}</h3>
-                                <h3>{"$" + order.getTotal().toString()}</h3>
+                    <div className="col-orders">
+                        {this.state.orders.filter(order => order.getStatus() === 0).map(order =>
+                            <div onClick={()=> this.handleEvent(order)} onMouseEnter={()=>this.dropDown(order.getId())} id={order.getId()} className="col-order">
+                                <div className="order-row">
+                                    <h3>{order.getItems()}</h3>
+                                    <h3>{order.getLocation()}</h3>
+                                </div>
+                                <div id={"drop-" + order.getId().toString()} className="order-drop hidden">
+                                    {/* <h3>{order.getCustomerID()}</h3> */}
+                                    <h3>{order.getItems()}</h3>
+                                    <h3>{"$" + order.getTotal().toString()}</h3>
+                                </div>
                             </div>
-                        </div>
-                    )}
+                        )}
+                    </div>
+
                 </div>
             )
         } else{
             return (
                 <div id="Main">
                     <span class="order-col-head">
-                        <h2 onClick={() => this.setState({active:0})} className="order-head">Outstanding Order</h2>
-                        <h2 onClick={() => this.setState({active:1})} className="active order-head">Finished Orders</h2>
+                        <h2 onClick={() => this.setState({active:0})} className="active order-head">Outstanding Order</h2>
+                        <h2 onClick={() => this.setState({active:1})} className="order-head">Finished Orders</h2>
                     </span>
-                    {this.state.orders.filter(order => order.getStatus() === 1).map(order =>
-                        <div id={order.getId()} className="col-orders">
-                            <h3>{order.getItems()}</h3>
-                            <h3>{order.getLocation()}</h3>
-                            <img onClick={() => this.dropDown(order.getId())} className="drop-arrow" src="https://www.pinclipart.com/picdir/big/130-1304123_drop-down-arrow-svg-png-icon-free-download.png" alt="Drop Down"></img>
-                            <div id={"drop-" + order.getId().toString()} className="order-drop hidden">
-                                <h3>{order.getCustomerID()}</h3>
-                                <h3>{order.getItems()}</h3>
-                                <h3>{"$" + order.getTotal().toString()}</h3>
+                    <div className="col-orders">
+                        {this.state.orders.filter(order => order.getStatus() === 1).map(order =>
+                            <div onClick={()=> this.handleEvent(order)}  onMouseEnter={()=>this.dropDown(order.getId())} id={order.getId()} className="col-order">
+                                <div className="order-row">
+                                    <h3>{order.getItems()}</h3>
+                                    <h3>{order.getLocation()}</h3>
+                                </div>
+                                <div id={"drop-" + order.getId().toString()} className="order-drop hidden">
+                                    {/* <h3>{order.getCustomerID()}</h3> */}
+                                    <h3>{order.getItems()}</h3>
+                                    <h3>{"$" + order.getTotal().toString()}</h3>
+                                </div>
                             </div>
-                        </div>
-                    )}
+                        )}
+                    </div>
+
                 </div>
             )
         }

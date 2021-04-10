@@ -48,44 +48,59 @@ export class MyOrders extends Component {
 
     render() {
 
-            if(this.state.active === 0){
-                return (
-                    <div id="Main">
-                        <span class="order-col-head">
-                            <h2 onClick={() => this.setState({active:0})} className="active order-head">Active Orders</h2>
-                            <h2 onClick={() => this.setState({active:1})} className="order-head">Past Orders</h2>
-                        </span>
-                        {this.state.orders.filter(order => order.getCustomerID() === this.state.id).filter(order =>order.getStatus()==0).map(order =>
-                            <div id={order.getId()} className="col-orders">
-                                <h3>{order.getItems()}</h3>
-                                <h3>{order.getLocation()}</h3>
-                                <h3>{"$"+order.getTotal()}</h3>
+        if(this.state.active === 0){
+            return (
+                <div id="Main">
+                    <span class="order-col-head">
+                        <h2 onClick={() => this.setState({active:0})} className="active order-head">Current Orders</h2>
+                        <h2 onClick={() => this.setState({active:1})} className="order-head">Past Orders</h2>
+                    </span>
+                    <div className="col-orders">
+                        {this.state.orders.filter(order => order.getStatus() === 0).map(order =>
+                            <div id={order.getId()} className="col-order">
+                                <div className="order-row">
+                                    <h3>{order.getItems()}</h3>
+                                    <h3>{order.getLocation()}</h3>
+                                </div>
+                                <div id={"drop-" + order.getId().toString()} className="order-drop hidden">
+                                    {/* <h3>{order.getCustomerID()}</h3> */}
+                                    <h3>{order.getItems()}</h3>
+                                    <h3>{"$" + order.getTotal().toString()}</h3>
+                                </div>
                             </div>
                         )}
                     </div>
-                )
-            } else{
-                return (
-                    <div id="Main">
-                        <span class="order-col-head">
-                            <h2 onClick={() => this.setState({active:0})} className="order-head">Outstanding Order</h2>
-                            <h2 onClick={() => this.setState({active:1})} className="active order-head">Finished Orders</h2>
-                        </span>
-                        {this.state.orders.filter(order => order.getCustomerID() === this.state.id).filter(order=>order.getStatus()==1).map(order =>
-                            <div id={order.getId()} className="col-orders">
-                                <h3>{order.getItems()}</h3>
-                                <h3>{order.getLocation()}</h3>
-                                <h3>{"$"+order.getTotal()}</h3>
+
+                </div>
+            )
+        } else{
+            return (
+                <div id="Main">
+                    <span class="order-col-head">
+                        <h2 onClick={() => this.setState({active:0})} className="active order-head">Current Orders</h2>
+                        <h2 onClick={() => this.setState({active:1})} className="order-head">Past Orders</h2>
+                    </span>
+                    <div className="col-orders">
+                        {this.state.orders.filter(order => order.getStatus() === 1).map(order =>
+                            <div id={order.getId()} className="col-order">
+                                <div className="order-row">
+                                    <h3>{order.getItems()}</h3>
+                                    <h3>{order.getLocation()}</h3>
+                                </div>
+                                <div id={"drop-" + order.getId().toString()} className="order-drop hidden">
+                                    {/* <h3>{order.getCustomerID()}</h3> */}
+                                    <h3>{order.getItems()}</h3>
+                                    <h3>{"$" + order.getTotal().toString()}</h3>
+                                </div>
                             </div>
                         )}
                     </div>
-                )
-            }
-    
-    
+
+                </div>
+            )
         }
 
     
-
+    }
 
 }

@@ -13,6 +13,7 @@ export class AccountsPage extends Component {
     #controller
     state = {
         expenses: [],
+        revTotal: 0,
         typ: 0
     }
 
@@ -24,11 +25,18 @@ export class AccountsPage extends Component {
     componentDidMount(){
         this.controller.getExpenses().then(({data})=>{
             let nExpenses = []
+            let total = 0;
             for(let i=0;i<data.length;i++){
-                let expense = new Expenses(data[i]["id"],data[i]["expenseName"],data[i]["expenseAmount"],data[i]["expensetype"])
+                if(data[i]["expensetype"]==1){
+                    total += data[i]["expenseAmount"];
+                }else{
+                    total -= data[i]["expenseAmount"];
+                }
+                let expense = new Expenses(data[i]["expenseName"],data[i]["expenseAmount"],data[i]["expensetype"])
                 nExpenses.push(expense)
             }
             this.setState({expenses: nExpenses})
+            this.setState({revTotal: total})
         })
     }
     
@@ -106,12 +114,12 @@ export class AccountsPage extends Component {
                         <h2>Net Income</h2>
                         <span className="exp-col">-----------</span>
                         <span className="exp-col">
-                            <h3>$14,000</h3>
+                            <h3>{"$"+Math.abs(this.state.revTotal).toString()}</h3>
                         </span>
                     </div>
                 </div>
 
-                <form onSubmit={this.handleEvent}>
+                <form id="rev-input" onSubmit={this.handleEvent}>
                     <label>Expense Name
                     <input type='text' name='name' placeholder="Enter name of the expense"/>
                     </label>
@@ -123,19 +131,19 @@ export class AccountsPage extends Component {
                     </label>
                     <input id ="submit" type='submit' value='Submit'/>
                 </form>
-                <button id="open" onClick={this.openClose}>Edit Revenue</button>
-                <div id="red-row" className="hidden">
+                {/* <button id="open" onClick={this.openClose}>Edit Revenue</button> */}
+                {/* <div id="red-row" className="hidden">
                     <span className="red-col">
                         {this.state.expenses.filter(expense => expense.getType()==1).map(expense =>
                         <h3>{expense.getName()}</h3>)}
                     </span>
                     <span className="red-col">
                         {this.state.expenses.filter(expense => expense.getType()==1).map(expense =>
-                            <input className="revEdits" id={expense.getId()} type="number" name="amount" placeholder={expense.getAmount()}/>
+                            <input className="revEdits" type="number" name="amount" placeholder={expense.getAmount()}/>
                         )}
                     </span>
                     <button onClick={()=>this.editRevenue()} id="save">Save</button>    
-                </div>
+                </div> */}
             </div>
         )
     }

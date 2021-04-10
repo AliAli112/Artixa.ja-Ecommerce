@@ -8,11 +8,15 @@ body,main{
     height: 1200px;
 }
 
-h1{
+body h1{
     color: #363636 !important;
-    padding-top: 50px;
-    font-size: 1.7em;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    font-size: 2.5em;
+    letter-spacing: 3px;
     font-family: sans-serif;
+    font-weight: bold;
+    color: rgb(0, 0, 0) !important;
 }
 
 .exp-row h2{
@@ -33,7 +37,7 @@ h1{
     align-content: center;
     display: flex;
     flex-direction: row;
-    border-bottom: 2px solid  #8a8a8a;;
+    border-bottom: 2px solid  #8a8a8a;
     padding: 20px;
 }
 
@@ -51,7 +55,7 @@ label{
     display: inline-block;
 }
 
-input {
+#rev-input input,input {
     background: #fff;
     height: 35px;
     width: 100%;
@@ -63,7 +67,7 @@ input {
     box-sizing: border-box;
 }
 
-#submit{
+#rev-input #submit{
     color: #f2f2f2;
     background: #e6b563;
     font-size: 0.8em;
@@ -115,7 +119,7 @@ button:hover{
 }
 
 .hidden{
-    display: none;
+    display: none !important;
 }
 .red-col{
     width: 50%;
