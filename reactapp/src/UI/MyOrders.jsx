@@ -44,8 +44,6 @@ export class MyOrders extends Component {
     })
     }
 
-
-
     render() {
 
         if(this.state.active === 0){
@@ -77,8 +75,8 @@ export class MyOrders extends Component {
             return (
                 <div id="Main">
                     <span class="order-col-head">
-                        <h2 onClick={() => this.setState({active:0})} className="active order-head">Current Orders</h2>
-                        <h2 onClick={() => this.setState({active:1})} className="order-head">Past Orders</h2>
+                        <h2 onClick={() => this.setState({active:0})} className="order-head">Current Orders</h2>
+                        <h2 onClick={() => this.setState({active:1})} className="active order-head">Past Orders</h2>
                     </span>
                     <div className="col-orders">
                         {this.state.orders.filter(order => order.getStatus() === 1).map(order =>

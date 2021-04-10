@@ -87,7 +87,8 @@ async function deleteOrder(req: Request, res: Response){
 async function updateOrderStatus(req: Request, res: Response){
     try{
         const id = req.params.id;
-        const status = req.body;
+        // const status = req.body;
+        const { cus_id, items, shippingLocation, status } = req.body
         console.log(id,status)
         con.query('UPDATE orders SET status = ? WHERE id = ?', [status, id]);
     }catch(err){

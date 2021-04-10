@@ -36,7 +36,7 @@ export class ExpensesController {
     }
 
     public async updateRevenue(amount: number){
-        const id = 999;
+        const id = 9999;
         try{
             let data = await this.server.get(`http://localhost:3005/accounts/${id}`);
             if(data.status === 200){

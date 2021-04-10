@@ -43,11 +43,11 @@ export class OrderCollartorPage extends Component {
 
     handleEvent = (order) => {
         let or = document.getElementById(order.getId());
-        or.classList.add("removed-item");
-        this.controller.updateOrderstatus(order, 1)
+        this.controller.updateOrderstatus(order, 1);
+        // or.classList.add("removed-item");
 
-        const newOrders = this.state.orders.splice(this.state.orders.indexOf((order), 1));
-        this.setState(newOrders);
+        window.location.reload();
+        
     }
 
 
@@ -86,7 +86,7 @@ export class OrderCollartorPage extends Component {
                     </span>
                     <div className="col-orders">
                         {this.state.orders.filter(order => order.getStatus() === 1).map(order =>
-                            <div onClick={()=> this.handleEvent(order)}  onMouseEnter={()=>this.dropDown(order.getId())} id={order.getId()} className="col-order">
+                            <div onMouseEnter={()=>this.dropDown(order.getId())} id={order.getId()} className="col-order">
                                 <div className="order-row">
                                     <h3>{order.getItems()}</h3>
                                     <h3>{order.getLocation()}</h3>
