@@ -14,6 +14,8 @@ import { DashBoardPage } from './UI/DashBoard'
 import { OrderCollartorPage } from './UI/OrderCollartor'
 import { ShoppingCart } from './UI/ShoppingCart'
 import { InventoryPage } from './UI/Inventory'
+import { MyOrders } from './UI/MyOrders'
+import { ExpensesPage } from './UI/ExpensesPage'
 
 
 
@@ -48,10 +50,18 @@ class App extends Component {
               exact
               path={Routes.orders}
               component={OrderCollartorPage}/>
+              <ProtectedRoutes
+              exact
+              path={Routes.myorders}
+              component={MyOrders}/>
+              <ProtectedRoutes
+              exact
+              path={Routes.expenses}
+              component={ExpensesPage}/>
             </Switch>
           </div>
           <Route path = {Routes.accounts}>
-            {/* <AccountsPage />  */}
+            <AccountsPage /> 
           </Route>
         </Router>
       </div>
