@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import axios from 'axios';
 import { BrowserRouter as Router, Switch, Route, Link, useHistory, IndexRoute } from 'react-router-dom';
-import { RouteEntries, Routes } from './Domain Model/Routes';
+import { Routes } from './Domain Model/Routes';
 import { ProtectedRoutes } from './Security/ProtectedRoutes'
 import { ProtectedRoutesAdmin } from './Security/ProtectedRoutesAdmin'
 import { RegisterPage } from './UI/Register';
@@ -14,6 +14,7 @@ import { DashBoardPage } from './UI/DashBoard'
 import { OrderCollartorPage } from './UI/OrderCollartor'
 import { ShoppingCart } from './UI/ShoppingCart'
 import { InventoryPage } from './UI/Inventory'
+import { Navbar , NavbarAdmin } from './UI/NavBar/Navbar'
 
 
 
@@ -28,14 +29,6 @@ class App extends Component {
             <Switch>
               <Route exact path = {/*Should change this to register later or item catalog*/Routes.index} component={LoginPage}/>
               <Route exact path = {Routes.register} component = {RegisterPage} />
-              <ProtectedRoutesAdmin
-              exact
-              path= {Routes.dashboard}
-              component={DashBoardPage}/>
-               <Route
-              exact
-              path= {Routes.inventory}
-              component={InventoryPage}/>
               <ProtectedRoutes
               exact
               path= {Routes.itemcatalog}
@@ -44,10 +37,18 @@ class App extends Component {
               exact
               path= {Routes.shoppingCart}
               component={ShoppingCart}/>
-              <ProtectedRoutes
+              <ProtectedRoutesAdmin
+              exact
+              path= {Routes.dashboard}
+              component={DashBoardPage}/>
+              <ProtectedRoutesAdmin
               exact
               path={Routes.orders}
               component={OrderCollartorPage}/>
+              <ProtectedRoutesAdmin
+              exact
+              path= {Routes.inventory}
+              component={InventoryPage}/>
             </Switch>
           </div>
           <Route path = {Routes.accounts}>

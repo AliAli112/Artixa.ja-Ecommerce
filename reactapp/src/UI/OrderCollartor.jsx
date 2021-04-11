@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Item } from '../Domain Model/Item'
 import { Order } from '../Domain Model/Orders'
 import {OrdersController } from '../Application/Controllers/OrdersController'
+import {  NavbarAdmin } from './NavBar/Navbar'
 //import { json } from '../json/data';
 import axios from 'axios'
 
@@ -43,6 +44,7 @@ export class OrderCollartorPage extends Component {
         if(this.state.active === 0){
             return (
                 <div id="Main">
+                    <NavbarAdmin/>
                     <span id="order-col-head">
                         <h2 onClick={() => this.setState({active:0})} className="active order-head">Outstanding Order</h2>
                         <h2 onClick={() => this.setState({active:1})} className="order-head">Finished Orders</h2>
