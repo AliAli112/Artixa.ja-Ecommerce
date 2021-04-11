@@ -25,6 +25,7 @@ export class CustomerController {
             customerEmail: customer.getEmail(),
             customerPassword: customer.getPassword()
             }).then((res) =>{
+                alert('You are now registered')
                 console.log(res)
             })
         }catch(err){

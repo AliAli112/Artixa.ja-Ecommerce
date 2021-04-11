@@ -49,9 +49,9 @@ const Navbar = () => {
           <Bars />
     
           <NavMenu>
-            {/* <NavLink to={Routes.myorders} activeStyle> */}
-              {/* My Orders */}
-            {/* </NavLink> */}
+            <NavLink to={Routes.myorders} activeStyle>
+              My Orders
+            </NavLink>
           </NavMenu>
           <NavBtn>
             <NavBtnLink to={Routes.index}>Logout</NavBtnLink>

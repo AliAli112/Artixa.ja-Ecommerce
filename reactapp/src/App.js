@@ -15,6 +15,8 @@ import { OrderCollartorPage } from './UI/OrderCollartor'
 import { ShoppingCart } from './UI/ShoppingCart'
 import { InventoryPage } from './UI/Inventory'
 import { Navbar , NavbarAdmin } from './UI/NavBar/Navbar'
+import { MyOrders } from './UI/MyOrders'
+import { ExpensesPage } from './UI/ExpensesPage'
 
 
 
@@ -37,10 +39,10 @@ class App extends Component {
               exact
               path= {Routes.shoppingCart}
               component={ShoppingCart}/>
-              <ProtectedRoutesAdmin
+              <ProtectedRoutes
               exact
-              path= {Routes.dashboard}
-              component={DashBoardPage}/>
+              path={Routes.myorders}
+              component={MyOrders}/>
               <ProtectedRoutesAdmin
               exact
               path={Routes.orders}
@@ -49,11 +51,12 @@ class App extends Component {
               exact
               path= {Routes.inventory}
               component={InventoryPage}/>
+              <ProtectedRoutesAdmin
+              exact
+              path={Routes.accounts}
+              component={AccountsPage}/>
             </Switch>
           </div>
-          <Route path = {Routes.accounts}>
-            {/* <AccountsPage />  */}
-          </Route>
         </Router>
       </div>
     );
