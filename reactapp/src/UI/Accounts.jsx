@@ -98,7 +98,7 @@ export class AccountsPage extends Component {
                         <h2>Net Income</h2>
                         <span className="exp-col">-----------</span>
                         <span className="exp-col">
-                            <h3>{"$"+Math.abs(this.state.revTotal).toString()}</h3>
+                            <h3>{"$"+this.state.revTotal.toString()}</h3>
                         </span>
                     </div>
                     <div className="exp-row">
