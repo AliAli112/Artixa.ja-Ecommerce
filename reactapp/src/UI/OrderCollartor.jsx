@@ -55,8 +55,10 @@ export class OrderCollartorPage extends Component {
     render() {
         if(this.state.active === 0){
             return (
+                <div>
+                <NavbarAdmin/>
                 <div id="Main">
-                    <NavbarAdmin/>
+                    {/* <NavbarAdmin/> */}
                     <span className="order-col-head">
                         <h2 onClick={() => this.setState({active:0})} className="active order-head">Outstanding Order</h2>
                         <h2 onClick={() => this.setState({active:1})} className="order-head">Finished Orders</h2>
@@ -78,11 +80,13 @@ export class OrderCollartorPage extends Component {
                     </div>
 
                 </div>
+                </div>
             )
         } else{
             return (
+                <div><NavbarAdmin/>
                 <div id="Main">
-                    <NavbarAdmin/>
+                    
                     <span className="order-col-head">
                         <h2 onClick={() => this.setState({active:0})} className="order-head">Outstanding Order</h2>
                         <h2 onClick={() => this.setState({active:1})} className="active order-head">Finished Orders</h2>
@@ -103,6 +107,7 @@ export class OrderCollartorPage extends Component {
                         )}
                     </div>
 
+                </div>
                 </div>
             )
         }
