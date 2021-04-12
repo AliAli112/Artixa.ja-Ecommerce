@@ -28,6 +28,8 @@ export class Registration extends Component {
         const email = event.target.email.value
         const pass = event.target.password.value
         this.controller.registerCustomer(email,pass,pnum,addr,fname,lname)
+        alert("You have been registered")
+        this.nextPath(Routes.index)
     }
 
     render(){
