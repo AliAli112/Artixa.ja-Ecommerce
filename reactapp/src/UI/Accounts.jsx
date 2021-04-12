@@ -108,13 +108,13 @@ export class Accounts extends Component {
 
                 <form id="rev-input" onSubmit={this.handleEvent}>
                     <label>Expense Name
-                    <input type='text' name='name' placeholder="Enter name of the expense"/>
+                    <input type='text' name='name' placeholder="Enter name of the expense" required/>
                     </label>
                     <label>Expense Amount
-                    <input type='number' name='amount' placeholder="Enter the Amount"/>
+                    <input type='number' name='amount' placeholder="Enter the Amount" required/>
                     </label>
                     <label>Expense Type
-                    <input type='text' name='type' placeholder="Revenue or Expense"/>
+                    <input type='text' name='type' placeholder="Revenue or Expense" required/>
                     </label>
                     <input id ="submit" type='submit' value='Submit'/>
                 </form>

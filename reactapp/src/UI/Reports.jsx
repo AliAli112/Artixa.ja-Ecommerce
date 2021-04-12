@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { ItemsController } from '../Application/Controllers/ItemController';
 import { Item } from '../Domain Model/Item'
+import { NavbarAdmin } from './NavBar/Navbar'
 import axios from 'axios'
 import './styles/reports.css';
 
@@ -77,6 +78,8 @@ export class Reports extends Component{
     
     render(){
         return(
+            <div>
+                <NavbarAdmin/>
             <div class = "container">
                 <h1>Stock Report</h1>
               
@@ -109,7 +112,7 @@ export class Reports extends Component{
                 <h3 id= "best-item">Best Selling Item:</h3>
             </div>
 
-            
+            </div>
         </div>
         
     
