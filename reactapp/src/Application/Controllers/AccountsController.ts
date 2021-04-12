@@ -37,18 +37,21 @@ export class ExpensesController {
 
     public async updateRevenue(amount: number){
         const id = 9999;
+        console.log("update 9999")
         try{
             let data = await this.server.get(`http://localhost:3005/accounts/${id}`);
             if(data.status === 200){
-                return data
+                console.log(data)
             }
-            const revenue = data.data[0] //gets the revenue with special id 9999
+            const revenue = data.data //gets the revenue with special id 9999
             const expense = new Expenses(revenue.expenseName, revenue.expenseAmount, revenue.expensetype)
+            console.log(expense, amount)
             expense.updateAmount(amount) //updated the revenue amount
+            console.log(expense)
             let res = await this.server.post(`http://localhost:3005/accounts/${id}`, {
                 //store the revenue back into the database
                 expenseName: expense.getName(),
-                expenseAmount: expense.getAmount(),
+                expenseAmount: expense.getAmount(), 
                 expenseType: expense.getType()
             }).then((res) =>{
                 console.log(res)
