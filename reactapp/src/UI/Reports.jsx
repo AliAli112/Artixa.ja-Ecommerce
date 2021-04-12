@@ -1,22 +1,19 @@
 import React, { Component } from 'react'
 import { ItemsController } from '../Application/Controllers/ItemController';
 import { Item } from '../Domain Model/Item'
-import { Order } from '../Domain Model/Orders'
 import axios from 'axios'
-import { Routes } from '../Domain Model/Routes'
 import './styles/reports.css';
-import { ImportsNotUsedAsValues } from 'typescript';
 
 
 const server = axios.create()
 
-export class ReportsPage extends Component{
+export class Reports extends Component{
 
     state = {
         items: [],
         initial: 0,
         final: 0,
-        current: 0
+        current: 0,
     }
 
 
@@ -47,6 +44,7 @@ export class ReportsPage extends Component{
     handleEvent = () => {
         let inputs = Array.from(document.getElementsByClassName('input'));
         let best = document.getElementById('best-item')
+        let btn = document.getElementById('btn')
         let diffarr = []
         for(let i=0;i<inputs.length;i++){
             let name = inputs[i].querySelector('label').textContent;
@@ -72,6 +70,7 @@ export class ReportsPage extends Component{
           });
         console.log(diffarr)
         best.innerHTML = "Best Selling Item: " + diffarr[diffarr.length-1]['Name'].toString()
+        btn.classList.add('hidden')
     }
 
     
@@ -101,8 +100,8 @@ export class ReportsPage extends Component{
                         </div>
                     </tbody>
                 </table> 
-
-            <button onClick={this.handleEvent}>Generate Report</button>
+                
+            <button id='btn' className='but' onClick={this.handleEvent}>Generate Reports</button>
 
 
             

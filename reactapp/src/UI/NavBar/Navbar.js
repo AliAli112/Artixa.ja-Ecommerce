@@ -25,9 +25,9 @@ const NavbarAdmin = () => {
                   <NavLink to={Routes.accounts} activeStyle>
                     Accounts
                   </NavLink>
-                  {/* <NavLink to={Routes.reports} activeStyle> */}
-                    {/* Teams */}
-                  {/* </NavLink> */}
+                  <NavLink to={Routes.reports} activeStyle>
+                    Reports
+                  </NavLink>
                   {/* Second Nav */}
                   {/* <NavBtnLink to='/sign-in'>Sign In</NavBtnLink> */}
                 </NavMenu>

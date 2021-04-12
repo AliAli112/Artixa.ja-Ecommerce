@@ -53,17 +53,8 @@ export class Accounts extends Component {
         const name = event.target.name.value
         const amount = event.target.amount.value
         const type = event.target.type.value
-        if(type.toLowerCase() == "revenue"){
-            this.state.typ = 1;
-            this.controller.addExpense(name, amount, this.state.typ)
-            window.location.reload(true);
-        } else if(type.toLowerCase() == "expense"){
-            this.state.typ = 0;
-            this.controller.addExpense(name, amount, this.state.typ)
-            window.location.reload(true);
-        } else{
-            alert("Must be 'Expense' or 'Revenue'")
-        }
+        this.controller.addExpense(name, amount, this.state.typ)
+        window.location.reload(true);
     }
 
     

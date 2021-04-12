@@ -28,6 +28,10 @@ button{
     font-weight: bold;
 }
 
+.hidden{
+    display: none;
+}
+
 .table {
 	border-collapse: collapse;
 	width: 100%;

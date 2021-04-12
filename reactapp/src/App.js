@@ -14,7 +14,8 @@ import { OrderCollartor } from './UI/OrderCollartor'
 import { ShoppingCart } from './UI/ShoppingCart'
 import { Inventory } from './UI/Inventory'
 import { MyOrders } from './UI/MyOrders'
-
+import { Reports } from './UI/Reports'
+ 
 
 
 
@@ -52,6 +53,10 @@ class App extends Component {
               exact
               path={Routes.accounts}
               component={Accounts}/>
+              <ProtectedRoutesAdmin
+              exact
+              path={Routes.reports}
+              component={Reports}/>
             </Switch>
           </div>
         </Router>
