@@ -25,8 +25,4 @@ export const RouteEntries = Object.freeze({
     myorders: RouteEntries.index + "/" + RouteEntries.myorders,
     expenses: RouteEntries.index + "/" + RouteEntries.expenses
 
-
-    // auctiondetails: RouteEntries.home + "/" + RouteEntries.auctiondetails,
-    // authenticate: RouteEntries.welcome + "/" + RouteEntries.authenticate,
-    // myauctions: RouteEntries.home + "/" + RouteEntries.myauctions,
-  });
+});

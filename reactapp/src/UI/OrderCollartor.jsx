@@ -33,7 +33,7 @@ export class OrderCollartor extends Component {
                 let tempItems = eval(data[i]["items"]);
                 for(let i=0;i<tempItems.length;i++){
                     let item = new Item(tempItems[i]["id"],tempItems[i]["name"],tempItems[i]["desc"],tempItems[i]["quantity"],tempItems[i]["cost"])
-                    items.push(item.getName()+", ")
+                    items.push(item.getName()+" (x"+ item.getQuantity()+") ")
                 }
             let ord = new Order(data[i]["id"],data[i]["cus_id"],items,data[i]["shippingLocation"],data[i]["status"],data[i]["total"]) 
             tOrders.push(ord)    
@@ -65,7 +65,7 @@ export class OrderCollartor extends Component {
                     </span>
                     <div className="col-orders">
                         {this.state.orders.filter(order => order.getStatus() === 0).map(order =>
-                            <div onClick={()=> this.handleEvent(order)} onMouseEnter={()=>this.dropDown(order.getId())} id={order.getId()} className="col-order">
+                            <div onClick={()=> this.handleEvent(order)} onMouseEnter={()=>this.dropDown(order.getId())} onMouseOut={()=>this.dropDown(order.getId())} id={order.getId()} className="col-order">
                                 <div className="order-row">
                                     <h3>{order.getItems()}</h3>
                                     <h3>{order.getLocation()}</h3>
@@ -93,7 +93,7 @@ export class OrderCollartor extends Component {
                     </span>
                     <div className="col-orders">
                         {this.state.orders.filter(order => order.getStatus() === 1).map(order =>
-                            <div onMouseEnter={()=>this.dropDown(order.getId())} id={order.getId()} className="col-order">
+                            <div onMouseEnter={()=>this.dropDown(order.getId())} onMouseOut={()=>this.dropDown(order.getId())} id={order.getId()} className="col-order">
                                 <div className="order-row">
                                     <h3>{order.getItems()}</h3>
                                     <h3>{order.getLocation()}</h3>
