@@ -10,7 +10,4 @@ export abstract class User{
     public getEmail(){
         
     }
-    // public getCookie(){
-        
-    // }
 }

@@ -28,6 +28,9 @@ export class Order {
         this.items.pop();
     }
 
+    public getId(){
+        return this.id;
+    }
     public getItems(){
         return this.items;
     }

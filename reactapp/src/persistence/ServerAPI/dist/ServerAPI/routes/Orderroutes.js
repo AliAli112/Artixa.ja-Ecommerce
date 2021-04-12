@@ -31,9 +31,9 @@ orderrouter
     // update order status (not sure if needed to store order status in database)
     .post(updateOrderStatus);
 orderrouter
-    .route('/customer')
+    .route('/customer/:id')
     // get customer specific orders this should maybe be post
-    .get();
+    .get(getCustomerOrders);
 function getAllOrders(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         database_1.con.query('SELECT * FROM orders', (err, result) => {
@@ -49,17 +49,17 @@ function getAllOrders(req, res) {
     });
 }
 // This needs a new route /:cusid/
-function getAllMyOrders(req, res) {
+function getCustomerOrders(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             // const orderid = req.params.id
-            const cusid = req.body; // in a hidden field pass this.Customer.getId
-            database_1.con.query('SELECT * from orders WHERE cus_id = ?', [cusid], (err, result) => {
+            const id = req.params.id; // in a hidden field pass this.Customer.getId
+            database_1.con.query('SELECT * from orders WHERE cus_id = ?', [id], (err, result) => {
                 if (err) {
                     res.status(400).send(err);
                     return;
                 }
-                if (true)
+                if (result.length > 0)
                     return res.json(result);
                 else
                     res.json({});
@@ -75,9 +75,9 @@ function addOrder(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             console.log(req.body);
-            const { items, shippingLocation } = req.body;
-            const sql = `INSERT INTO orders (items, shippingLocation ) VALUES (
-            '${items}', '${shippingLocation}')`;
+            const { cus_id, items, shippingLocation, status, total } = req.body;
+            const sql = `INSERT INTO orders (cus_id, items, shippingLocation, status, total ) VALUES (
+            '${cus_id}', '${items}', '${shippingLocation}', '${status}', '${total}')`;
             database_1.con.query(sql);
             console.log("Order added");
         }
@@ -103,8 +103,10 @@ function updateOrderStatus(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const id = req.params.id;
-            const stat = req.body;
-            database_1.con.query('UPDATE orders SET status = ? WHERE id = ?', [stat, id]);
+            // const status = req.body;
+            const { cus_id, items, shippingLocation, status } = req.body;
+            console.log(id, status);
+            database_1.con.query('UPDATE orders SET status = ? WHERE id = ?', [status, id]);
         }
         catch (err) {
             res.status(400).send(err);

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Order } from '../../Domain Model/Orders'
 import axios from 'axios'
+import { orderrouter } from '../../persistence/ServerAPI/dist/ServerAPI/routes/Orderroutes';
 
 const server = axios.create()
 
@@ -52,17 +53,30 @@ export class OrdersController {
             console.log(err)
         }
     }
-
-    public updateOrderstatus = async (id: number, newstat: number) => {
-        //order collator
+    public updateOrderstatus = async (order: Order, newstat: number) => {
         try{
-            let res = await this.server.post(`http://localhost:3005/orders/${id}`,{
-                status: newstat,
+            let res = await server.post(`http://localhost:3005/orders/${order.getId()}`,{
+                cus_id: '',
+                items: order.getItems(),
+                shippingLocation: order.getLocation(),
+                status: newstat
             }).then((res) => {
                 console.log(res);
             })
         }catch(e){
             console.log(e)
+        }
+    }
+
+    public getmyOrders = async (id: number) => {
+        try{
+            let data =  await this.server.get(`http://localhost:3005/orders/customer/${id}`);
+            console.log(data)
+            if(data.status === 200){
+                return data
+            }
+            }catch(e){
+                console.log(e)
         }
     }
 }

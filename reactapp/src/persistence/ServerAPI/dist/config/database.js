@@ -10,7 +10,7 @@ const con = mysql_1.default.createConnection({
     host: "localhost",
     user: "root",
     password: "",
-    database: "artixa"
+    database: "Artixa"
 });
 exports.con = con;
 //# sourceMappingURL=database.js.map

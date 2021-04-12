@@ -3,10 +3,12 @@ import axios from 'axios'
 import { Routes } from '../Domain Model/Routes';
 import { Customer } from '../Domain Model/Customers'
 import { CustomerController } from '../Application/Controllers/CustomerController'
+import './styles/Login.css';
+import './styles/buttons.css';
  
 const server = axios.create()
 
-export class RegisterPage extends Component {
+export class Registration extends Component {
     
     #controller
     constructor(){
@@ -25,37 +27,48 @@ export class RegisterPage extends Component {
         const pnum = event.target.pnum.value
         const email = event.target.email.value
         const pass = event.target.password.value
-        const customer = new Customer(email,pass,null,pnum,addr,fname,lname, [])
-        this.controller.registerCustomer(customer)
+        this.controller.registerCustomer(email,pass,pnum,addr,fname,lname)
+        alert("You have been registered")
+        this.nextPath(Routes.index)
     }
 
     render(){
         return(
-            <div>
-                <h1>This is the RegisterPage</h1>
-                <div>
-                    <form onSubmit={this.handleEvent}>
-                        <label>First Name
-                        <input type='text' name='fname'/>
-                        </label>
-                        <label>Last Name
-                        <input type='text' name='lname'/>
-                        </label>
-                        <label>Address
-                        <input type='text' name='addr'/>
-                        </label>
-                        <label>Phone Number
-                        <input type='text' name='pnum'/>
-                        </label>
-                        <label>Email
-                        <input type='text' name='email'/>
-                        </label>
-                        <label>Password
-                        <input type='text' name='password'/>
-                        </label>
-                        <input type='submit' value='Sign Up'/>
-                    </form>
-                    <button onClick={() => this.nextPath(Routes.index)} >Sign In</button>
+            <div className="main">
+                <div className="main-container">
+                    <div id='rtitle'>Sign-Up</div>
+                    <div className="detail-container">
+                        <form onSubmit={this.handleEvent}>
+                            <div className="input-fields">
+                                <div><label>First Name</label></div>
+                                <div><input type='text' name='fname' required/></div>
+                            </div>
+                            <div className="input-fields">
+                                <div><label>Last Name</label></div>
+                                <div><input type='text' name='lname' required/></div>
+                            </div>
+                            <div className="input-fields">
+                                <div><label>Address</label></div>
+                                <div><input type='text' name='addr' required/></div>
+                            </div>
+                            <div className="input-fields">    
+                                <div><label>Phone Number</label></div>
+                                <div><input type='number' name='pnum' required/></div>
+                            </div>
+                            <div className="input-fields">
+                                <div><label>Email</label></div>
+                                <div><input type='email' name='email' required/></div>
+                            </div>
+                            <div className="input-fields">
+                                <div><label>Password</label></div>
+                                <div><input type='password' name='password' required/></div>
+                            </div>
+                            <div className="btn-container">
+                                <input className="oth-btn" type='submit' value='Sign Up'/>
+                                <button className="oth-btn" onClick={() => this.nextPath(Routes.index)} >Sign In</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         )

@@ -66,11 +66,11 @@ function registerCustomer(req, res) {
         // This function will store the data received in the req body in the database.
         try {
             console.log(req.body);
-            const { customerFirstName, customerLastName, customerAddress, customerPhoneNumber, customerOrders, customerEmail, customerPassword } = req.body;
+            const { customerFirstName, customerLastName, customerAddress, customerPhoneNumber, customerEmail, customerPassword } = req.body;
             const sql = `INSERT INTO customers (customerFirstName, customerLastName,
-            customerAddress, customerPhoneNumber, customerOrders, customerEmail, customerPassword)
+            customerAddress, customerPhoneNumber, customerEmail, customerPassword)
             VALUES ('${customerFirstName}','${customerLastName}','${customerAddress}',
-                '${customerPhoneNumber}',' ${customerOrders}','${customerEmail}','${customerPassword}')`;
+                '${customerPhoneNumber}','${customerEmail}','${customerPassword}')`;
             database_1.con.query(sql);
             console.log(req.body);
             console.log("Successfully added");
