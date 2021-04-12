@@ -55,7 +55,7 @@ export class MyOrders extends Component {
                     </span>
                     <div className="col-orders">
                         {this.state.orders.filter(order => order.getStatus() === 0).map(order =>
-                            <div id={order.getId()} className="col-order">
+                            <div onClick={()=> this.handleEvent(order)} onMouseEnter={()=>this.dropDown(order.getId())} id={order.getId()} className="col-order">
                                 <div className="order-row">
                                     <h3>{order.getItems()}</h3>
                                     <h3>{order.getLocation()}</h3>
@@ -80,7 +80,7 @@ export class MyOrders extends Component {
                     </span>
                     <div className="col-orders">
                         {this.state.orders.filter(order => order.getStatus() === 1).map(order =>
-                            <div id={order.getId()} className="col-order">
+                            <div onClick={()=> this.handleEvent(order)} onMouseEnter={()=>this.dropDown(order.getId())}  id={order.getId()} className="col-order">
                                 <div className="order-row">
                                     <h3>{order.getItems()}</h3>
                                     <h3>{order.getLocation()}</h3>
@@ -99,6 +99,16 @@ export class MyOrders extends Component {
         }
 
     
+    }
+
+    dropDown = (id) => {
+        let dropId = ("drop-" + id.toString())
+        let drop = document.getElementById(dropId);
+        if (drop.classList.contains("hidden")) {
+            drop.classList.remove("hidden");
+        } else {
+            drop.classList.add("hidden");
+        }
     }
 
 }
