@@ -10,7 +10,7 @@ import { Navbar } from './NavBar/Navbar'
 const server = axios.create()
 
 
-export class ItemsCatalogPage extends Component {
+export class ItemsCatalog extends Component {
 
     #controller
     state = {

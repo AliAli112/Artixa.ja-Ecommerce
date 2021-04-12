@@ -8,7 +8,7 @@ import './styles/buttons.css';
  
 const server = axios.create()
 
-export class RegisterPage extends Component {
+export class Registration extends Component {
     
     #controller
     constructor(){

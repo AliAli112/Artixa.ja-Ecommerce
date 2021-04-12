@@ -49,8 +49,9 @@ export class MyOrders extends Component {
 
         if(this.state.active === 0){
             return (
+                <div>
+                <Navbar/>
                 <div id="Main">
-                    <Navbar/>
                     <span class="order-col-head">
                         <h2 onClick={() => this.setState({active:0})} className="active order-head">Current Orders</h2>
                         <h2 onClick={() => this.setState({active:1})} className="order-head">Past Orders</h2>
@@ -72,11 +73,13 @@ export class MyOrders extends Component {
                     </div>
 
                 </div>
+                </div>
             )
         } else{
             return (
+                <div>
+                <Navbar/>
                 <div id="Main">
-                    <Navbar/>
                     <span class="order-col-head">
                         <h2 onClick={() => this.setState({active:0})} className="order-head">Current Orders</h2>
                         <h2 onClick={() => this.setState({active:1})} className="active order-head">Past Orders</h2>
@@ -97,6 +100,7 @@ export class MyOrders extends Component {
                         )}
                     </div>
 
+                </div>
                 </div>
             )
         }

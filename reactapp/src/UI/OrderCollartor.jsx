@@ -10,7 +10,7 @@ import axios from 'axios'
 
 const server = axios.create()
 
-export class OrderCollartorPage extends Component {
+export class OrderCollartor extends Component {
 
     state = {
         active : 0,

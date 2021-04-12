@@ -11,7 +11,7 @@ import './styles/buttons.css';
 const server = axios.create()
 
 
-export class LoginPage extends Component {
+export class Login extends Component {
 
     #controller
     state = {

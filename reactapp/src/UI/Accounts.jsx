@@ -10,7 +10,7 @@ import { NavbarAdmin } from './NavBar/Navbar'
 
 const server = axios.create()
 
-export class AccountsPage extends Component {
+export class Accounts extends Component {
 //Will make this page create a incomestatement class in the constructor.
     #controller
     state = {

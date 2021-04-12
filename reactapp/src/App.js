@@ -6,17 +6,14 @@ import { BrowserRouter as Router, Switch, Route, Link, useHistory, IndexRoute } 
 import { Routes } from './Domain Model/Routes';
 import { ProtectedRoutes } from './Security/ProtectedRoutes'
 import { ProtectedRoutesAdmin } from './Security/ProtectedRoutesAdmin'
-import { RegisterPage } from './UI/Register';
-import { AccountsPage } from './UI/Accounts'
-import { ItemsCatalogPage } from './UI/ItemsCatalogPage'
-import { LoginPage } from './UI/LoginPage'
-import { DashBoardPage } from './UI/DashBoard'
-import { OrderCollartorPage } from './UI/OrderCollartor'
+import { Registration } from './UI/Register';
+import { Accounts } from './UI/Accounts'
+import { ItemsCatalog } from './UI/ItemsCatalogPage'
+import { Login } from './UI/LoginPage'
+import { OrderCollartor } from './UI/OrderCollartor'
 import { ShoppingCart } from './UI/ShoppingCart'
-import { InventoryPage } from './UI/Inventory'
-import { Navbar , NavbarAdmin } from './UI/NavBar/Navbar'
+import { Inventory } from './UI/Inventory'
 import { MyOrders } from './UI/MyOrders'
-import { ExpensesPage } from './UI/ExpensesPage'
 
 
 
@@ -29,13 +26,13 @@ class App extends Component {
         <Router>
           <div>
             <Switch>
-              <Route exact path = {/*Should change this to register later or item catalog*/Routes.index} component={LoginPage}/>
-              <Route exact path = {Routes.register} component = {RegisterPage} />
+              <Route exact path = {/*Should change this to register later or item catalog*/Routes.index} component={Login}/>
+              <Route exact path = {Routes.register} component = {Registration} />
               <ProtectedRoutes
               exact
               path= {Routes.itemcatalog}
-              component={ItemsCatalogPage}/>
-               <ProtectedRoutes
+              component={ItemsCatalog}/>
+              <ProtectedRoutes
               exact
               path= {Routes.shoppingCart}
               component={ShoppingCart}/>
@@ -46,15 +43,15 @@ class App extends Component {
               <ProtectedRoutesAdmin
               exact
               path={Routes.orders}
-              component={OrderCollartorPage}/>
+              component={OrderCollartor}/>
               <ProtectedRoutesAdmin
               exact
               path= {Routes.inventory}
-              component={InventoryPage}/>
+              component={Inventory}/>
               <ProtectedRoutesAdmin
               exact
               path={Routes.accounts}
-              component={AccountsPage}/>
+              component={Accounts}/>
             </Switch>
           </div>
         </Router>

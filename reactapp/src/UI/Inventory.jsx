@@ -8,7 +8,7 @@ import {ProductDetails} from '../UI/ProductDetails';
 import {  NavbarAdmin } from './NavBar/Navbar'
 import Popup from 'reactjs-popup';
 
-export class InventoryPage extends Component {
+export class Inventory extends Component {
     state = {
         items: []
      
