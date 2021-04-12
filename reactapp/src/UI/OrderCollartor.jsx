@@ -30,6 +30,7 @@ export class OrderCollartorPage extends Component {
             for(let i=0;i<data.length;i++){
                 let items = []
                 let tempItems = eval(data[i]["items"]);
+                console.log(tempItems)
                 for(let i=0;i<tempItems.length;i++){
                     let item = new Item(tempItems[i]["id"],tempItems[i]["name"],tempItems[i]["desc"],tempItems[i]["quantity"],tempItems[i]["cost"])
                     items.push(item.getName()+" (x"+ item.getQuantity()+") ")
