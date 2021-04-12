@@ -1,12 +1,9 @@
 import React, { Component } from 'react'
-import axios from 'axios'
 import { Routes } from '../Domain Model/Routes';
-import { Customer } from '../Domain Model/Customers'
 import { CustomerController } from '../Application/Controllers/CustomerController'
 import './styles/Login.css';
 import './styles/buttons.css';
  
-const server = axios.create()
 
 export class Registration extends Component {
     

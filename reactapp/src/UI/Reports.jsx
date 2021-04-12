@@ -2,11 +2,8 @@ import React, { Component } from 'react'
 import { ItemsController } from '../Application/Controllers/ItemController';
 import { Item } from '../Domain Model/Item'
 import { NavbarAdmin } from './NavBar/Navbar'
-import axios from 'axios'
 import './styles/reports.css';
 
-
-const server = axios.create()
 
 export class Reports extends Component{
 

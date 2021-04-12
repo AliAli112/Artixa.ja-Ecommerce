@@ -1,6 +1,5 @@
 import express, { Request, Response } from 'express';
 import { con } from '../../config/database';
-import { Expenses } from '../../misc/Expenses'
 
 const expenserouter = express.Router();
 

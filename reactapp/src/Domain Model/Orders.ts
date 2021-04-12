@@ -1,5 +1,4 @@
 import { Item } from './Item'
-import { Customer } from './Customers'
 import { OrderStatus } from './Enum'
 
 export class Order {
