@@ -49,16 +49,33 @@ function getAllExpense(req, res) {
 }
 function getExpense(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        try {
-            const id = req.params.id;
-            const data = database_1.con.query(`SELECT * from expenses WHERE id ='9999'`);
-            res.json(data);
-            console.log("Expense with id" + id + "retrived");
-        }
-        catch (err) {
-            res.status(400).send(err);
-            console.log("An error occured");
-        }
+        const id = req.params.id;
+        console.log(id);
+        database_1.con.query(`SELECT * FROM expenses WHERE id = ?`, [id], (err, result) => {
+            if (err) {
+                console.log("eer");
+                res.status(400).send(err);
+                return;
+            }
+            if (result.length > 0) {
+                console.log(result[0]);
+                console.log("Expense with id" + id + "retrived");
+                return res.json(result[0]);
+            }
+            else {
+                console.log("aaa");
+                return res.json({});
+            }
+        });
+        // try{
+        //     const id = req.params.id
+        //     const data = con.query(`SELECT * from expenses WHERE id = ?`, [id]);
+        //     res.json(data)
+        //     console.log("Expense with id"+ id + "retrived")
+        // }catch(err){
+        //     res.status(400).send(err);
+        //     console.log("An error occured getExpense()");
+        // }
     });
 }
 function addExpense(req, res) {
@@ -83,6 +100,7 @@ function updateRevenue(req, res) {
         try {
             const id = req.params.id;
             const { expenseAmount } = req.body;
+            console.log(expenseAmount, "9999 updated");
             database_1.con.query(`UPDATE expenses SET expenseAmount = ? WHERE id = ?`, [expenseAmount, id]);
         }
         catch (err) {

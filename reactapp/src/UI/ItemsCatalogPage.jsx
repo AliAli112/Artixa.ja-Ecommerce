@@ -5,12 +5,12 @@ import axios from 'axios'
 import './styles/ItemCatalogue.css';
 import { BrowserRouter as Router, Link } from 'react-router-dom'
 import { OrdersController } from '../Application/Controllers/OrdersController'
-import { Order } from '../Domain Model/Orders';
+import { Navbar } from './NavBar/Navbar'
 
 const server = axios.create()
 
 
-export class ItemsCatalogPage extends Component {
+export class ItemsCatalog extends Component {
 
     #controller
     state = {
@@ -103,6 +103,7 @@ export class ItemsCatalogPage extends Component {
     render(){
         return(
             <>
+            <Navbar/>
                                 
 
             <div className="hero is-primary">

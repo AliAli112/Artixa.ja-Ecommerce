@@ -26,6 +26,7 @@ export class Expenses{
     }
 
     public updateAmount(amount: number){
-        this.amount += amount;
+        const num = this.amount
+        this.amount = +num + +amount
     }
 }

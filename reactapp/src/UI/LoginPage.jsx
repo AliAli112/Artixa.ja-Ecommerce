@@ -11,7 +11,7 @@ import './styles/buttons.css';
 const server = axios.create()
 
 
-export class LoginPage extends Component {
+export class Login extends Component {
 
     #controller
     state = {
@@ -50,7 +50,7 @@ export class LoginPage extends Component {
                             //this.nextPath('/item')
                          }
                          else if (this.controller.getSessionUser().isloggedIn === 'admin'){
-                            this.props.history.push(Routes.dashboard)
+                            this.props.history.push(Routes.inventory)
                             //this.nextPath(Routes.dashboard)
                         }
             })

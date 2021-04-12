@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Item} from '../Domain Model/Item'
-import {ItemController} from '../Application/Controllers/ItemController'
+
 
 
 export class ProductDetails extends Component {

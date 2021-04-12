@@ -9,6 +9,6 @@ export enum ExpenseType{
 }
 
 export enum OrderStatus{
-    pending = 1,
-    finished = 0
+    pending = 0,
+    finished = 1
 }

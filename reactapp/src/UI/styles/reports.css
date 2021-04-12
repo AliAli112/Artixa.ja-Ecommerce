@@ -1,0 +1,102 @@
+@import "themeColours.css";
+
+body{
+    background: var(--background);
+    font-size: 20px;
+    font-family: sans-serif,serif,Georgia, 'Times New Roman', Times, serif !important;
+    height: auto;
+    width: auto;
+}
+
+.container{
+    margin: 20px 50px;
+}
+/* .items{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+} */
+
+button{
+    border: none;
+    background-color: #FFE169;
+    height: 50px;
+    width: 150px;
+    border-radius: 8px;
+    color: #805B10;
+    font-weight: bold;
+}
+
+.hidden{
+    display: none;
+}
+
+.table {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+.table th {
+	/* background-color: rgb(255, 255, 255); */
+	text-align: left;
+} 
+
+.table #units{
+    padding-right: 80px;
+}
+
+/* .table td {
+	padding: 20px 0px;
+	text-decoration: none;
+	text-align: left;
+} */
+
+.table td #input-field{
+    width: 200px;
+    padding: 12px 15px;
+    margin: 8px 0;
+    /* display: inline-block; */
+    border: 1px solid #ccc;
+    /* border: 1px solid #805B10; */
+    border-radius: 4px;
+    /* box-sizing: border-box; */
+    /* box-shadow: 5px 5px 5px rgb(230 230 230); */
+    box-shadow: 5px 5px 5px rgb(230, 230, 230);
+}
+
+.outputvals {
+    display:flex;
+    justify-content: flex-start;
+}
+
+
+.input .outputvals{
+    display: flex;
+    justify-content: flex-start;
+    justify-items: center;
+    align-items: baseline;
+}
+
+.input .outputvals label{
+    padding-left: 200px;
+}
+
+.container .best{
+    margin-top: 10px;
+    border: none;
+    background-color: #FFE169;
+    height: 150px;
+    border-radius: 8px;
+    color: #805B10;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    box-shadow: 5px 5px 5px rgb(230, 230, 230);
+}
+
+.table #units{
+    padding-left: 200px;
+}
+

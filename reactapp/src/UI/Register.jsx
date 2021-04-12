@@ -8,7 +8,7 @@ import './styles/buttons.css';
  
 const server = axios.create()
 
-export class RegisterPage extends Component {
+export class Registration extends Component {
     
     #controller
     constructor(){
@@ -28,6 +28,8 @@ export class RegisterPage extends Component {
         const email = event.target.email.value
         const pass = event.target.password.value
         this.controller.registerCustomer(email,pass,pnum,addr,fname,lname)
+        alert("You have been registered")
+        this.nextPath(Routes.index)
     }
 
     render(){

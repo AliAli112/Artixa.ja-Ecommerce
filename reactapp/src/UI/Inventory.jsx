@@ -5,9 +5,10 @@ import 'react-tabulator/lib/styles.css'; // required styles
 import 'react-tabulator/lib/css/tabulator.min.css'; // theme
 import { ReactTabulator } from 'react-tabulator';
 import {ProductDetails} from '../UI/ProductDetails';
+import {  NavbarAdmin } from './NavBar/Navbar'
 import Popup from 'reactjs-popup';
 
-export class InventoryPage extends Component {
+export class Inventory extends Component {
     state = {
         items: []
      
@@ -71,6 +72,7 @@ export class InventoryPage extends Component {
         return(
             
             <div>
+                <NavbarAdmin/>
                 <div>
 
 

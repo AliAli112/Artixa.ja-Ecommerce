@@ -37,16 +37,33 @@ async function getAllExpense(req: Request, res: Response) {
     });
 }
 
-async function getExpense(req: Request, res: Response): Promise<Response | void>{
-    try{
-        const id = req.params.id
-        const data = con.query(`SELECT * from expenses WHERE id ='9999'`);
-        res.json(data)
-        console.log("Expense with id"+ id + "retrived")
-    }catch(err){
-        res.status(400).send(err);
-        console.log("An error occured");
-    }
+async function getExpense(req: Request, res: Response){
+    const id = req.params.id
+    console.log(id)
+    con.query(`SELECT * FROM expenses WHERE id = ?`,[id], (err, result) =>{
+        if(err) {
+            console.log("eer")
+            res.status(400).send(err);
+            return;
+        }
+        if(result.length > 0){
+            console.log(result[0])
+            console.log("Expense with id"+ id + "retrived")
+            return res.json(result[0]);
+        }else{
+            console.log("aaa")
+            return res.json({})
+        }
+    });
+    // try{
+    //     const id = req.params.id
+    //     const data = con.query(`SELECT * from expenses WHERE id = ?`, [id]);
+    //     res.json(data)
+    //     console.log("Expense with id"+ id + "retrived")
+    // }catch(err){
+    //     res.status(400).send(err);
+    //     console.log("An error occured getExpense()");
+    // }
 }
 
 async function addExpense(req: Request, res: Response){
@@ -68,6 +85,7 @@ async function updateRevenue(req:Request, res: Response){
     try{
         const id = req.params.id
         const {expenseAmount} = req.body
+        console.log(expenseAmount, "9999 updated")
         con.query(`UPDATE expenses SET expenseAmount = ? WHERE id = ?`, [expenseAmount, id]);
     }catch(err){
         res.status(400).send(err);
