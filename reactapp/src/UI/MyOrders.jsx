@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Item } from '../Domain Model/Item'
 import { Order } from '../Domain Model/Orders'
-import { Customer } from '../Domain Model/Customers'
 import { CustomerController } from '../Application/Controllers/CustomerController'
 import {OrdersController } from '../Application/Controllers/OrdersController'
 import './styles/orders.css';

@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import { useHistory } from 'react-router-dom';
-import { Customer } from '../Domain Model/Customers'
 import { Authenticate } from '../Security/Auth'
 import { Routes } from '../Domain Model/Routes'
 import { CustomerController } from '../Application/Controllers/CustomerController'

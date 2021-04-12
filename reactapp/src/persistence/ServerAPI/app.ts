@@ -1,5 +1,5 @@
 import express, { Application, Request, Response } from 'express'
-import { Connection } from '../misc/Enum'
+import { Connection } from '../../Domain Model/Enum'
 import cors from 'cors';
 import { con } from '../config/database';
 import { inventoryrouter } from './routes/Inventoryroute'

@@ -1,6 +1,5 @@
 import express, { Request, Response } from 'express';
 import { con } from '../../config/database';
-import { Item } from '../../misc/Item'
 
 const inventoryrouter = express.Router();
 

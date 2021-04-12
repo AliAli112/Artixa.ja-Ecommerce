@@ -1,5 +1,4 @@
 import { User } from './User';
-import { Order } from './Orders';
 
 export class Customer extends User{
     private id: number;
