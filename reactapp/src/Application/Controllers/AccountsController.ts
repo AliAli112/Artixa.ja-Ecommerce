@@ -2,6 +2,8 @@ import { ControlBox } from '@chakra-ui/control-box';
 import axios from 'axios'
 import { ExpenseType } from '../../Domain Model/Enum';
 import { Expenses } from '../../Domain Model/Expenses'
+import { Orders } from '../../persistence/misc/Orders';
+import { OrdersController } from './OrdersController';
 
 
 export class ExpensesController {
