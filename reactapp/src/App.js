@@ -12,7 +12,7 @@ import { ItemsCatalogPage } from './UI/ItemsCatalogPage'
 import { LoginPage } from './UI/LoginPage'
 import { DashBoardPage } from './UI/DashBoard'
 import { OrderCollartorPage } from './UI/OrderCollartor'
-
+import { ReportsPage } from './UI/Reports'
 
 class App extends Component {
 
@@ -22,7 +22,7 @@ class App extends Component {
         <Router>
           <div>
             <Switch>
-              <Route exact path = {/*Should change this to register later or item catalog*/Routes.index} component={AccountsPage}/>
+              <Route exact path = {/*Should change this to register later or item catalog*/Routes.index} component={ReportsPage}/>
               <Route exact path = {Routes.register} component = {RegisterPage} />
               <ProtectedRoutesAdmin
               exact

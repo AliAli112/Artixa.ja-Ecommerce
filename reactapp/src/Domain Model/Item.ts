@@ -13,6 +13,7 @@ export class Item {
         this.description = desc;
         this.quantity = quantity;
         this.cost = cost;
+        
     }
 
     public getId(){
@@ -38,5 +39,7 @@ export class Item {
     public updateQuantity(amount: number){
         this.quantity += amount
     }
+    
+
 }
 

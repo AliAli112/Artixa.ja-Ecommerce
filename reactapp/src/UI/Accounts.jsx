@@ -25,27 +25,16 @@ export class AccountsPage extends Component {
     componentDidMount() {
         this.controller.getExpenses().then(({data}) => 
         {
+            
             let tExpenses = [];
             for(let i=0;i<data.length;i++){
-            let exp = new Expenses(data[i]["id"],data[i]["expenseName"],data[i]["expenseAmount"], data[i]["expenseType"])
+            let exp = new Expenses(data[i]["expenseName"],data[i]["expenseAmount"], data[i]["expenseType"])
             tExpenses.push(exp)
             }
         
             this.setState({expenses: tExpenses})
     })
     }
-
-
-    // getExpense = async () => {
-    //     try{
-    //         let data = await server.get('http://localhost:3005/accounts').then(({data}) =>
-    //         data);
-    //         console.log(data)
-    //         this.setState({expenses: data})
-    //     }catch(err){
-    //         console.log(err);
-    //     }
-    // }
     
     handleEvent = (event) => {
         const name = event.target.name.value
@@ -78,10 +67,10 @@ export class AccountsPage extends Component {
                     </label>
                     <input type='submit' value='Submit'/>
                 </form>
+                <h3>Expenses</h3>
                 {this.state.expenses.map(expense => 
                     <div>
 
-                        <h3>Expenses</h3>
                         <h4>{expense.getName()} </h4>
                         <h4>{expense.getAmount()} </h4>
                         <h4>{expense.getType()} </h4>
